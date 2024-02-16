@@ -1,10 +1,10 @@
 export interface DiscoverMovies {
   page: number;
-  results: ResultsEntity[];
+  results: Movie[];
   total_pages: number;
   total_results: number;
 }
-export interface ResultsEntity {
+export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
