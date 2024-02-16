@@ -1,7 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["tmdb.org", "themoviedb.org", "image.tmdb.org"],
+    remotePatterns: [
+      {
+        hostname: "tmdb.org",
+      },
+      {
+        hostname: "themoviedb.org",
+      },
+      {
+        hostname: "image.tmdb.org",
+      },
+    ],
   },
 };
 
