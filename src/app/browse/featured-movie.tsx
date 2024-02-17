@@ -3,6 +3,7 @@ import PlayIcon from "@/icons/play-icon";
 import RateIcon from "@/icons/rate-icon";
 import SaveLaterIcon from "@/icons/save-later-icon";
 import Image from "next/image";
+import Link from "next/link";
 import { forwardRef } from "react";
 import { movieGenres } from "../constants/genres";
 import { Movie } from "../types/tmdb-types";
@@ -56,10 +57,13 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
           </p>
 
           <div className="flex gap-x-4 md:gap-x-8 justify-center items-center md:justify-start sm:!mt-6">
-            <button className="rounded-full bg-gradient-to-r from-blue-400 to-blue-600 py-2 px-8 sm:py-3 flex gap-x-1 items-center">
+            <Link
+              href={`/browse/${movie.id}`}
+              className="rounded-full bg-gradient-to-r from-blue-400 to-blue-600 py-2 px-8 sm:py-3 flex gap-x-1 items-center"
+            >
               <PlayIcon className="shrink-0 h-5" />
               Play
-            </button>
+            </Link>
             <button className="p-2 rounded-full border border-white/20 flex md:border-0 items-center gap-x-2 justify-center text-sm">
               <BookMarkIcon className="shrink-0" />
               <span className="hidden md:inline">Bookmark</span>

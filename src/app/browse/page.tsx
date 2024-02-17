@@ -1,16 +1,15 @@
 import SearchIcon from "@/icons/search-icon";
 import Carousel from "../components/carousel";
 import Logo from "../components/logo";
+import { tmdbFetch } from "../helpers/fetcher";
 import { DiscoverMovies } from "../types/tmdb-types";
 
 async function getFeatured(): Promise<DiscoverMovies> {
-  const res = await fetch(
-    "https://api.themoviedb.org/3/discover/movie?" +
-      new URLSearchParams({
-        api_key: process.env.TMDB_API_KEY || "",
-        include_video: "true",
-      })
-  );
+  const res = await tmdbFetch(`discover/movie`, {
+    api_key: `${process.env.TMDB_API_KEY}`,
+    append_to_response: "videos",
+    include_video: "true",
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

@@ -9,7 +9,6 @@ import {
   useState,
 } from "react";
 import { FeaturedMovie } from "../browse/featured-movie";
-import { useMediaQuery } from "../hooks/useMediaQuery";
 import { Movie } from "../types/tmdb-types";
 
 interface CarouselProps {
@@ -17,24 +16,21 @@ interface CarouselProps {
 }
 const minSwipeDistance = 50;
 const Carousel = ({ movies }: CarouselProps) => {
-  const { isMatch } = useMediaQuery(834);
   const [index, setIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   useEffect(() => {
-    const interval = !isMatch
-      ? setInterval(() => {
-          setIndex((p) => (p === 2 ? 0 : p + 1));
-        }, 5000)
-      : "";
+    const interval = setInterval(() => {
+      setIndex((p) => (p === 2 ? 0 : p + 1));
+    }, 5000);
 
-    isMatch && clearInterval(interval);
+    clearInterval(interval);
 
     return () => {
       clearInterval(interval);
     };
-  }, [isMatch, index]);
+  }, [index]);
 
   const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
     setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
@@ -42,6 +38,7 @@ const Carousel = ({ movies }: CarouselProps) => {
   };
 
   const onMouseDown: MouseEventHandler<HTMLDivElement> = (e) => {
+    console.log(e.currentTarget);
     setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
     setTouchStart(e.clientX);
   };
