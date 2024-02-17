@@ -1,7 +1,7 @@
+import Logo from "@/components/logo";
 import SearchIcon from "@/icons/search-icon";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "./components/logo";
 
 export default function Home() {
   return (

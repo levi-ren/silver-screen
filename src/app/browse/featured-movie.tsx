@@ -1,12 +1,12 @@
+import { movieGenres } from "@/constants/genres";
 import BookMarkIcon from "@/icons/bookmark-icon";
 import PlayIcon from "@/icons/play-icon";
 import RateIcon from "@/icons/rate-icon";
 import SaveLaterIcon from "@/icons/save-later-icon";
+import { Movie } from "@/types/tmdb-types";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef } from "react";
-import { movieGenres } from "../constants/genres";
-import { Movie } from "../types/tmdb-types";
 
 interface FeaturedMovieProps {
   movie: Movie;

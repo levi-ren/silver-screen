@@ -1,5 +1,7 @@
 "use client";
 
+import { FeaturedMovie } from "@/app/browse/featured-movie";
+import { Movie } from "@/types/tmdb-types";
 import { Transition } from "@headlessui/react";
 import {
   Fragment,
@@ -8,8 +10,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { FeaturedMovie } from "../browse/featured-movie";
-import { Movie } from "../types/tmdb-types";
 
 interface CarouselProps {
   movies: Movie[];

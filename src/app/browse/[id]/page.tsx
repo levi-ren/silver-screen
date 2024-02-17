@@ -1,6 +1,6 @@
-import { tmdbFetch } from "@/app/helpers/fetcher";
-import { PageProps } from "@/app/types/page";
-import { MovieDetails } from "@/app/types/tmdb-types";
+import { tmdbFetch } from "@/helpers/fetcher";
+import { PageProps } from "@/types/page-types";
+import { MovieDetails } from "@/types/tmdb-types";
 
 async function getMovie(id: string): Promise<MovieDetails> {
   const res = await tmdbFetch(`movie/${id}`, {

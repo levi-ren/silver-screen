@@ -1,8 +1,8 @@
+import Carousel from "@/components/carousel";
+import Logo from "@/components/logo";
+import { tmdbFetch } from "@/helpers/fetcher";
 import SearchIcon from "@/icons/search-icon";
-import Carousel from "../components/carousel";
-import Logo from "../components/logo";
-import { tmdbFetch } from "../helpers/fetcher";
-import { DiscoverMovies } from "../types/tmdb-types";
+import { DiscoverMovies } from "@/types/tmdb-types";
 
 async function getFeatured(): Promise<DiscoverMovies> {
   const res = await tmdbFetch(`discover/movie`, {
