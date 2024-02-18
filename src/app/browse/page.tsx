@@ -1,8 +1,9 @@
-import Carousel from "@/components/carousel";
+import Carousel from "@/app/browse/carousel";
 import Logo from "@/components/logo";
 import { tmdbFetch } from "@/helpers/fetcher";
 import SearchIcon from "@/icons/search-icon";
 import { DiscoverMovies } from "@/types/tmdb-types";
+import Trending from "./trending";
 
 async function getFeatured(): Promise<DiscoverMovies> {
   const res = await tmdbFetch(`discover/movie`, {
@@ -26,7 +27,7 @@ export default async function BrowsePage() {
         <Logo />
 
         <form className="inline-flex-1 group ">
-          <div className="flex  items-center rounded-full px-3 py-2  bg-gray-900">
+          <div className="flex  items-center rounded-full px-3 py-2 bg-black/90">
             <SearchIcon className="text-white w-4 h-4 m-auto focus:ml-auto relative right-0 shrink-0" />
             <input
               className="transition-all md:group-hover:w-[320px] md:[&:not(:placeholder-shown)]:w-[320px] md:focus:[&:placeholder-shown]:w-[320px] group-hover:w-[150px] placeholder:text-sm bg-transparent outline-none [&:not(:placeholder-shown)]:w-[150px] [&:placeholder-shown]:w-0 focus:[&:placeholder-shown]:w-[150px] focus:ml-2 group-hover:ml-2 [&:not(:placeholder-shown)]:ml-2"
@@ -37,7 +38,7 @@ export default async function BrowsePage() {
       </header>
       <main className="min-h-screen">
         <Carousel movies={movies.results.slice(0, 3)} />
-        <section className="p-2 md:p-4 hidden">Section 2 placeholder</section>
+        <Trending />
       </main>
       <footer></footer>
     </>

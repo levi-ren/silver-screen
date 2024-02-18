@@ -25,8 +25,6 @@ const Carousel = ({ movies }: CarouselProps) => {
       setIndex((p) => (p === 2 ? 0 : p + 1));
     }, 5000);
 
-    clearInterval(interval);
-
     return () => {
       clearInterval(interval);
     };
@@ -38,7 +36,6 @@ const Carousel = ({ movies }: CarouselProps) => {
   };
 
   const onMouseDown: MouseEventHandler<HTMLDivElement> = (e) => {
-    console.log(e.currentTarget);
     setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
     setTouchStart(e.clientX);
   };

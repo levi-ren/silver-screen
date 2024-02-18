@@ -18,7 +18,7 @@ export default function Home() {
           <Logo className="mt-4 mb-6" />
           <p>Watch movies at your finger tips</p>
           <form className="mt-6">
-            <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-gray-900">
+            <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/70">
               <input
                 className="w-full placeholder:text-sm bg-transparent outline-none"
                 placeholder="Search movies"
