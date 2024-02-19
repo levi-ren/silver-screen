@@ -91,9 +91,7 @@ const Carousel = ({ featured }: CarouselProps) => {
   };
 
   return (
-    <section
-      id="featured"
-      className="relative aspect-[4/2.7] md:aspect-[16/7.4] lg:aspect-[16/8] max-h-[722px] w-full"
+    <div
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -118,7 +116,7 @@ const Carousel = ({ featured }: CarouselProps) => {
           </div>
         </Transition>
       ))}
-    </section>
+    </div>
   );
 };
 

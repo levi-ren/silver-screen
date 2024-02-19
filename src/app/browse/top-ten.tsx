@@ -49,7 +49,6 @@ export default async function TopTen(props: TopTenProps) {
             <Link
               href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
               className="inline-block"
-              key={t.id}
             >
               <Image
                 draggable={false}

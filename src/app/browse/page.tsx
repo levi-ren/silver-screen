@@ -1,47 +1,14 @@
-import Carousel from "@/app/browse/carousel";
 import Logo from "@/components/logo";
-import { tmdbFetch } from "@/helpers/fetcher";
 import SearchIcon from "@/icons/search-icon";
-import { PopularMovie } from "@/types/popular-movie";
-import { PopularTV } from "@/types/popular-tv";
-import { TrendingAll } from "@/types/trending-all";
+import { Suspense } from "react";
+import Featured from "./featured";
+import FeaturedLoading from "./featured-loading";
 import TopTen from "./top-ten";
+import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
+import TrendingLoader from "./trending-loader";
 
-async function getTrending(): Promise<TrendingAll> {
-  const res = await tmdbFetch(`trending/all/day`);
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-async function getPopularMovie(): Promise<PopularMovie> {
-  const res = await tmdbFetch(`trending/all/day`);
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-async function getPopularTV(): Promise<PopularTV> {
-  const res = await tmdbFetch(`trending/all/day`);
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-export default async function BrowsePage() {
-  const featured = await getTrending();
-  await getPopularMovie();
-  await getPopularTV();
+export default function BrowsePage() {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">
@@ -58,9 +25,15 @@ export default async function BrowsePage() {
         </form>
       </header>
       <main>
-        <Carousel featured={featured.results.slice(0, 3)} />
-        <Trending />
-        <TopTen />
+        <Suspense fallback={<FeaturedLoading />}>
+          <Featured />
+        </Suspense>
+        <Suspense fallback={<TrendingLoader />}>
+          <Trending />
+        </Suspense>
+        <Suspense fallback={<TopTenLoader />}>
+          <TopTen />
+        </Suspense>
       </main>
       <footer></footer>
     </>
