@@ -1,9 +1,8 @@
-import { TV } from "./discover-tv";
-import { Movie } from "./tmdb-types";
+import { TrendingResults } from "./shared";
 
 export interface TrendingAll {
   page: number;
-  results: (Movie | TV)[];
+  results: TrendingResults[];
   total_pages: number;
   total_results: number;
 }

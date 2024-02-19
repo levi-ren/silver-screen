@@ -2,15 +2,11 @@ import Carousel from "@/app/browse/carousel";
 import Logo from "@/components/logo";
 import { tmdbFetch } from "@/helpers/fetcher";
 import SearchIcon from "@/icons/search-icon";
-import { DiscoverMovies } from "@/types/tmdb-types";
+import { TrendingAll } from "@/types/trending-all";
 import Trending from "./trending";
 
-async function getFeatured(): Promise<DiscoverMovies> {
-  const res = await tmdbFetch(`discover/movie`, {
-    api_key: `${process.env.TMDB_API_KEY}`,
-    append_to_response: "videos",
-    include_video: "true",
-  });
+async function getTrending(): Promise<TrendingAll> {
+  const res = await tmdbFetch(`trending/all/day`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -20,7 +16,7 @@ async function getFeatured(): Promise<DiscoverMovies> {
 }
 
 export default async function BrowsePage() {
-  const movies = await getFeatured();
+  const featured = await getTrending();
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">
@@ -37,7 +33,7 @@ export default async function BrowsePage() {
         </form>
       </header>
       <main className="min-h-screen">
-        <Carousel movies={movies.results.slice(0, 3)} />
+        <Carousel featured={featured.results.slice(0, 3)} />
         <Trending />
       </main>
       <footer></footer>

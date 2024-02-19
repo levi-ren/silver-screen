@@ -1,7 +1,7 @@
 "use client";
 
 import { FeaturedMovie } from "@/app/browse/featured-movie";
-import { Movie } from "@/types/tmdb-types";
+import { TrendingResults } from "@/types/shared";
 import { Transition } from "@headlessui/react";
 import {
   Fragment,
@@ -12,10 +12,10 @@ import {
 } from "react";
 
 interface CarouselProps {
-  movies: Movie[];
+  featured: TrendingResults[];
 }
 const minSwipeDistance = 50;
-const Carousel = ({ movies }: CarouselProps) => {
+const Carousel = ({ featured }: CarouselProps) => {
   const [index, setIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -101,10 +101,10 @@ const Carousel = ({ movies }: CarouselProps) => {
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}
     >
-      {movies.map((movie, i) => (
+      {featured.map((resource, i) => (
         <Transition
           show={index === i}
-          key={movie.id}
+          key={resource.id}
           enter="transition-opacity duration-500"
           enterFrom="opacity-0"
           enterTo="opacity-1"
@@ -114,7 +114,7 @@ const Carousel = ({ movies }: CarouselProps) => {
           as={Fragment}
         >
           <div className="absolute w-full">
-            <FeaturedMovie movie={movie} />
+            <FeaturedMovie resource={resource} />
           </div>
         </Transition>
       ))}

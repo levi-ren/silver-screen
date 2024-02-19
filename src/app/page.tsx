@@ -1,9 +1,22 @@
 import Logo from "@/components/logo";
+import { tmdbFetch } from "@/helpers/fetcher";
 import SearchIcon from "@/icons/search-icon";
+import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+async function getTrending(): Promise<TrendingAll> {
+  const res = await tmdbFetch(`trending/all/day`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function Home() {
+  await getTrending();
   return (
     <main className="relative">
       <Image

@@ -24,7 +24,7 @@ export default async function Trending() {
     >
       <p className="text-2xl  font-semibold">TRENDING TODAY</p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
-        {trending.results.map((t) => (
+        {trending.results.slice(3).map((t) => (
           <Link
             href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
             className="relative inline-block"

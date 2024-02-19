@@ -1,6 +1,6 @@
 import { tmdbFetch } from "@/helpers/fetcher";
+import { MovieDetails } from "@/types/movie-details";
 import { PageProps } from "@/types/page-types";
-import { MovieDetails } from "@/types/tmdb-types";
 import { notFound } from "next/navigation";
 
 type WatchType = "TV" | "Movie";
