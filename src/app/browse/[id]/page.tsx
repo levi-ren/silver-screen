@@ -1,9 +1,12 @@
 import { tmdbFetch } from "@/helpers/fetcher";
 import { PageProps } from "@/types/page-types";
 import { MovieDetails } from "@/types/tmdb-types";
+import { notFound } from "next/navigation";
 
-async function getMovie(id: string): Promise<MovieDetails> {
-  const res = await tmdbFetch(`movie/${id}`, {
+type WatchType = "TV" | "Movie";
+
+async function getMovie(id: string, type: WatchType): Promise<MovieDetails> {
+  const res = await tmdbFetch(`${type.toLowerCase()}/${id}`, {
     append_to_response: "videos",
   });
 
@@ -14,8 +17,14 @@ async function getMovie(id: string): Promise<MovieDetails> {
   return res.json();
 }
 
-export default async function MoviePage({ params: { id } }: PageProps) {
-  const movie = await getMovie(id);
+export default async function MoviePage({
+  params: { id },
+  searchParams: { watch },
+}: PageProps<WatchType>) {
+  if (!watch || (watch !== "TV" && watch !== "Movie")) {
+    notFound();
+  }
+  const movie = await getMovie(id, watch);
   const movieKey = movie.videos.results.find(
     (v) => v.site === "YouTube" && v.type === "Trailer"
   )?.key;

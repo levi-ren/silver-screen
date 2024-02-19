@@ -1,42 +1,28 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-
 interface MovieRatingProps {
   rating: number;
 }
 
 export default function MovieRating({ rating }: MovieRatingProps) {
-  const ref = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    if (ref.current) {
-      const ctx = ref.current.getContext("2d");
-      const startAngle = -Math.PI / 2;
-      const endAngle = startAngle + rating * 2 * Math.PI;
-      if (ctx) {
-        ctx.beginPath();
-        ctx.arc(24, 24, 18, startAngle, endAngle);
-        ctx.lineWidth = 2;
-        ctx.lineCap = "round";
-        if (rating < 0.25) {
-          ctx.strokeStyle = "#ef4444";
-        } else if (rating < 0.5) {
-          ctx.strokeStyle = "#f97316";
-        } else if (rating < 0.75) {
-          ctx.strokeStyle = "#eab308";
-        } else {
-          ctx.strokeStyle = "#22c55e";
-        }
-        ctx.stroke();
-      }
-    }
-  }, [rating]);
+  let color = "";
+  if (rating < 25) {
+    color = "#ef4444";
+  } else if (rating < 5) {
+    color = "#f97316";
+  } else if (rating < 75) {
+    color = "#eab308";
+  } else {
+    color = "#22c55e";
+  }
 
   return (
-    <div className="absolute -bottom-4 left-2 z-10  bg-black/90 rounded-full flex items-center justify-center w-11 h-11">
-      <canvas ref={ref} width={48} height={48} className="absolute" />
-      <span className="text-xs font-bold">{Math.round(rating * 100)}</span>
-      <span className="text-[8px]">%</span>
+    <div className="absolute -bottom-4 left-2 z-10  bg-black/90 rounded-full w-11 h-11 p-[2px]">
+      <div
+        className="relative bg-transparent rounded-full flex items-center justify-center h-full pie before:bg-gray-900 "
+        style={{ "--p": rating, "--c": color }}
+      >
+        <span className="text-xs font-bold">{Math.round(rating)}</span>
+        <span className="text-[8px]">%</span>
+      </div>
     </div>
   );
 }

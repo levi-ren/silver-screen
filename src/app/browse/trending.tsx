@@ -1,11 +1,11 @@
 import MovieRating from "@/components/movie-rating";
 import { tmdbFetch } from "@/helpers/fetcher";
 
-import { DiscoverMovies } from "@/types/tmdb-types";
+import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getTrending(): Promise<DiscoverMovies> {
+async function getTrending(): Promise<TrendingAll> {
   const res = await tmdbFetch(`trending/all/day`);
 
   if (!res.ok) {
@@ -18,24 +18,27 @@ async function getTrending(): Promise<DiscoverMovies> {
 export default async function Trending() {
   const trending = await getTrending();
   return (
-    <section id="trending" className="p-2 md:p-4 space-y-4 bg-zinc-950">
+    <section
+      id="trending"
+      className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 bg-zinc-950"
+    >
       <p className="text-2xl  font-semibold">TRENDING TODAY</p>
-      <div className="space-x-2 whitespace-nowrap overflow-auto py-4 no-scrollbar">
+      <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
         {trending.results.map((t) => (
           <Link
-            href={`/browse/${t.id}`}
+            href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
             className="relative inline-block"
             key={t.id}
           >
             <Image
               draggable={false}
               src={`https://image.tmdb.org/t/p/original${t.poster_path}`}
-              alt={t.title}
+              alt={"title" in t ? t.title : t.name}
               className="h-full select-none w-[128px] aspect-[11/17]  rounded-md"
               width={150}
               height={250}
             />
-            <MovieRating rating={t.vote_average / 10} />
+            <MovieRating rating={t.vote_average * 10} />
           </Link>
         ))}
       </div>

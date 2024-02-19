@@ -43,6 +43,19 @@ const config: Config = {
           "-ms-overflow-style": "none",
           "scrollbar-width": "",
         },
+        ".show-scrollbar::-webkit-scrollbar": {
+          display: "block",
+        },
+        ".show-scrollbar": {
+          "-ms-overflow-style": "auto",
+          "scrollbar-width": "auto",
+        },
+        ".hidden-scrollbar::-webkit-scrollbar-thumb": {
+          backgroundColor: "transparent",
+        },
+        ".display-scrollbar::-webkit-scrollbar-thumb": {
+          backgroundColor: "#ffffff26",
+        },
       });
     }),
   ],
