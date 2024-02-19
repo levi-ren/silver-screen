@@ -29,7 +29,7 @@ export default async function Trending() {
           >
             <Image
               draggable={false}
-              src={`https://image.tmdb.org/t/p/w300${t.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w200${t.poster_path}`}
               alt={"title" in t ? t.title : t.name}
               className="h-full select-none w-[175px] aspect-[11/17]  rounded-md"
               width={175}
