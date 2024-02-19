@@ -18,10 +18,7 @@ async function getTrending(): Promise<TrendingAll> {
 export default async function Trending() {
   const trending = await getTrending();
   return (
-    <section
-      id="trending"
-      className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 bg-zinc-950"
-    >
+    <section id="trending" className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 ">
       <p className="text-2xl  font-semibold">TRENDING TODAY</p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
         {trending.results.slice(3).map((t) => (
@@ -37,6 +34,7 @@ export default async function Trending() {
               className="h-full select-none w-[175px] aspect-[11/17]  rounded-md"
               width={175}
               height={270.45}
+              loading="lazy"
             />
             <MovieRating rating={t.vote_average * 10} />
           </Link>

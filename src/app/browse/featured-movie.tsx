@@ -3,13 +3,13 @@ import BookMarkIcon from "@/icons/bookmark-icon";
 import PlayIcon from "@/icons/play-icon";
 import RateIcon from "@/icons/rate-icon";
 import SaveLaterIcon from "@/icons/save-later-icon";
-import { TrendingResults } from "@/types/shared";
+import { Resource } from "@/types/shared";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef } from "react";
 
 interface FeaturedMovieProps {
-  resource: TrendingResults;
+  resource: Resource;
 }
 
 export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(

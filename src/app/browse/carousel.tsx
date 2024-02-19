@@ -1,7 +1,7 @@
 "use client";
 
 import { FeaturedMovie } from "@/app/browse/featured-movie";
-import { TrendingResults } from "@/types/shared";
+import { Resource } from "@/types/shared";
 import { Transition } from "@headlessui/react";
 import {
   Fragment,
@@ -12,7 +12,7 @@ import {
 } from "react";
 
 interface CarouselProps {
-  featured: TrendingResults[];
+  featured: Resource[];
 }
 const minSwipeDistance = 50;
 const Carousel = ({ featured }: CarouselProps) => {
