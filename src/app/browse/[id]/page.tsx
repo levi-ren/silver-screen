@@ -31,7 +31,11 @@ export default async function MoviePage({
   return (
     <iframe
       src={`https://www.youtube.com/embed/${movieKey}?autoplay=1`}
-      className="w-screen h-screen"
+      className="w-screen h-screen "
+      style={{
+        background: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}) center center no-repeat`,
+        backgroundSize: "cover",
+      }}
     />
   );
 }

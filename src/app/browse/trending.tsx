@@ -34,9 +34,9 @@ export default async function Trending() {
               draggable={false}
               src={`https://image.tmdb.org/t/p/original${t.poster_path}`}
               alt={"title" in t ? t.title : t.name}
-              className="h-full select-none w-[128px] aspect-[11/17]  rounded-md"
-              width={150}
-              height={250}
+              className="h-full select-none w-[175px] aspect-[11/17]  rounded-md"
+              width={175}
+              height={270.45}
             />
             <MovieRating rating={t.vote_average * 10} />
           </Link>

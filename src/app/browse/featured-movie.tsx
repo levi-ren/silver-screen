@@ -62,7 +62,9 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
 
           <div className="flex gap-x-4 md:gap-x-8 justify-center items-center md:justify-start sm:!mt-6">
             <Link
-              href={`/browse/${resource.id}`}
+              href={`/browse/${resource.id}?watch=${
+                "title" in resource ? "Movie" : "TV"
+              }`}
               className="rounded-full bg-gradient-to-r from-blue-400 to-blue-600 py-2 px-8 sm:py-3 flex gap-x-1 items-center"
             >
               <PlayIcon className="shrink-0 h-5" />
