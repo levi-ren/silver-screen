@@ -53,7 +53,7 @@ export default async function TopTen(props: TopTenProps) {
             >
               <Image
                 draggable={false}
-                src={`https://image.tmdb.org/t/p/original${t.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w400${t.poster_path}`}
                 alt={"title" in t ? t.title : t.name}
                 className="h-full select-none w-[250px] aspect-[11/17]  rounded-xl relative -left-20 top-10"
                 width={250}
