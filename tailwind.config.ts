@@ -2,6 +2,9 @@ import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 
 const config: Config = {
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -31,6 +34,10 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        quicksand: ["var(--font-quicksand)"],
+        bebas: ["var(--font-bebas)"],
+      },
     },
   },
   plugins: [
@@ -55,6 +62,9 @@ const config: Config = {
         },
         ".display-scrollbar::-webkit-scrollbar-thumb": {
           backgroundColor: "#ffffff26",
+        },
+        ".small-caps": {
+          "font-variant": "small-caps",
         },
       });
     }),

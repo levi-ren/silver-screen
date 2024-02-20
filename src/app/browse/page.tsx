@@ -3,10 +3,11 @@ import SearchIcon from "@/icons/search-icon";
 import { Suspense } from "react";
 import Featured from "./featured";
 import FeaturedLoading from "./featured-loading";
+import ListLoader from "./list-loader";
+import NowShowing from "./now-showing";
 import TopTen from "./top-ten";
 import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
-import TrendingLoader from "./trending-loader";
 
 export default async function BrowsePage() {
   return (
@@ -28,8 +29,11 @@ export default async function BrowsePage() {
         <Suspense fallback={<FeaturedLoading />}>
           <Featured />
         </Suspense>
-        <Suspense fallback={<TrendingLoader />}>
+        <Suspense fallback={<ListLoader header="Trending Today" />}>
           <Trending />
+        </Suspense>
+        <Suspense fallback={<ListLoader header="Only on Cinemas" />}>
+          <NowShowing />
         </Suspense>
         <Suspense fallback={<TopTenLoader />}>
           <TopTen />

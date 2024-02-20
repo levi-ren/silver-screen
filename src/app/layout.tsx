@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { Quicksand } from "next/font/google";
+import { Bebas_Neue, Quicksand } from "next/font/google";
 import "./globals.css";
 
-const quickSand = Quicksand({ subsets: ["latin"] });
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+  display: "swap",
+});
+
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  variable: "--font-bebas",
+  display: "swap",
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Silver Screen",
@@ -16,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${quickSand.className} bg-black`}>{children}</body>
+      <body className={`${quicksand.className} ${bebas.variable} bg-black`}>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,7 +1,7 @@
-export default async function TrendingLoader() {
+export default async function ListLoader({ header }: { header: string }) {
   return (
     <section id="trending" className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 ">
-      <p className="text-2xl  font-semibold">TRENDING TODAY</p>
+      <p className="text-4xl font-semibold font-bebas small-caps">{header}</p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
         {Array.from({ length: 10 }).map((_, i) => (
           <div

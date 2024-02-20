@@ -1,12 +1,12 @@
 import MovieRating from "@/components/movie-rating";
 import { tmdbFetch } from "@/helpers/fetcher";
+import { DiscoverMovies } from "@/types/discover-movie";
 
-import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getTrending(): Promise<TrendingAll> {
-  const res = await tmdbFetch(`trending/all/day`);
+async function getNowShowing(): Promise<DiscoverMovies> {
+  const res = await tmdbFetch(`movie/now_playing`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -15,25 +15,24 @@ async function getTrending(): Promise<TrendingAll> {
   return res.json();
 }
 
-export default async function Trending() {
-  const trending = await getTrending();
-
+export default async function NowShowing() {
+  const resource = await getNowShowing();
   return (
-    <section id="trending" className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 ">
-      <p className="text-4xl font-bebas font-semibold small-caps">
-        Trending Today
+    <section id="now-showing" className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 ">
+      <p className="text-4xl  font-semibold small-caps font-bebas">
+        Only on Cinemas
       </p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
-        {trending.results.slice(3).map((t) => (
+        {resource.results.slice(3).map((t) => (
           <Link
-            href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
+            href={`/browse/${t.id}?watch=Movie`}
             className="relative inline-block"
             key={t.id}
           >
             <Image
               draggable={false}
               src={`https://image.tmdb.org/t/p/w200${t.poster_path}`}
-              alt={"title" in t ? t.title : t.name}
+              alt={t.title}
               className="h-full select-none rounded-md"
               width={175}
               height={262.5}

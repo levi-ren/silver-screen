@@ -34,7 +34,7 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
           priority
         />
         <div className="absolute z-10 p-4 bottom-0 space-y-2 w-full from-black to-black/5  bg-gradient-to-t">
-          <p className="text-xl sm:text-2xl text-center md:text-left md:text-3xl uppercase font-bold">
+          <p className="text-xl sm:text-4xl text-center md:text-left md:text-5xl uppercase font-bold font-bebas">
             {isMovie ? resource.title : resource.name}
           </p>
 
