@@ -17,9 +17,11 @@ async function getTrending(): Promise<TrendingAll> {
 
 export default async function Trending() {
   const trending = await getTrending();
-
   return (
-    <section id="trending" className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 ">
+    <section
+      id="trending"
+      className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 xl:col-span-8 order-2 col-span-12 xxl:col-span-9"
+    >
       <p className="text-4xl font-bebas font-semibold small-caps">
         Trending Today
       </p>

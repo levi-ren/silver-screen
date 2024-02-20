@@ -39,9 +39,11 @@ export default async function TopTen(props: TopTenProps) {
       .sort((a, b) => b.popularity - a.popularity)
       .slice(0, 10);
   });
-
   return (
-    <section id="top-10" className="px-2 py-4 bg-zinc-950 mt-4">
+    <section
+      id="top-10"
+      className="px-2 py-4 bg-zinc-950 mt-4 col-span-12 order-4"
+    >
       <div className="overflow-x-auto overflow-y-hidden h-full hidden-scrollbar hover:display-scrollbar pb-4 space-x-2 whitespace-nowrap">
         {topten.map((t, i) => (
           <div key={t.id} className="inline-block whitespace-nowrap  min-w-max">

@@ -18,7 +18,10 @@ async function getNowShowing(): Promise<DiscoverMovies> {
 export default async function NowShowing() {
   const resource = await getNowShowing();
   return (
-    <section id="now-showing" className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 ">
+    <section
+      id="now-showing"
+      className="p-2 pb-0 md:pb-0 md:p-4 space-y-4  xl:col-span-8 order-3 col-span-12  xxl:col-span-9"
+    >
       <p className="text-4xl  font-semibold small-caps font-bebas">
         Only on Cinemas
       </p>

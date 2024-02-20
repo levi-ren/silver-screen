@@ -38,6 +38,9 @@ const config: Config = {
         quicksand: ["var(--font-quicksand)"],
         bebas: ["var(--font-bebas)"],
       },
+      screens: {
+        xxl: "1440px",
+      },
     },
   },
   plugins: [

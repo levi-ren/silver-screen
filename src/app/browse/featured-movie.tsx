@@ -52,7 +52,7 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
             <div className="flex gap-x-2 justify-center items-center text-xs sm:text-sm">
               <span className="flex justify-center items-center gap-x-1">
                 <RateIcon className="text-blue-500" />
-                {resource.vote_average}
+                {resource.vote_average.toFixed(2)}
               </span>
               <time dateTime={`${year}`}>{year}</time>
             </div>

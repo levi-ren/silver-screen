@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import Featured from "./featured";
 import FeaturedLoading from "./featured-loading";
 import ListLoader from "./list-loader";
+import NowAiring from "./now-airing";
+import NowAiringLoader from "./now-airing-loader";
 import NowShowing from "./now-showing";
 import TopTen from "./top-ten";
 import TopTenLoader from "./top-ten-loader";
@@ -25,14 +27,21 @@ export default async function BrowsePage() {
           </div>
         </form>
       </header>
-      <main>
+      <main className="grid grid-cols-12">
         <Suspense fallback={<FeaturedLoading />}>
           <Featured />
         </Suspense>
-        <Suspense fallback={<ListLoader header="Trending Today" />}>
+        <Suspense
+          fallback={<ListLoader header="Trending Today" className="order-2" />}
+        >
           <Trending />
         </Suspense>
-        <Suspense fallback={<ListLoader header="Only on Cinemas" />}>
+        <Suspense fallback={<NowAiringLoader />}>
+          <NowAiring />
+        </Suspense>
+        <Suspense
+          fallback={<ListLoader header="Only on Cinemas" className="order-3" />}
+        >
           <NowShowing />
         </Suspense>
         <Suspense fallback={<TopTenLoader />}>
