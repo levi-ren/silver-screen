@@ -1,3 +1,4 @@
+import Button from "@/components/button";
 import { movieGenres, tvGenres } from "@/constants/genres";
 import BookMarkIcon from "@/icons/bookmark-icon";
 import PlayIcon from "@/icons/play-icon";
@@ -70,14 +71,20 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
               <PlayIcon className="shrink-0 h-5" />
               Play
             </Link>
-            <button className="p-2 rounded-full border border-white/20 flex md:border-0 items-center gap-x-2 justify-center text-sm">
+            <Button
+              aria-label="bookmark button"
+              className="p-2 rounded-full border border-white/20 flex md:border-0 items-center gap-x-2 justify-center text-sm"
+            >
               <BookMarkIcon className="shrink-0" />
               <span className="hidden md:inline">Bookmark</span>
-            </button>
-            <button className="order-first md:order-last p-2 rounded-full border border-white/20 flex md:border-0 items-center gap-x-2 justify-center text-sm">
+            </Button>
+            <Button
+              aria-label="add to list button"
+              className="order-first md:order-last p-2 rounded-full border border-white/20 flex md:border-0 items-center gap-x-2 justify-center text-sm"
+            >
               <SaveLaterIcon className="shrink-0" />
               <span className="hidden md:inline">Add to list</span>
-            </button>
+            </Button>
           </div>
         </div>
       </div>

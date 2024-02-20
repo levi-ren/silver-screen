@@ -31,9 +31,9 @@ export default async function Trending() {
               draggable={false}
               src={`https://image.tmdb.org/t/p/w200${t.poster_path}`}
               alt={"title" in t ? t.title : t.name}
-              className="h-full select-none w-[175px] aspect-[11/17]  rounded-md"
+              className="h-full select-none rounded-md"
               width={175}
-              height={270.45}
+              height={262.5}
               loading="lazy"
             />
             <MovieRating rating={t.vote_average * 10} />

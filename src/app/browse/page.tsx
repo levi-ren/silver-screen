@@ -8,7 +8,7 @@ import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
 import TrendingLoader from "./trending-loader";
 
-export default function BrowsePage() {
+export default async function BrowsePage() {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">

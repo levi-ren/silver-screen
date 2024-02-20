@@ -6,7 +6,7 @@ export default async function TrendingLoader() {
         {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
-            className="inline-block h-full select-none w-[175px] aspect-[11/17]  rounded-md border border-white/20 animate-pulse bg-white/50"
+            className="inline-block h-full select-none w-[175px] aspect-[2/3]  rounded-md border border-white/20 animate-pulse bg-white/50"
           />
         ))}
       </div>
