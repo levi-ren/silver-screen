@@ -34,9 +34,10 @@ export default async function TopTen(props: TopTenProps) {
   ]).then(([m, t]) => {
     const movie = m.status === "fulfilled" ? m.value.results : [];
     const tv = t.status === "fulfilled" ? t.value.results : [];
+
     return [...movie, ...tv]
       .sort((a, b) => b.popularity - a.popularity)
-      .splice(10);
+      .slice(0, 10);
   });
 
   return (
