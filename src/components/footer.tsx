@@ -32,18 +32,18 @@ export default function Footer(props: FooterProps) {
   return (
     <footer className="relative py-4 mt-10 pt-4">
       <Image
-        className="grayscale object-cover -z-10 blur-[3px] brightness-50"
-        src="/banner-posters.jpg"
+        className="grayscale object-cover -z-10 blur brightness-50"
+        src="/banner-footer.jpg"
         alt="Banner posters"
         fill
-        priority
+        loading="lazy"
       />
       <div className="p-2">
         <div className="pb-8 border-b border-white/20 flex">
           <Logo className="text-center mx-auto" size="large" />
         </div>
-        <div className="px-2 my-4 flex gap-2 text-sm">
-          <div className="flex-1 space-y-2">
+        <div className="px-2 my-4 flex gap-2 text-sm max-w-2xl m-auto justify-between">
+          <div className=" space-y-2">
             <p className="font-semibold tracking-tighter text-blue-500 text-base">
               Quick Links:
             </p>
@@ -55,7 +55,7 @@ export default function Footer(props: FooterProps) {
               ))}
             </ul>
           </div>
-          <div className="flex-1 space-y-2">
+          <div className=" space-y-2">
             <p className="font-semibold tracking-tighter text-blue-500 text-base">
               Socials:
             </p>
