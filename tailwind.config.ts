@@ -39,6 +39,7 @@ const config: Config = {
         bebas: ["var(--font-bebas)"],
       },
       screens: {
+        xs: "425px",
         xxl: "1440px",
       },
     },

@@ -25,6 +25,8 @@ export interface MovieDetails {
   videos: { results: MovieTrailers[] };
   vote_average: number;
   vote_count: number;
+  release_dates: MovieReleaseDates;
+  credits: Credits;
 }
 export interface BelongsToCollection {
   id: number;
@@ -63,4 +65,53 @@ export interface MovieTrailers {
   official: boolean;
   published_at: string;
   id: string;
+}
+
+export interface MovieReleaseDates {
+  results: ReleaseDates[];
+}
+export interface ReleaseDates {
+  iso_3166_1: string;
+  release_dates: ReleaseDatesEntity[];
+}
+export interface ReleaseDatesEntity {
+  certification: string;
+  descriptors: null[];
+  iso_639_1: string;
+  note: string;
+  release_date: string;
+  type: number;
+}
+
+export interface Credits {
+  id: number;
+  cast: CastEntity[];
+  crew: CrewEntity[];
+}
+export interface CastEntity {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string | null;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+export interface CrewEntity {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string | null;
+  credit_id: string;
+  department: string;
+  job: string;
 }

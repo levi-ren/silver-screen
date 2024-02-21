@@ -1,8 +1,20 @@
+import { twMerge } from "tailwind-merge";
+
 interface MovieRatingProps {
   rating: number;
+  absolute?: boolean;
+  className?: string;
+  font?: "small" | "large";
+  votes?: number;
 }
 
-export default function MovieRating({ rating }: MovieRatingProps) {
+export default function MovieRating({
+  rating,
+  absolute = true,
+  className,
+  font = "small",
+  votes,
+}: MovieRatingProps) {
   let color = "";
   if (rating < 25) {
     color = "#ef4444";
@@ -15,13 +27,22 @@ export default function MovieRating({ rating }: MovieRatingProps) {
   }
 
   return (
-    <div className="absolute -bottom-4 left-2 z-10  bg-black/90 rounded-full w-11 h-11 p-[2px]">
+    <div
+      className={twMerge(
+        " bg-black/90 rounded-full w-11 h-11 p-[2px]",
+        absolute && "absolute -bottom-4 left-2 z-10",
+        className
+      )}
+      title={votes ? `Rated by ${votes} reviewers` : undefined}
+    >
       <div
         className="relative bg-transparent rounded-full flex items-center justify-center h-full pie before:bg-gray-900 "
         style={{ "--p": rating, "--c": color }}
       >
-        <span className="text-xs font-bold">{Math.round(rating)}</span>
-        <span className="text-[8px]">%</span>
+        <span className={twMerge("text-xs font-bold", font && "text-base")}>
+          {Math.round(rating)}
+        </span>
+        <span className={twMerge("text-[8px]", font && "text-xs")}>%</span>
       </div>
     </div>
   );
