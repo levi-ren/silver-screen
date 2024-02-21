@@ -7,6 +7,8 @@ import ListLoader from "./list-loader";
 import NowAiring from "./now-airing";
 import NowAiringLoader from "./now-airing-loader";
 import NowShowing from "./now-showing";
+import TopRatedMoviesLoader from "./top-rate-movies-loader";
+import TopRatedMovies from "./top-rated-movies";
 import TopTen from "./top-ten";
 import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
@@ -46,6 +48,10 @@ export default async function BrowsePage() {
         </Suspense>
         <Suspense fallback={<TopTenLoader />}>
           <TopTen />
+        </Suspense>
+
+        <Suspense fallback={<TopRatedMoviesLoader />}>
+          <TopRatedMovies />
         </Suspense>
       </main>
       <footer></footer>

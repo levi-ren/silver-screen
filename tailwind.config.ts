@@ -44,7 +44,8 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(function ({ addUtilities }) {
+    plugin(function ({ addUtilities, addVariant }) {
+      addVariant("not-last", "&:not(:last-child)");
       addUtilities({
         ".no-scrollbar::-webkit-scrollbar": {
           display: "none",

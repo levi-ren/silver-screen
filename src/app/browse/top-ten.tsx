@@ -1,5 +1,5 @@
 import { tmdbFetch } from "@/helpers/fetcher";
-import { PopularMovie } from "@/types/popular-movie";
+import { PopularMovies } from "@/types/discover-movie";
 import { PopularTV } from "@/types/popular-tv";
 import { Resource } from "@/types/shared";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import Link from "next/link";
 
 interface TopTenProps {}
 
-async function getPopularMovie(): Promise<PopularMovie> {
+async function getPopularMovie(): Promise<PopularMovies> {
   const res = await tmdbFetch(`movie/popular`);
 
   if (!res.ok) {
@@ -57,7 +57,7 @@ export default async function TopTen(props: TopTenProps) {
             >
               <Image
                 draggable={false}
-                src={`https://image.tmdb.org/t/p/w400${t.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w342${t.poster_path}`}
                 alt={"title" in t ? t.title : t.name}
                 className="h-full select-none md:w-[250px] w-[175px]  rounded-xl relative md:-left-15 md:top-10 -left-10 top-5"
                 width={250}

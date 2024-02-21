@@ -47,22 +47,22 @@ export default async function NowAiring() {
                 />
                 <div className="flex-1 tracking-tighter">
                   <p className="">{t.name}</p>
-                  <div className="text-sm text-gray-500 ">
+                  <div className="text-sm text-blue-500 ">
                     {new Date(t.first_air_date).getUTCFullYear()} /{" "}
                     {languages[t.original_language].english_name} /{" "}
                     {t.vote_average ? (
-                      <span className="inline-flex justify-center items-center gap-x-1">
-                        {t.vote_average.toFixed(2)}
-                        <RateIcon className="text-blue-500 w-3" />
+                      <span className="inline-flex justify-center items-center gap-x-1 ">
+                        {t.vote_average.toFixed(1)}
+                        <RateIcon className="w-3 text-white" />
                       </span>
                     ) : (
                       <span className="text-red-500">Unrated</span>
                     )}
                   </div>
-                  <div className="text-xs text-gray-400 space-x-1 space-y-1 mt-2">
+                  <div className="text-xs space-x-1 space-y-1 mt-2">
                     {t.genre_ids.map((id) => (
                       <span
-                        className="px-2 py-[0.5px] rounded-full border border-white/20 inline-flex items-center"
+                        className="px-2 py-[0.5px] rounded-full border  inline-flex items-center border-blue-600"
                         key={id}
                       >
                         {tvGenres[id]}

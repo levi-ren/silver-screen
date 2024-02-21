@@ -20,3 +20,6 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
 }
+
+export type PopularMovies = DiscoverMovies;
+export type RatedMovies = DiscoverMovies;
