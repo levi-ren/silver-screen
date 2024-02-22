@@ -13,12 +13,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Casts from "./casts";
 import Certification from "./certification";
+import Reviews from "./reviews";
 
 type WatchType = "TV" | "Movie";
 
 async function getMovie(id: string, type: WatchType): Promise<MovieDetails> {
   const res = await tmdbFetch(`${type.toLowerCase()}/${id}`, {
-    append_to_response: "videos,release_dates,credits,keywords",
+    append_to_response: "videos,release_dates,credits,keywords,reviews",
   });
 
   if (!res.ok) {
@@ -201,6 +202,7 @@ export default async function MoviePage({
       </section>
 
       <Casts casts={movie.credits.cast} />
+      <Reviews reviews={movie.reviews} />
     </main>
   );
 }
