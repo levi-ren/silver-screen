@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import Casts from "./casts";
 import Certification from "./certification";
 import Reviews from "./reviews";
+export const runtime = "edge";
 
 type WatchType = "TV" | "Movie";
 
@@ -44,6 +45,8 @@ export default async function MoviePage({
   }
 
   const country = headers().get("x-country") || "US";
+  console.log({ country });
+  console.log({ headers: headers().get("x-country") });
   const movie = await getMovie(id, watch);
   const movieKey = movie.videos.results.find(
     (v) => v.site === "YouTube" && v.type === "Trailer"
