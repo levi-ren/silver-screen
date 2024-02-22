@@ -27,7 +27,14 @@ export interface MovieDetails {
   vote_count: number;
   release_dates: MovieReleaseDates;
   credits: Credits;
+  keywords: { keywords: Keyword[] };
 }
+
+export interface Keyword {
+  id: number;
+  name: string;
+}
+
 export interface BelongsToCollection {
   id: number;
   name: string;
