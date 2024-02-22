@@ -17,15 +17,19 @@ export default function Casts({ casts }: CastsProps) {
               className="inline-flex flex-col align-top border border-white/20 rounded-xl overflow-hidden h-full max-w-[160px] shadow-md shadow-white/20"
               key={cast.id}
             >
-              <Image
-                draggable={false}
-                src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
-                alt={cast.name}
-                className="h-full select-none "
-                width={160}
-                height={240}
-                loading="lazy"
-              />
+              {cast.profile_path ? (
+                <Image
+                  draggable={false}
+                  src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
+                  alt={cast.name}
+                  className="h-full select-none "
+                  width={160}
+                  height={240}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="w-[160px] h-[240px] bg-white/20" />
+              )}
               <div className="px-1 py-2 text-center h-[88px] overflow-y-auto no-scrollbar">
                 <p className="tracking-tighter whitespace-break-spaces leading-none">
                   {cast.name}
