@@ -93,7 +93,7 @@ export default async function MoviePage({
                   release_date={movie.release_date}
                   country={country}
                   runtime={movie.runtime}
-                  className="sm:hidden block text-center"
+                  className="sm:hidden block text-center !text-white"
                 />
 
                 <div className="tracking-tighter leading-tight max-w-xl mt-4">

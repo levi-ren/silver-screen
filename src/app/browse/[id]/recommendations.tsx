@@ -33,19 +33,12 @@ export default function Recommendations({
                 fill
                 loading="lazy"
               />
-              <div className="absolute bottom-0 z-10 p-2 opacity-0 group-hover:opacity-100 transition-all w-full bg-gradient-to-t from-blue-500/70 to-blue-200/40 ">
+              <div className="absolute bottom-0 z-10 p-2 opacity-0 group-hover:opacity-100 transition-all w-full bg-gradient-to-t from-black/90 to-black/50 ">
                 <p className="text-3xl font-bebas small-caps  truncate">
                   {movie.title}
                 </p>
-                <div className="text-xs text-white/70 truncate">
-                  {movie.genre_ids.map((id) => (
-                    <span
-                      className="py-[0.5px] inline-flex items-center not-last:after:content-['\2022'] after:mx-1 after:align-text-top "
-                      key={id}
-                    >
-                      {movieGenres[id]}
-                    </span>
-                  ))}
+                <div className="text-xs text-white/80 truncate">
+                  {movie.genre_ids.map((id) => movieGenres[id]).join(" • ")}
                 </div>
               </div>
             </Link>

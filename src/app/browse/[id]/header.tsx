@@ -19,23 +19,14 @@ export default function BrowseHeader({ movie, country }: BrowseHeaderProps) {
       className="py-4 xs:p-4 sticky top-0 z-30 bg-gradient-to-b from-black/90 to-black/50 backdrop-blur-xl backdrop-opacity-90 border-b border-white/20"
     >
       <div className="max-w-screen-xl m-auto px-2 xs:px-2 ">
-        <div className="flex items-center justify-between  gap-2 ">
-          <div className="flex items-center gap-2 flex-col xs:items-start">
-            <div className="leading-none">
-              <p className="small-caps font-bebas text-5xl text-center xs:text-left">
-                {movie.title}
-              </p>
-              <div className="text-sm text-center xs:text-left">
-                {movie.genres.map(({ id }) => (
-                  <span
-                    className="py-[0.5px] inline-flex items-center not-last:after:content-['\2022'] not-last:after:mx-1.5 after:align-text-top "
-                    key={id}
-                  >
-                    {movieGenres[id]}
-                  </span>
-                ))}
-              </div>
-            </div>
+        <div className="flex items-center justify-between gap-2 ">
+          <div className="min-w-0">
+            <p className="small-caps font-bebas text-5xl truncate  ">
+              {movie.title}
+            </p>
+            <p className="text-sm truncate mb-1">
+              {movie.genres.map(({ id }) => movieGenres[id]).join(" • ")}
+            </p>
             <Certification
               certificates={movie.release_dates}
               release_date={movie.release_date}
@@ -43,7 +34,7 @@ export default function BrowseHeader({ movie, country }: BrowseHeaderProps) {
               runtime={movie.runtime}
             />
           </div>
-          <div className="flex items-center gap-2 ">
+          <div className="flex items-center gap-2 shrink-0">
             <Link
               href={`#youtube-trailer`}
               className="p-2 rounded-full border border-white/20 sm:flex  items-center justify-center text-sm hidden"
