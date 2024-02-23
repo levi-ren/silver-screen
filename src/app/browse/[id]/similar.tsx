@@ -44,16 +44,14 @@ export default function Similar({ similar }: SimilarProps) {
             <div className="p-2 tracking-tighter">
               <p className="">{t.title}</p>
               <div className="text-xs text-white/70">
-                <div className=" ">
-                  {t.genre_ids.map((id) => (
-                    <span
-                      className="py-[0.5px] inline-flex items-center not-last:after:content-['\2022'] after:mx-1 after:align-text-top"
-                      key={id}
-                    >
-                      {movieGenres[id]}
-                    </span>
-                  ))}
-                </div>
+                {t.genre_ids.map((id) => (
+                  <span
+                    className="py-[0.5px] inline-flex items-center not-last:after:content-['\2022'] after:mx-1 after:align-text-top"
+                    key={id}
+                  >
+                    {movieGenres[id]}
+                  </span>
+                ))}
               </div>
             </div>
           </Link>

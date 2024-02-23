@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import Casts from "./casts";
 import Certification from "./certification";
 import BrowseHeader from "./header";
+import Recommendations from "./recommendations";
 import Reviews from "./reviews";
 import Similar from "./similar";
 
@@ -16,7 +17,8 @@ type WatchType = "TV" | "Movie";
 
 async function getMovie(id: string, type: WatchType): Promise<MovieDetails> {
   const res = await tmdbFetch(`${type.toLowerCase()}/${id}`, {
-    append_to_response: "videos,release_dates,credits,keywords,reviews,similar",
+    append_to_response:
+      "videos,release_dates,credits,keywords,reviews,similar,recommendations",
   });
 
   if (!res.ok) {
@@ -161,6 +163,7 @@ export default async function MoviePage({
             <Similar similar={movie.similar} />
           </div>
         </section>
+        <Recommendations recommendations={movie.recommendations} />
       </main>
 
       <Footer />
