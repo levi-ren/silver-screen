@@ -1,18 +1,13 @@
-import Button from "@/components/button";
-import MovieRating from "@/components/movie-rating";
-import { movieGenres } from "@/constants/genres";
 import { languages } from "@/constants/languages";
 import { tmdbFetch } from "@/helpers/fetcher";
-import BookMarkIcon from "@/icons/bookmark-icon";
-import SaveLaterIcon from "@/icons/save-later-icon";
 import { MovieDetails } from "@/types/movie-details";
 import { PageProps } from "@/types/page-types";
 import { headers } from "next/headers";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Casts from "./casts";
 import Certification from "./certification";
+import BrowseHeader from "./header";
 import Reviews from "./reviews";
 
 type WatchType = "TV" | "Movie";
@@ -55,66 +50,13 @@ export default async function MoviePage({
           id="youtube-trailer"
           src={`https://www.youtube.com/embed/${movieKey}?autoplay=1`}
           className="w-full h-screen max-w-[100vw]"
-          style={{
-            background: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path}) center center no-repeat`,
-            backgroundSize: "cover",
-          }}
         />
       </section>
 
-      <section className="p-4 sticky top-0 z-30 bg-gradient-to-b from-black/90 to-black/50 backdrop-blur-xl backdrop-opacity-85">
-        <div className="max-w-screen-xl m-auto px-4 ">
-          <div className="flex items-center justify-between flex-col xs:flex-row gap-2 ">
-            <div className="flex items-center gap-2 flex-col xs:items-start">
-              <div className="leading-none">
-                <p className="small-caps font-bebas text-5xl text-center xs:text-left">
-                  {movie.title}
-                </p>
-                <div className="text-sm">
-                  {movie.genres.map(({ id }) => (
-                    <span
-                      className="py-[0.5px] inline-flex items-center not-last:after:content-['\2022'] not-last:after:mx-1.5 after:align-text-top "
-                      key={id}
-                    >
-                      {movieGenres[id]}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <Certification
-                certificates={movie.release_dates}
-                release_date={movie.release_date}
-                country={country}
-                runtime={movie.runtime}
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <Link
-                href={`#youtube-trailer`}
-                className="p-2 rounded-full border border-white/20 flex  items-center justify-center text-sm"
-              >
-                <SaveLaterIcon />
-              </Link>
-              <MovieRating
-                absolute={false}
-                font="large"
-                rating={movie.vote_average * 10}
-                className="w-16 h-16"
-                votes={movie.vote_count}
-              />
-              <Button
-                aria-label="bookmark button"
-                className="p-2 rounded-full border border-white/20 flex items-center justify-center text-sm"
-              >
-                <BookMarkIcon />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BrowseHeader movie={movie} country={country} />
 
       <section id="details" className="relative p-2 md:p-4 ">
-        <div className="absolute inset-0 -top-[209px] xs:-top-[137px] w-full xs:h-[calc(100%_+_137px)] h-[calc(100%_+_209px)]">
+        <div className="absolute inset-0 -top-[100px] sm:-top-[156px] w-full sm:h-[calc(100%_+_156px)] h-[calc(100%_+_100px)]">
           <Image
             draggable={false}
             src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
@@ -137,9 +79,17 @@ export default async function MoviePage({
               priority
             />
             <div className="flex-1 py-2">
-              <p className="italic my-4 tracking-tighter text-blue-400 text-center xs:text-left">
+              <p className="italic my-4 tracking-tighter text-blue-400 text-center sm:text-left">
                 ~ {movie.tagline} ~
               </p>
+
+              <Certification
+                certificates={movie.release_dates}
+                release_date={movie.release_date}
+                country={country}
+                runtime={movie.runtime}
+                className="sm:hidden block text-center"
+              />
 
               <div className="tracking-tighter leading-tight max-w-xl mt-4">
                 <p className="font-semibold">Overview:</p>

@@ -90,3 +90,7 @@ blockquote::after {
   content: '"';
   display: inline;
 }
+
+pre {
+  white-space: break-spaces;
+}

@@ -1,3 +1,4 @@
+import { release_types } from "@/constants/release_types";
 import { MovieReleaseDates } from "@/types/movie-details";
 import { twMerge } from "tailwind-merge";
 
@@ -6,6 +7,7 @@ interface CertificationProps {
   release_date: string;
   country: string;
   runtime: number;
+  className?: string;
 }
 
 const convert = (n: number) => {
@@ -19,37 +21,44 @@ export default function Certification({
   country,
   release_date,
   runtime,
+  className,
 }: CertificationProps) {
   const certificate = (
     certificates.results.find((r) => r.iso_3166_1 === country) ||
     certificates.results.find((r) => r.iso_3166_1 === "US")
   )?.release_dates.find(
-    (d) => new Date(d.release_date) >= new Date(release_date)
+    (d) => new Date(d.release_date) >= new Date(release_date) && d.certification
   );
   const countryRelease = certificates.results.find(
     (r) => r.iso_3166_1 === country
   )
     ? country
     : "US";
+
   return certificate ? (
-    <div className=" text-xl tracking-tighter font-bebas text-gray-400 divide-x divide-white/40">
-      <div className="inline pr-1">
-        <span
-          className={twMerge(
-            "px-1 border border-white/20",
-            !certificate?.certification && "text-red-500 border-none"
-          )}
-        >
-          {certificate?.certification || "Unrated"}
+    <div
+      className={twMerge("text-gray-400 space-y-1 hidden sm:block", className)}
+    >
+      <div className=" text-xl tracking-tighter font-bebas  divide-x divide-white/40">
+        <div className="inline">
+          <span
+            className={twMerge(
+              "px-1 border border-white/20 ",
+              !certificate?.certification && "text-red-500 border-none"
+            )}
+          >
+            {certificate?.certification || "Unrated"}
+          </span>
+        </div>
+        <span className="mx-1 pl-1">
+          {new Date(certificate.release_date).toLocaleDateString()}
         </span>
-        {certificate?.certification && country !== countryRelease && (
-          <span className="pl-1">({countryRelease})</span>
-        )}
+
+        <span className="small-caps pl-1">{convert(runtime)}</span>
       </div>
-      <span className="px-1">
-        {new Date(certificate.release_date).toLocaleDateString()}
-      </span>
-      <span className="small-caps px-1">{convert(runtime)}</span>
+      <p className="tracking-tighter text-xs ">
+        {release_types[certificate.type]} Release ({countryRelease})
+      </p>
     </div>
   ) : null;
 }
