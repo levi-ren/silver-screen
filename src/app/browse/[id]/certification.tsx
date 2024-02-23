@@ -27,7 +27,7 @@ export default function Certification({
     certificates.results.find((r) => r.iso_3166_1 === country) ||
     certificates.results.find((r) => r.iso_3166_1 === "US")
   )?.release_dates.find(
-    (d) => new Date(d.release_date) >= new Date(release_date) && d.certification
+    (d) => new Date(d.release_date) >= new Date(release_date)
   );
   const countryRelease = certificates.results.find(
     (r) => r.iso_3166_1 === country

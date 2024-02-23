@@ -66,8 +66,7 @@ export default async function MoviePage({
     notFound();
   }
 
-  const country = headers().get("x-country") || "US";
-  console.log({ country });
+  const country = headers().get("x-country") || "PH";
   const movie = await getMovie(id, watch);
   const movieKey = movie.videos.results.find(
     (v) => v.site === "YouTube" && v.type === "Trailer"
@@ -76,7 +75,10 @@ export default async function MoviePage({
     <>
       <PreloadResources />
       <main>
-        <section id="trailer" className="w-full h-screen max-w-[100vw]">
+        <section
+          id="trailer"
+          className="w-full h-screen max-w-[100vw] relative z-30"
+        >
           <YouTubeEmbed
             videoid={movieKey || ""}
             style="width:100%; max-width:100vw; height:100vh"

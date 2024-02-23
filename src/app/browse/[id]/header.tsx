@@ -16,7 +16,7 @@ export default function BrowseHeader({ movie, country }: BrowseHeaderProps) {
   return (
     <section
       id="header"
-      className="py-4 xs:p-4 sticky top-0 z-30 bg-gradient-to-b from-black/90 to-black/50 backdrop-blur-xl backdrop-opacity-90 border-b border-white/20"
+      className="py-4 xs:p-4 sticky top-0 z-50 bg-gradient-to-b from-black/90 to-black/50 backdrop-blur-xl backdrop-opacity-90 border-b border-white/20"
     >
       <div className="max-w-screen-xl m-auto px-2 xs:px-2 ">
         <div className="flex items-center justify-between gap-2 ">
