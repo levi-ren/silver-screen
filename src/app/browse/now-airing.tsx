@@ -20,7 +20,7 @@ async function getNowAiring(): Promise<DiscoverTV> {
 export default async function NowAiring() {
   const resource = await getNowAiring();
   return (
-    <section
+    <aside
       id="now-airing"
       className="p-2 pb-0 md:pb-0 md:p-4 space-y-4 xl:col-span-4 col-span-12  xl:order-2 xl:row-span-2 xxl:col-span-3 order-5"
     >
@@ -75,6 +75,6 @@ export default async function NowAiring() {
           ))}
         </div>
       </div>
-    </section>
+    </aside>
   );
 }

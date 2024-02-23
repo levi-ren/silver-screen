@@ -89,7 +89,7 @@ export default function Footer(props: FooterProps) {
           >
             <Image
               draggable={false}
-              src="./tmdb_logo.svg"
+              src="/tmdb_logo.svg"
               alt="TMDB Logo"
               className="m-auto"
               width={150}

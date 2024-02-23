@@ -62,10 +62,6 @@ function timePassedSince(dateString: string) {
   return message;
 }
 
-interface ReviewsProps {
-  reviews: MovieReviews;
-}
-
 const peerNames = [
   "peer/one",
   "peer/two",
@@ -115,116 +111,118 @@ async function Content({ content, htmlFor, index }: ContentProps) {
   );
 }
 
+interface ReviewsProps {
+  reviews: MovieReviews;
+}
+
 export default async function Reviews({ reviews }: ReviewsProps) {
   return (
-    <section id="reviews" className="md:px-4 ">
-      <div className="max-w-screen-xl m-auto px-2 sm:px-4">
-        <div className="flex justify-between items-center">
-          <div className="">
-            <span className="text-4xl font-bebas font-semibold small-caps">
-              Reviews{" "}
-            </span>
-            <span className="text-base tracking-tighter align-super">
-              ({reviews.total_results})
-            </span>
-          </div>
-          {reviews.total_results > 0 && (
-            <Link href="#reviews">
-              <LinkIcon className="w-5 h-5" />
-            </Link>
-          )}
+    <article id="reviews" className="flex-1 basis-2/3 ">
+      <div className="flex justify-between items-center">
+        <div className="">
+          <span className="text-4xl font-bebas font-semibold small-caps">
+            Reviews{" "}
+          </span>
+          <span className="text-base tracking-tighter align-super">
+            ({reviews.total_results})
+          </span>
         </div>
-        {reviews.total_results === 0 ? (
-          <div className="w-full rounded-md border border-white/20 px-4 py-28 mt-4 text-center">
-            No reviews yet
-          </div>
-        ) : (
-          <ul className="space-y-2 py-4">
-            {reviews.results.slice(0, 5).map((review, i) => (
-              <li
-                className={twMerge(
-                  "border border-white/20 rounded-md p-2 tracking-tighter text-justify relative pb-7 bg-zinc-950",
-                  review.content.length > maxLength && "pb-14"
-                )}
-                key={review.id}
-              >
-                <div className="pt-4 pb-6 border-b border-white/20 mb-6 px-2 xs:px-4 ">
-                  <div className="flex gap-x-2">
-                    <div className="w-[45px] h-[45px] bg-white rounded-full uppercase flex justify-center items-center shrink-0">
-                      {review.author_details.avatar_path ? (
-                        <Image
-                          draggable={false}
-                          src={`https://image.tmdb.org/t/p/w45${review.author_details.avatar_path}`}
-                          alt={review.author}
-                          className="h-full select-none rounded-full object-cover  border-2"
-                          width={45}
-                          height={45}
-                          loading="lazy"
-                        />
-                      ) : (
-                        <span className="tracking-normal font-bebas text-xl text-black">
-                          {(review.author_details.name
-                            ? review.author_details.name
-                            : review.author_details.username
-                          )
-                            .split(" ")
-                            .slice(0, 2)
-                            .map((n) => n[0])
-                            .join("")}
-                        </span>
-                      )}
-                    </div>
-
-                    <div>
-                      <p className="">{review.author}</p>
-                      <p className="text-xs text-white/90">
-                        Written {timePassedSince(review.created_at)}
-                      </p>
-                    </div>
-
-                    <div
-                      className={twMerge(
-                        "ml-auto text-3xl font-bebas self-center w-10 h-10 border border-dashed rounded-full items-center justify-center flex gap-x-[1px] p-1 ",
-                        styleRating(review.author_details.rating)
-                      )}
-                    >
-                      <span className="h-8">
-                        {review.author_details.rating || "~~"}
-                      </span>
-                      {review.author_details.rating && (
-                        <StarIcon className="w-2.5 h-2.5 shrink-0 " />
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <input
-                  id={review.id}
-                  type="checkbox"
-                  className={peerNames[i]}
-                  hidden
-                />
-                <Suspense fallback={<ReviewsLoader />}>
-                  <Content
-                    content={review.content}
-                    htmlFor={review.id}
-                    index={i}
-                  />
-                </Suspense>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {reviews.total_results > 0 && (
-          <div className="text-center">
-            <Link href="#reviews">
-              View All
-              <LinkIcon className="w-5 h-5 inline ml-2" />
-            </Link>
-          </div>
+        {reviews.results.length > 5 && (
+          <Link href="#reviews">
+            <LinkIcon className="w-5 h-5" />
+          </Link>
         )}
       </div>
-    </section>
+      {reviews.total_results === 0 ? (
+        <div className="w-full rounded-md border border-white/20 px-4 py-28 mt-4 text-center">
+          No reviews yet
+        </div>
+      ) : (
+        <ul className="space-y-2 py-4">
+          {reviews.results.slice(0, 5).map((review, i) => (
+            <li
+              className={twMerge(
+                "border border-white/20 rounded-md p-2 tracking-tighter text-justify relative pb-7 bg-zinc-950",
+                review.content.length > maxLength && "pb-14"
+              )}
+              key={review.id}
+            >
+              <div className="pt-4 pb-6 border-b border-white/20 mb-6 px-2 xs:px-4 ">
+                <div className="flex gap-x-2">
+                  <div className="w-[45px] h-[45px] bg-white rounded-full uppercase flex justify-center items-center shrink-0">
+                    {review.author_details.avatar_path ? (
+                      <Image
+                        draggable={false}
+                        src={`https://image.tmdb.org/t/p/w45${review.author_details.avatar_path}`}
+                        alt={review.author}
+                        className="h-full select-none rounded-full object-cover  border-2"
+                        width={45}
+                        height={45}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span className="tracking-normal font-bebas text-xl text-black">
+                        {(review.author_details.name
+                          ? review.author_details.name
+                          : review.author_details.username
+                        )
+                          .split(" ")
+                          .slice(0, 2)
+                          .map((n) => n[0])
+                          .join("")}
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <p className="">{review.author}</p>
+                    <p className="text-xs text-white/90">
+                      Written {timePassedSince(review.created_at)}
+                    </p>
+                  </div>
+
+                  <div
+                    className={twMerge(
+                      "ml-auto text-3xl font-bebas self-center w-10 h-10 border border-dashed rounded-full items-center justify-center flex gap-x-[1px] p-1 ",
+                      styleRating(review.author_details.rating)
+                    )}
+                  >
+                    <span className="h-8">
+                      {review.author_details.rating || "~~"}
+                    </span>
+                    {review.author_details.rating && (
+                      <StarIcon className="w-2.5 h-2.5 shrink-0 " />
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <input
+                id={review.id}
+                type="checkbox"
+                className={peerNames[i]}
+                hidden
+              />
+              <Suspense fallback={<ReviewsLoader />}>
+                <Content
+                  content={review.content}
+                  htmlFor={review.id}
+                  index={i}
+                />
+              </Suspense>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {reviews.results.length > 5 && (
+        <div className="text-center">
+          <Link href="#reviews">
+            View All
+            <LinkIcon className="w-5 h-5 inline ml-2" />
+          </Link>
+        </div>
+      )}
+    </article>
   );
 }
