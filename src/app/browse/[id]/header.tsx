@@ -1,10 +1,10 @@
+import Anchor from "@/components/anchor";
 import Button from "@/components/button";
 import MovieRating from "@/components/movie-rating";
 import { movieGenres } from "@/constants/genres";
 import BookMarkIcon from "@/icons/bookmark-icon";
 import SaveLaterIcon from "@/icons/save-later-icon";
 import { MovieDetails } from "@/types/movie-details";
-import Link from "next/link";
 import Certification from "./certification";
 
 interface BrowseHeaderProps {
@@ -35,12 +35,13 @@ export default function BrowseHeader({ movie, country }: BrowseHeaderProps) {
             />
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <Link
+            <Anchor
+              aria-label="View trailer"
               href={`#youtube-trailer`}
               className="p-2 rounded-full border border-white/20 sm:flex  items-center justify-center text-sm hidden"
             >
               <SaveLaterIcon />
-            </Link>
+            </Anchor>
             <MovieRating
               absolute={false}
               font="large"

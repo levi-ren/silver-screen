@@ -1,9 +1,9 @@
+import Anchor from "@/components/anchor";
 import MovieRating from "@/components/movie-rating";
 import { tmdbFetch } from "@/helpers/fetcher";
 
 import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";
-import Link from "next/link";
 
 async function getTrending(): Promise<TrendingAll> {
   const res = await tmdbFetch(`trending/all/day`);
@@ -27,7 +27,8 @@ export default async function Trending() {
       </p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
         {trending.results.slice(3).map((t) => (
-          <Link
+          <Anchor
+            aria-label={`Link to watch ${"title" in t ? t.title : t.name}`}
             href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
             className="relative inline-block"
             key={t.id}
@@ -42,7 +43,7 @@ export default async function Trending() {
               loading="lazy"
             />
             <MovieRating rating={t.vote_average * 10} />
-          </Link>
+          </Anchor>
         ))}
       </div>
     </section>

@@ -3,7 +3,7 @@ import GitHubIcon from "@/icons/github-icon";
 import LDLogo from "@/icons/ld-logo";
 import LinkedInIcon from "@/icons/linkedin-icon";
 import Image from "next/image";
-import Link from "next/link";
+import Anchor from "./anchor";
 
 const quicklinks = [
   { label: "About", href: "/about" },
@@ -50,7 +50,9 @@ export default function Footer(props: FooterProps) {
             <ul className="space-y-2">
               {quicklinks.map((q) => (
                 <li key={q.label}>
-                  <Link href={q.href}>{q.label}</Link>
+                  <Anchor aria-label={`Link to ${q.label}`} href={q.href}>
+                    {q.label}
+                  </Anchor>
                 </li>
               ))}
             </ul>
@@ -63,14 +65,15 @@ export default function Footer(props: FooterProps) {
             <ul className="space-y-2">
               {socials.map((q) => (
                 <li key={q.label}>
-                  <Link
+                  <Anchor
+                    aria-label={`Link to ${q.label}`}
                     className="inline-flex items-center gap-x-2"
                     target="_blank"
                     href={q.href}
                   >
                     <q.logo className="w-7 h-7" />
                     {q.label}
-                  </Link>
+                  </Anchor>
                 </li>
               ))}
             </ul>
@@ -82,7 +85,8 @@ export default function Footer(props: FooterProps) {
         </p>
         <div className="text-sm text-center pt-4 border-t border-blue-400/50">
           <p>Powered by:</p>
-          <Link
+          <Anchor
+            aria-label="Link to TMDB"
             href="https://www.themoviedb.org"
             target="_blank"
             className="inline-flex"
@@ -96,7 +100,7 @@ export default function Footer(props: FooterProps) {
               height={21}
               loading="lazy"
             />
-          </Link>
+          </Anchor>
         </div>
       </div>
     </footer>

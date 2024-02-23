@@ -1,9 +1,9 @@
+import Anchor from "@/components/anchor";
 import Logo from "@/components/logo";
 import { tmdbFetch } from "@/helpers/fetcher";
 import SearchIcon from "@/icons/search-icon";
 import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";
-import Link from "next/link";
 
 async function getTrending(): Promise<TrendingAll> {
   const res = await tmdbFetch(`trending/all/day`);
@@ -39,12 +39,13 @@ export default async function Home() {
               <SearchIcon className="text-white/50 " />
             </div>
           </form>
-          <Link
+          <Anchor
+            aria-label="Link to browse"
             href="/browse"
             className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 mt-6"
           >
             Browse Cataloge
-          </Link>
+          </Anchor>
           <div className="space-y-2">
             <p className="text-justify mt-6">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

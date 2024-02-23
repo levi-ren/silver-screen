@@ -1,7 +1,7 @@
+import Anchor from "@/components/anchor";
 import { movieGenres } from "@/constants/genres";
 import { MovieRecommendations } from "@/types/movie-details";
 import Image from "next/image";
-import Link from "next/link";
 
 interface ReccomendationProps {
   recommendations: MovieRecommendations;
@@ -19,7 +19,8 @@ export default function Recommendations({
         </p>
         <ul className="space-x-4 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar text-sm">
           {movies.map((movie) => (
-            <Link
+            <Anchor
+              aria-label={`Link to watch ${movie.title}`}
               key={movie.id}
               href={`/browse/${movie.id}?watch=Movie`}
               className="relative inline-block w-[300px] h-[168.75px] rounded-md group overflow-hidden"
@@ -41,7 +42,7 @@ export default function Recommendations({
                   {movie.genre_ids.map((id) => movieGenres[id]).join(" • ")}
                 </div>
               </div>
-            </Link>
+            </Anchor>
           ))}
         </ul>
       </div>

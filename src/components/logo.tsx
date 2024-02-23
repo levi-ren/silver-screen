@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+import Anchor from "./anchor";
 
 interface LogoProps {
   className?: string;
@@ -9,7 +9,7 @@ interface LogoProps {
 export default function Logo({ className, size }: LogoProps) {
   return (
     <div className={twMerge(className, "relative ")}>
-      <Link href="/">
+      <Anchor aria-label="Link to home page" href="/">
         <span
           className={twMerge(
             "text-5xl md:text-6xl absolute right-1/2 translate-x-1/2 top-[60%] -translate-y-[60%] text-white/30",
@@ -34,7 +34,7 @@ export default function Logo({ className, size }: LogoProps) {
         >
           Silver Screen
         </p>
-      </Link>
+      </Anchor>
     </div>
   );
 }

@@ -1,8 +1,8 @@
+import Anchor from "@/components/anchor";
 import { movieGenres } from "@/constants/genres";
 import ChevronIcon from "@/icons/chevron-icon";
 import { SimilarMovies } from "@/types/movie-details";
 import Image from "next/image";
-import Link from "next/link";
 
 interface SimilarProps {
   similar: SimilarMovies;
@@ -27,7 +27,8 @@ export default function Similar({ similar }: SimilarProps) {
 
       <div className="relative gap-x-8 space-y-2 my-4 max-h-96 md:max-h-[1000px] overflow-hidden peer-has-[:checked]:max-h-[1000px] transition-all bg-zinc-900 rounded-md p-2">
         {movies.map((t, i) => (
-          <Link
+          <Anchor
+            aria-label={`Link to watch ${t.title}`}
             href={`/browse/${t.id}?watch=Movie`}
             className="flex items-center relative rounded-xl bg-black/70 hover:bg-black/90 transition-colors p-2"
             key={t.id}
@@ -47,7 +48,7 @@ export default function Similar({ similar }: SimilarProps) {
                 {t.genre_ids.map((id) => movieGenres[id]).join(" • ")}
               </div>
             </div>
-          </Link>
+          </Anchor>
         ))}
       </div>
     </aside>

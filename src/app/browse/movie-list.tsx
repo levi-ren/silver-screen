@@ -1,7 +1,7 @@
+import Anchor from "@/components/anchor";
 import { tmdbFetch } from "@/helpers/fetcher";
 import { RatedMovies } from "@/types/discover-movie";
 import Image from "next/image";
-import Link from "next/link";
 
 interface TopTenProps {}
 
@@ -28,7 +28,8 @@ export default async function MovieList(props: TopTenProps) {
           .sort((a, b) => b.popularity - a.popularity)
           .slice(10)
           .map((t, i) => (
-            <Link
+            <Anchor
+              aria-label={`Link to watch ${t.title}`}
               href={`/browse/${t.id}?watch=Movie`}
               className="flex items-center relative border border-white/20 rounded-xl rounded-t-none"
               key={t.id}
@@ -62,7 +63,7 @@ export default async function MovieList(props: TopTenProps) {
                   <div className="pl-4 p-1">{t.title}</div>
                 </div>
               </div>
-            </Link>
+            </Anchor>
           ))}
       </div>
     </section>

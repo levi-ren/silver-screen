@@ -1,3 +1,4 @@
+import Anchor from "@/components/anchor";
 import { tvGenres } from "@/constants/genres";
 import { languages } from "@/constants/languages";
 import { tmdbFetch } from "@/helpers/fetcher";
@@ -5,7 +6,6 @@ import RateIcon from "@/icons/rate-icon";
 import { DiscoverTV } from "@/types/discover-tv";
 
 import Image from "next/image";
-import Link from "next/link";
 
 async function getNowAiring(): Promise<DiscoverTV> {
   const res = await tmdbFetch(`tv/airing_today`);
@@ -30,7 +30,8 @@ export default async function NowAiring() {
         </p>
         <div className="space-y-4 xl:overflow-y-auto xl:overflow-x-hidden overflow-x-auto overflow-y-hidden xl:py-4 hidden-scrollbar hover:display-scrollbar xl:pr-4 max-h-[655px] whitespace-nowrap xl:whitespace-normal space-x-4 xl:space-x-0">
           {resource.results.slice(3).map((t) => (
-            <Link
+            <Anchor
+              aria-label={`Link to watch ${t.name}`}
               href={`/browse/${t.id}?watch=Movie`}
               className="inline-block xl:block hover:bg-zinc-900 transition-colors rounded-md p-2 "
               key={t.id}
@@ -71,7 +72,7 @@ export default async function NowAiring() {
                   </div>
                 </div>
               </div>
-            </Link>
+            </Anchor>
           ))}
         </div>
       </div>

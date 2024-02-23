@@ -1,8 +1,8 @@
+import Anchor from "@/components/anchor";
 import { movieGenres } from "@/constants/genres";
 import { tmdbFetch } from "@/helpers/fetcher";
 import { RatedMovies } from "@/types/discover-movie";
 import Image from "next/image";
-import Link from "next/link";
 
 interface TopTenProps {}
 
@@ -31,7 +31,8 @@ export default async function TopRatedMovies(props: TopTenProps) {
           .sort((a, b) => b.popularity - a.popularity)
           .slice(10)
           .map((t, i) => (
-            <Link
+            <Anchor
+              aria-label={`Link to watch ${t.title}`}
               href={`/browse/${t.id}?watch=Movie`}
               className="flex items-center relative rounded-xl bg-zinc-900 hover:bg-zinc-900/70 transition-colors p-2"
               key={t.id}
@@ -55,7 +56,7 @@ export default async function TopRatedMovies(props: TopTenProps) {
                   {t.genre_ids.map((id) => movieGenres[id]).join(" • ")}
                 </p>
               </div>
-            </Link>
+            </Anchor>
           ))}
       </div>
     </section>

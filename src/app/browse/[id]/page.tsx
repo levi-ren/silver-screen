@@ -3,15 +3,39 @@ import { languages } from "@/constants/languages";
 import { tmdbFetch } from "@/helpers/fetcher";
 import { MovieDetails } from "@/types/movie-details";
 import { PageProps } from "@/types/page-types";
+import { YouTubeEmbed } from "@next/third-parties/google";
+import { Metadata } from "next";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Casts from "./casts";
 import Certification from "./certification";
 import BrowseHeader from "./header";
+import { PreloadResources } from "./preload-resources";
 import Recommendations from "./recommendations";
 import Reviews from "./reviews";
 import Similar from "./similar";
+
+export async function generateMetadata({
+  params: { id },
+  searchParams: { watch },
+}: PageProps<WatchType>): Promise<Metadata> {
+  // fetch data
+  const res = await tmdbFetch(`${watch.toLowerCase()}/${id}`, {
+    append_to_response:
+      "videos,release_dates,credits,keywords,reviews,similar,recommendations",
+  });
+
+  if (!res.ok) {
+    throw new Error("Generate Metadata - Failed to fetch data");
+  }
+  const movie: MovieDetails = await res.json();
+
+  return {
+    title: movie.title,
+    description: movie.overview,
+  };
+}
 
 type WatchType = "TV" | "Movie";
 
@@ -43,25 +67,27 @@ export default async function MoviePage({
   }
 
   const country = headers().get("x-country") || "US";
+  console.log({ country });
   const movie = await getMovie(id, watch);
   const movieKey = movie.videos.results.find(
     (v) => v.site === "YouTube" && v.type === "Trailer"
   )?.key;
   return (
     <>
+      <PreloadResources />
       <main>
-        <section id="trailer">
-          <iframe
-            id="youtube-trailer"
-            src={`https://www.youtube.com/embed/${movieKey}?autoplay=1`}
-            className="w-full h-screen max-w-[100vw]"
+        <section id="trailer" className="w-full h-screen max-w-[100vw]">
+          <YouTubeEmbed
+            videoid={movieKey || ""}
+            style="width:100%; max-width:100vw; height:100vh"
+            params="autoplay=1&controls=1"
           />
         </section>
 
         <BrowseHeader movie={movie} country={country} />
 
         <section id="details" className="relative p-2 md:p-4">
-          <div className="absolute inset-0 -top-[100px] sm:-top-[156px] w-full sm:h-[calc(100%_+_156px)] h-[calc(100%_+_100px)]">
+          <div className="absolute inset-0 -top-[103px] sm:-top-[152px] w-full sm:h-[calc(100%_+_152px)] h-[calc(100%_+_103px)]">
             <Image
               draggable={false}
               src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}

@@ -1,3 +1,4 @@
+import Anchor from "@/components/anchor";
 import Button from "@/components/button";
 import { movieGenres, tvGenres } from "@/constants/genres";
 import BookMarkIcon from "@/icons/bookmark-icon";
@@ -6,7 +7,6 @@ import RateIcon from "@/icons/rate-icon";
 import SaveLaterIcon from "@/icons/save-later-icon";
 import { Resource } from "@/types/shared";
 import Image from "next/image";
-import Link from "next/link";
 import { forwardRef } from "react";
 
 interface FeaturedMovieProps {
@@ -62,7 +62,10 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
           </p>
 
           <div className="flex gap-x-4 md:gap-x-8 justify-center items-center md:justify-start sm:!mt-6">
-            <Link
+            <Anchor
+              aria-label={`Link to watch ${
+                "title" in resource ? resource.title : resource.name
+              }`}
               href={`/browse/${resource.id}?watch=${
                 "title" in resource ? "Movie" : "TV"
               }`}
@@ -70,7 +73,7 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
             >
               <PlayIcon className="shrink-0 h-5" />
               Play
-            </Link>
+            </Anchor>
             <Button
               aria-label="bookmark button"
               className="p-2 rounded-full border border-white/20 flex md:border-0 items-center gap-x-2 justify-center text-sm"

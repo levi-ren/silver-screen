@@ -13,6 +13,13 @@ const nextConfig = {
       },
     ],
   },
+  devIndicators: {
+    buildActivityPosition: "bottom-left",
+    buildActivity: true,
+  },
+  experimental: {
+    webVitalsAttribution: ["CLS", "LCP"],
+  },
 };
 
 export default nextConfig;

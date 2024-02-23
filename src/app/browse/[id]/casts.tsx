@@ -1,6 +1,6 @@
+import Anchor from "@/components/anchor";
 import { CastEntity } from "@/types/movie-details";
 import Image from "next/image";
-import Link from "next/link";
 
 interface CastsProps {
   casts: CastEntity[];
@@ -11,9 +11,9 @@ export default function Casts({ casts }: CastsProps) {
     <section id="casts" className=" pt-6 md:pt-6 md:p-4">
       <div className="max-w-screen-xl m-auto px-2 sm:px-4">
         <p className="text-4xl font-bebas font-semibold small-caps">Cast</p>
-        <ol className="space-x-4 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar text-sm">
+        <div className="space-x-4 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar text-sm">
           {casts.slice(0, 10).map((cast) => (
-            <li
+            <div
               className="inline-flex flex-col align-top border border-white/20 rounded-xl overflow-hidden h-full max-w-[160px] shadow-md shadow-white/20"
               key={cast.id}
             >
@@ -39,15 +39,16 @@ export default function Casts({ casts }: CastsProps) {
                   {cast.character}
                 </p>
               </div>
-            </li>
+            </div>
           ))}
-          <Link
+          <Anchor
+            aria-label="Link to view full cast and crew"
             href="/crew"
             className=" tracking-tighter leading-none whitespace-break-spaces inline-flex items-center justify-center w-[160px] h-[327.42px] border rounded-xl border-white/20 p-2 shadow-white/20 shadow-md"
           >
             View full cast & crew
-          </Link>
-        </ol>
+          </Anchor>
+        </div>
       </div>
     </section>
   );

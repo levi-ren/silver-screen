@@ -1,9 +1,9 @@
+import Anchor from "@/components/anchor";
 import MovieRating from "@/components/movie-rating";
 import { tmdbFetch } from "@/helpers/fetcher";
 import { DiscoverMovies } from "@/types/discover-movie";
 
 import Image from "next/image";
-import Link from "next/link";
 
 async function getNowShowing(): Promise<DiscoverMovies> {
   const res = await tmdbFetch(`movie/now_playing`);
@@ -27,7 +27,8 @@ export default async function NowShowing() {
       </p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
         {resource.results.slice(3).map((t) => (
-          <Link
+          <Anchor
+            aria-label={`Link to watch ${t.title}`}
             href={`/browse/${t.id}?watch=Movie`}
             className="relative inline-block"
             key={t.id}
@@ -42,7 +43,7 @@ export default async function NowShowing() {
               loading="lazy"
             />
             <MovieRating rating={t.vote_average * 10} />
-          </Link>
+          </Anchor>
         ))}
       </div>
     </section>

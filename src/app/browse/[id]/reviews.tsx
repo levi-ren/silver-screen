@@ -1,9 +1,9 @@
+import Anchor from "@/components/anchor";
 import LinkIcon from "@/icons/link-icon";
 import StarIcon from "@/icons/star-icon";
 import { MovieReviews } from "@/types/movie-details";
 import { marked } from "marked";
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
 import { twMerge } from "tailwind-merge";
 import ReviewsLoader from "./reviews-loader";
@@ -128,9 +128,9 @@ export default async function Reviews({ reviews }: ReviewsProps) {
           </span>
         </div>
         {reviews.results.length > 5 && (
-          <Link href="#reviews">
+          <Anchor aria-label="View reviews section" href="#reviews">
             <LinkIcon className="w-5 h-5" />
-          </Link>
+          </Anchor>
         )}
       </div>
       {reviews.total_results === 0 ? (
@@ -217,10 +217,10 @@ export default async function Reviews({ reviews }: ReviewsProps) {
 
       {reviews.results.length > 5 && (
         <div className="text-center">
-          <Link href="#reviews">
+          <Anchor aria-label="View reviews section" href="#reviews">
             View All
             <LinkIcon className="w-5 h-5 inline ml-2" />
-          </Link>
+          </Anchor>
         </div>
       )}
     </article>

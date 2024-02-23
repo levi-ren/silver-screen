@@ -1,9 +1,9 @@
+import Anchor from "@/components/anchor";
 import { tmdbFetch } from "@/helpers/fetcher";
 import { PopularMovies } from "@/types/discover-movie";
 import { PopularTV } from "@/types/popular-tv";
 import { Resource } from "@/types/shared";
 import Image from "next/image";
-import Link from "next/link";
 
 interface TopTenProps {}
 
@@ -51,7 +51,8 @@ export default async function TopTen(props: TopTenProps) {
               {i + 1}
             </p>
 
-            <Link
+            <Anchor
+              aria-label={`Link to watch ${"title" in t ? t.title : t.name}`}
               href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
               className="inline-block"
             >
@@ -64,7 +65,7 @@ export default async function TopTen(props: TopTenProps) {
                 height={375}
                 loading="lazy"
               />
-            </Link>
+            </Anchor>
           </div>
         ))}
       </div>
