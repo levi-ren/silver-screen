@@ -1,7 +1,7 @@
 import Anchor from "@/components/anchor";
 import LinkIcon from "@/icons/link-icon";
 import StarIcon from "@/icons/star-icon";
-import { MovieReviews } from "@/types/movie-details";
+import { ResourceReviews } from "@/types/shared";
 import { marked } from "marked";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -112,7 +112,7 @@ async function Content({ content, htmlFor, index }: ContentProps) {
 }
 
 interface ReviewsProps {
-  reviews: MovieReviews;
+  reviews: ResourceReviews;
 }
 
 export default async function Reviews({ reviews }: ReviewsProps) {

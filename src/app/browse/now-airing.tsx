@@ -32,7 +32,7 @@ export default async function NowAiring() {
           {resource.results.slice(3).map((t) => (
             <Anchor
               aria-label={`Link to watch ${t.name}`}
-              href={`/browse/${t.id}?watch=Movie`}
+              href={`/browse/${t.id}?watch=TV`}
               className="inline-block xl:block hover:bg-zinc-900 transition-colors rounded-md p-2 "
               key={t.id}
             >

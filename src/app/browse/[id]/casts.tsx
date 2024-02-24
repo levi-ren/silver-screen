@@ -1,5 +1,5 @@
 import Anchor from "@/components/anchor";
-import { CastEntity } from "@/types/movie-details";
+import { CastEntity } from "@/types/shared";
 import Image from "next/image";
 
 interface CastsProps {
@@ -8,7 +8,7 @@ interface CastsProps {
 
 export default function Casts({ casts }: CastsProps) {
   return (
-    <section id="casts" className=" pt-6 md:pt-6 md:p-4">
+    <section id="casts" className="md:p-4">
       <div className="max-w-screen-xl m-auto px-2 sm:px-4">
         <p className="text-4xl font-bebas font-semibold small-caps">Cast</p>
         <div className="space-x-4 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar text-sm">
@@ -36,7 +36,13 @@ export default function Casts({ casts }: CastsProps) {
                 </p>
                 <p className="text-xs italic text-gray-400">~ as ~</p>
                 <p className="tracking-tighter whitespace-break-spaces leading-none ">
-                  {cast.character}
+                  {cast.character ||
+                    (cast.roles &&
+                      `${cast.roles[0].character}${
+                        cast.roles.length > 1
+                          ? ` and ${cast.roles.length - 1} more`
+                          : ""
+                      }`)}
                 </p>
               </div>
             </div>

@@ -1,9 +1,17 @@
+import {
+  Credits,
+  Keyword,
+  ResourceRecommendations,
+  ResourceReviews,
+  SimilarResources,
+} from "./shared";
+
 export interface MovieDetails {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: BelongsToCollection;
   budget: number;
-  genres: GenresEntity[];
+  genres: MovieGenresEntity[];
   homepage: string;
   id: number;
   imdb_id: string;
@@ -28,36 +36,9 @@ export interface MovieDetails {
   release_dates: MovieReleaseDates;
   credits: Credits;
   keywords: { keywords: Keyword[] };
-  reviews: MovieReviews;
-  similar: SimilarMovies;
-  recommendations: MovieRecommendations;
-}
-
-export interface MovieReviews {
-  page: number;
-  results: MovieReviews[];
-  total_pages: number;
-  total_results: number;
-}
-export interface MovieReviews {
-  author: string;
-  author_details: AuthorDetails;
-  content: string;
-  created_at: string;
-  id: string;
-  updated_at: string;
-  url: string;
-}
-export interface AuthorDetails {
-  name?: string;
-  username: string;
-  avatar_path?: string | null;
-  rating?: number;
-}
-
-export interface Keyword {
-  id: number;
-  name: string;
+  reviews: ResourceReviews;
+  similar: SimilarResources<SimilarMovie>;
+  recommendations: ResourceRecommendations<MovieRecommendation>;
 }
 
 export interface BelongsToCollection {
@@ -66,7 +47,7 @@ export interface BelongsToCollection {
   poster_path: string;
   backdrop_path: string;
 }
-export interface GenresEntity {
+export interface MovieGenresEntity {
   id: number;
   name: string;
 }
@@ -115,45 +96,6 @@ export interface ReleaseDatesEntity {
   type: number;
 }
 
-export interface Credits {
-  id: number;
-  cast: CastEntity[];
-  crew: CrewEntity[];
-}
-export interface CastEntity {
-  adult: boolean;
-  gender: number;
-  id: number;
-  known_for_department: string;
-  name: string;
-  original_name: string;
-  popularity: number;
-  profile_path?: string | null;
-  cast_id: number;
-  character: string;
-  credit_id: string;
-  order: number;
-}
-export interface CrewEntity {
-  adult: boolean;
-  gender: number;
-  id: number;
-  known_for_department: string;
-  name: string;
-  original_name: string;
-  popularity: number;
-  profile_path?: string | null;
-  credit_id: string;
-  department: string;
-  job: string;
-}
-
-export interface SimilarMovies {
-  page: number;
-  results: SimilarMovie[];
-  total_pages: number;
-  total_results: number;
-}
 export interface SimilarMovie {
   adult: boolean;
   backdrop_path: string;
@@ -171,13 +113,7 @@ export interface SimilarMovie {
   vote_count: number;
 }
 
-export interface MovieRecommendations {
-  page: number;
-  results: Recommendation[];
-  total_pages: number;
-  total_results: number;
-}
-export interface Recommendation {
+export interface MovieRecommendation {
   adult: boolean;
   backdrop_path: string;
   id: number;
