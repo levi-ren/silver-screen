@@ -5,8 +5,8 @@ import { DiscoverMovies } from "@/types/discover-movie";
 
 import Image from "next/image";
 
-async function getNowShowing(): Promise<DiscoverMovies> {
-  const res = await tmdbFetch(`movie/now_playing`);
+async function getNowShowing(region: string): Promise<DiscoverMovies> {
+  const res = await tmdbFetch(`movie/now_playing`, { region });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -15,8 +15,12 @@ async function getNowShowing(): Promise<DiscoverMovies> {
   return res.json();
 }
 
-export default async function NowShowing() {
-  const resource = await getNowShowing();
+interface NowShowingProps {
+  region: string;
+}
+
+export default async function NowShowing({ region }: NowShowingProps) {
+  const resource = await getNowShowing(region);
   return (
     <section
       id="now-showing"

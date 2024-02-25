@@ -1,10 +1,9 @@
 import { tmdbFetch } from "@/helpers/fetcher";
 import { TrendingAll } from "@/types/trending-all";
-import { PropsWithChildren } from "react";
 import Carousel from "./carousel";
 
-async function getTrending(): Promise<TrendingAll> {
-  const res = await tmdbFetch(`trending/all/day`);
+async function getTrending(region: string): Promise<TrendingAll> {
+  const res = await tmdbFetch(`trending/all/day`, { region });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -13,10 +12,12 @@ async function getTrending(): Promise<TrendingAll> {
   return res.json();
 }
 
-interface FeaturedProps extends PropsWithChildren {}
+interface FeaturedProps {
+  region: string;
+}
 
-export default async function Featured({ children }: FeaturedProps) {
-  const featured = await getTrending();
+export default async function Featured({ region }: FeaturedProps) {
+  const featured = await getTrending(region);
   return (
     <section
       id="featured"

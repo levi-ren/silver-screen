@@ -1,6 +1,5 @@
 "use client";
 
-import { FeaturedMovie } from "@/app/browse/featured-movie";
 import { Resource } from "@/types/shared";
 import { Transition } from "@headlessui/react";
 import {
@@ -10,6 +9,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { FeaturedMovie } from "./featured-movie";
 
 interface CarouselProps {
   featured: Resource[];

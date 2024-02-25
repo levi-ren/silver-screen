@@ -5,7 +5,6 @@ import { PageProps } from "@/types/page-types";
 import { TVDetails } from "@/types/tv-details";
 import { YouTubeEmbed } from "@next/third-parties/google";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import Casts from "./casts";
 import Details from "./details";
@@ -57,14 +56,13 @@ async function getResource(
 }
 
 export default async function MoviePage({
-  params: { id },
+  params: { id, region },
   searchParams: { watch },
 }: PageProps<WatchType>) {
   if (!watch || (watch !== "TV" && watch !== "Movie")) {
     notFound();
   }
 
-  const country = headers().get("x-country") || "PH";
   const resource = await getResource(id, watch);
   const trailerKey = resource.videos.results.find(
     (v) => v.site === "YouTube" && v.type === "Trailer"
@@ -87,9 +85,9 @@ export default async function MoviePage({
           />
         </section>
 
-        <BrowseHeader resource={resource} country={country} />
+        <BrowseHeader resource={resource} country={region} />
 
-        <Details resource={resource} country={country} />
+        <Details resource={resource} country={region} />
 
         {!isMovie && <Seasons seasons={resource.seasons} />}
 
@@ -103,7 +101,10 @@ export default async function MoviePage({
             <Similar similar={resource.similar.results} />
           </div>
         </section>
-        <Recommendations recommendations={resource.recommendations.results} />
+
+        {resource.recommendations.results.length > 0 && (
+          <Recommendations recommendations={resource.recommendations.results} />
+        )}
       </main>
 
       <Footer />

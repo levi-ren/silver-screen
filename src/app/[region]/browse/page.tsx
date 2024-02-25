@@ -1,6 +1,7 @@
 import Footer from "@/components/footer";
 import Logo from "@/components/logo";
 import SearchIcon from "@/icons/search-icon";
+import { PageProps } from "@/types/page-types";
 import { Suspense } from "react";
 import Featured from "./featured";
 import FeaturedLoading from "./featured-loading";
@@ -14,7 +15,7 @@ import TopTen from "./top-ten";
 import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
 
-export default async function BrowsePage() {
+export default async function BrowsePage({ params: { region } }: PageProps) {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">
@@ -32,12 +33,12 @@ export default async function BrowsePage() {
       </header>
       <main className="grid grid-cols-12">
         <Suspense fallback={<FeaturedLoading />}>
-          <Featured />
+          <Featured region={region} />
         </Suspense>
         <Suspense
           fallback={<ListLoader header="Trending Today" className="order-2" />}
         >
-          <Trending />
+          <Trending region={region} />
         </Suspense>
         <Suspense fallback={<NowAiringLoader />}>
           <NowAiring />
@@ -45,10 +46,10 @@ export default async function BrowsePage() {
         <Suspense
           fallback={<ListLoader header="Only on Cinemas" className="order-3" />}
         >
-          <NowShowing />
+          <NowShowing region={region} />
         </Suspense>
         <Suspense fallback={<TopTenLoader />}>
-          <TopTen />
+          <TopTen region={region} />
         </Suspense>
 
         <Suspense fallback={<TopRatedMoviesLoader />}>

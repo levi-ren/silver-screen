@@ -57,7 +57,9 @@ export default function Details({ resource, country }: DetailsProps) {
             ) : (
               <TVContentRating
                 country={country}
-                seasons={`${resource.number_of_seasons} seasons`}
+                seasons={`${resource.number_of_seasons} season${
+                  resource.number_of_seasons > 1 ? "s" : ""
+                }`}
                 episodes={`${resource.number_of_episodes} episodes`}
                 ratings={resource.content_ratings.results}
                 className="sm:hidden block text-center !text-white"

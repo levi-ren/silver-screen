@@ -46,7 +46,9 @@ export default function BrowseHeader({ resource, country }: BrowseHeaderProps) {
             ) : (
               <TVContentRating
                 country={country}
-                seasons={`${resource.number_of_seasons} seasons`}
+                seasons={`${resource.number_of_seasons} season${
+                  resource.number_of_seasons > 1 ? "s" : ""
+                }`}
                 ratings={resource.content_ratings.results}
                 episodes={`${resource.number_of_episodes} episodes`}
               />

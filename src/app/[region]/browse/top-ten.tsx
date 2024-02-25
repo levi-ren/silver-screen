@@ -5,10 +5,8 @@ import { PopularTV } from "@/types/popular-tv";
 import { Resource } from "@/types/shared";
 import Image from "next/image";
 
-interface TopTenProps {}
-
-async function getPopularMovie(): Promise<PopularMovies> {
-  const res = await tmdbFetch(`movie/popular`);
+async function getPopularMovie(region: string): Promise<PopularMovies> {
+  const res = await tmdbFetch(`movie/popular`, { region });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -17,8 +15,8 @@ async function getPopularMovie(): Promise<PopularMovies> {
   return res.json();
 }
 
-async function getPopularTV(): Promise<PopularTV> {
-  const res = await tmdbFetch(`tv/popular`);
+async function getPopularTV(region: string): Promise<PopularTV> {
+  const res = await tmdbFetch(`tv/popular`, { region });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -26,18 +24,19 @@ async function getPopularTV(): Promise<PopularTV> {
 
   return res.json();
 }
+interface TopTenProps {
+  region: string;
+}
 
-export default async function TopTen(props: TopTenProps) {
+export default async function TopTen({ region }: TopTenProps) {
   const topten: Resource[] = await Promise.allSettled([
-    getPopularMovie(),
-    getPopularTV(),
+    getPopularMovie(region),
+    getPopularTV(region),
   ]).then(([m, t]) => {
     const movie = m.status === "fulfilled" ? m.value.results : [];
     const tv = t.status === "fulfilled" ? t.value.results : [];
 
-    return [...movie, ...tv]
-      .sort((a, b) => b.popularity - a.popularity)
-      .slice(0, 10);
+    return [...movie].sort((a, b) => b.popularity - a.popularity).slice(0, 10);
   });
   return (
     <section

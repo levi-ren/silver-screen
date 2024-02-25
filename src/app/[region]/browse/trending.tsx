@@ -5,8 +5,8 @@ import { tmdbFetch } from "@/helpers/fetcher";
 import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";
 
-async function getTrending(): Promise<TrendingAll> {
-  const res = await tmdbFetch(`trending/all/day`);
+async function getTrending(region: string): Promise<TrendingAll> {
+  const res = await tmdbFetch(`trending/all/day`, { region });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -15,8 +15,12 @@ async function getTrending(): Promise<TrendingAll> {
   return res.json();
 }
 
-export default async function Trending() {
-  const trending = await getTrending();
+interface TrendingProps {
+  region: string;
+}
+
+export default async function Trending({ region }: TrendingProps) {
+  const trending = await getTrending(region);
   return (
     <section
       id="trending"
