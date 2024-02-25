@@ -41,15 +41,19 @@ export default async function TopRatedMovies(props: TopTenProps) {
                 {i + 1}
               </p>
 
-              <Image
-                draggable={false}
-                src={`https://image.tmdb.org/t/p/w45${t.poster_path}`}
-                alt={t.title}
-                className="select-none rounded-md shrink-0 w-[45px] h-[67px]"
-                width={45}
-                height={67.5}
-                loading="lazy"
-              />
+              {t.poster_path ? (
+                <Image
+                  draggable={false}
+                  src={`https://image.tmdb.org/t/p/w45${t.poster_path}`}
+                  alt={t.title}
+                  className="select-none rounded-md shrink-0 w-[45px] h-[67px]"
+                  width={45}
+                  height={67}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="w-[45px] h-[67px] rounded-md border border-white/20 " />
+              )}
               <div className="p-2 tracking-tighter">
                 <p className="">{t.title}</p>
                 <p className="text-sm text-blue-500 ">

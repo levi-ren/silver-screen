@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        hostname: "flagcdn.com",
+      },
+      {
         hostname: "tmdb.org",
       },
       {

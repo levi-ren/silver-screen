@@ -32,15 +32,24 @@ export default function Details({ resource, country }: DetailsProps) {
       </div>
       <div className="max-w-screen-xl m-auto relative z-10">
         <div className="p-2 md:p-4 flex h-full gap-x-4 flex-col sm:flex-row">
-          <Image
-            draggable={false}
-            src={`https://image.tmdb.org/t/p/w342${resource.poster_path}`}
-            alt={isMovie ? resource.title : resource.name}
-            className="select-none rounded-md self-center  min-w-0 sm:w-[230px] sm:h-[345px] md:w-[342px] md:h-[513px]"
-            width={342}
-            height={513}
-            priority
-          />
+          {resource.poster_path ? (
+            <Image
+              draggable={false}
+              src={`https://image.tmdb.org/t/p/w342${resource.poster_path}`}
+              alt={isMovie ? resource.title : resource.name}
+              className="select-none rounded-md self-center min-w-0 sm:w-[230px] sm:h-[345px] md:w-[342px] md:h-[513px] sm:self-start"
+              width={342}
+              height={513}
+              priority
+            />
+          ) : (
+            <div className="self-center w-[342px] h-[513px] min-w-0 sm:w-[230px] sm:h-[345px] md:w-[342px] md:h-[513px] rounded-md border border-white/20 p-2 sm:self-start">
+              <div className="bg-black/80 h-full rounded grid place-items-center text-sm italic font-extralight">
+                No poster available
+              </div>
+            </div>
+          )}
+
           <div className="flex-1 py-2">
             <p className="italic my-4 tracking-tighter text-blue-400 text-center sm:text-left">
               ~ {resource.tagline} ~

@@ -8,7 +8,8 @@ import { DiscoverTV } from "@/types/discover-tv";
 import Image from "next/image";
 
 async function getNowAiring(): Promise<DiscoverTV> {
-  const res = await tmdbFetch(`tv/airing_today`);
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const res = await tmdbFetch(`tv/airing_today`, { timezone });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -37,15 +38,19 @@ export default async function NowAiring() {
               key={t.id}
             >
               <div className="flex gap-x-2 items-center">
-                <Image
-                  draggable={false}
-                  src={`https://image.tmdb.org/t/p/w92${t.poster_path}`}
-                  alt={t.name}
-                  className="h-full select-none rounded-md shrink-0"
-                  width={92}
-                  height={138}
-                  loading="lazy"
-                />
+                {t.poster_path ? (
+                  <Image
+                    draggable={false}
+                    src={`https://image.tmdb.org/t/p/w92${t.poster_path}`}
+                    alt={t.name}
+                    className="h-full select-none rounded-md shrink-0"
+                    width={92}
+                    height={138}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-[92px] h-[138px] rounded-md border border-white/20 " />
+                )}
                 <div className="flex-1 tracking-tighter">
                   <p className="">{t.name}</p>
                   <div className="text-sm text-blue-500 ">

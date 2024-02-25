@@ -3,8 +3,6 @@ import { tmdbFetch } from "@/helpers/fetcher";
 import { RatedMovies } from "@/types/discover-movie";
 import Image from "next/image";
 
-interface TopTenProps {}
-
 async function getTopRatedMovies(): Promise<RatedMovies> {
   const res = await tmdbFetch(`movie/top_rated`);
 
@@ -15,7 +13,9 @@ async function getTopRatedMovies(): Promise<RatedMovies> {
   return res.json();
 }
 
-export default async function MovieList(props: TopTenProps) {
+// Currently unused. Use on Search page
+
+export default async function MovieList() {
   const movies = await getTopRatedMovies();
 
   return (
@@ -51,15 +51,20 @@ export default async function MovieList(props: TopTenProps) {
                 </div>
 
                 <div className="flex">
-                  <Image
-                    draggable={false}
-                    src={`https://image.tmdb.org/t/p/w92${t.poster_path}`}
-                    alt={t.title}
-                    className="h-full select-none relative -top-6 left-2 rounded-md"
-                    width={75}
-                    height={112.5}
-                    loading="lazy"
-                  />
+                  <div className="w-[75px] h-[112.5px] rounded-md border border-white/20 " />
+                  {/* {t.poster_path ? (
+                    <Image
+                      draggable={false}
+                      src={`https://image.tmdb.org/t/p/w92${t.poster_path}`}
+                      alt={t.title}
+                      className="h-full select-none relative -top-6 left-2 rounded-md"
+                      width={75}
+                      height={112.5}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-[75px] h-[112.5px] rounded-md border border-white/20 " />
+                  )} */}
                   <div className="pl-4 p-1">{t.title}</div>
                 </div>
               </div>

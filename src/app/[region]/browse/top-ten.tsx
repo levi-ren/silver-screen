@@ -55,15 +55,19 @@ export default async function TopTen({ region }: TopTenProps) {
               href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
               className="inline-block"
             >
-              <Image
-                draggable={false}
-                src={`https://image.tmdb.org/t/p/w342${t.poster_path}`}
-                alt={"title" in t ? t.title : t.name}
-                className="h-full select-none md:w-[250px] w-[175px]  rounded-xl relative md:-left-15 md:top-10 -left-10 top-5"
-                width={250}
-                height={375}
-                loading="lazy"
-              />
+              {t.poster_path ? (
+                <Image
+                  draggable={false}
+                  src={`https://image.tmdb.org/t/p/w342${t.poster_path}`}
+                  alt={"title" in t ? t.title : t.name}
+                  className="h-full select-none md:w-[250px] w-[175px]  rounded-xl relative md:-left-15 md:top-10 -left-10 top-5"
+                  width={250}
+                  height={375}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="aspect-[2/3] select-none md:w-[250px] w-[175px]  rounded-xl relative md:-left-15 md:top-10 -left-10 top-5 border border-white/20 " />
+              )}
             </Anchor>
           </div>
         ))}

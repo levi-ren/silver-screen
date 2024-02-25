@@ -39,15 +39,20 @@ export default function Similar({ similar }: SimilarProps) {
                   className="flex items-center relative rounded-xl bg-black/70 hover:bg-black/90 transition-colors p-2"
                   key={t.id}
                 >
-                  <Image
-                    draggable={false}
-                    src={`https://image.tmdb.org/t/p/w45${t.poster_path}`}
-                    alt={isMovie ? t.title : t.name}
-                    className="select-none rounded-md shrink-0 w-[45px] h-[67px]"
-                    width={45}
-                    height={67.5}
-                    loading="lazy"
-                  />
+                  {t.poster_path ? (
+                    <Image
+                      draggable={false}
+                      src={`https://image.tmdb.org/t/p/w45${t.poster_path}`}
+                      alt={isMovie ? t.title : t.name}
+                      className="select-none rounded-md shrink-0 w-[45px] h-[67px]"
+                      width={45}
+                      height={67.5}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-[45px] h-[67px] rounded-md border border-white/20  shrink-0" />
+                  )}
+
                   <div className="p-2 tracking-tighter">
                     <p>{isMovie ? t.title : t.name}</p>
                     <div className="text-xs text-white/70 line-clamp-1">

@@ -37,15 +37,19 @@ export default async function Trending({ region }: TrendingProps) {
             className="relative inline-block"
             key={t.id}
           >
-            <Image
-              draggable={false}
-              src={`https://image.tmdb.org/t/p/w200${t.poster_path}`}
-              alt={"title" in t ? t.title : t.name}
-              className="h-full select-none rounded-md"
-              width={175}
-              height={262.5}
-              loading="lazy"
-            />
+            {t.poster_path ? (
+              <Image
+                draggable={false}
+                src={`https://image.tmdb.org/t/p/w200${t.poster_path}`}
+                alt={"title" in t ? t.title : t.name}
+                className="h-full select-none rounded-md "
+                width={175}
+                height={262.5}
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-[175px] h-[262.5px] rounded-md border border-white/20 " />
+            )}
             <MovieRating rating={t.vote_average * 10} />
           </Anchor>
         ))}
