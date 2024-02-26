@@ -12,6 +12,7 @@
 
 html {
   @apply text-white;
+  scroll-behavior: smooth !important;
 }
 
 body {

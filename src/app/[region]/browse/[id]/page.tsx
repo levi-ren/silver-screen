@@ -29,6 +29,7 @@ export async function generateMetadata({
     console.log(await res.json());
     new Error("Generate Metadata - Failed to fetch data");
   }
+
   const resource: MovieDetails | TVDetails = await res.json();
 
   return {

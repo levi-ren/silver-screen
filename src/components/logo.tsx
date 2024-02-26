@@ -9,7 +9,7 @@ interface LogoProps {
 export default function Logo({ className, size }: LogoProps) {
   return (
     <div className={twMerge(className, "relative ")}>
-      <Anchor aria-label="Link to home page" href="/">
+      <Anchor aria-label="Link to home page" href="/browse">
         <span
           className={twMerge(
             "text-5xl md:text-6xl absolute right-1/2 translate-x-1/2 top-[60%] -translate-y-[60%] text-white/30",

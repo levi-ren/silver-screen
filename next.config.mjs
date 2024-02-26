@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         hostname: "flagcdn.com",
@@ -22,6 +23,11 @@ const nextConfig = {
   },
   experimental: {
     webVitalsAttribution: ["CLS", "LCP"],
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
   },
 };
 

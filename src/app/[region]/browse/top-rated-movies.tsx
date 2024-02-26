@@ -29,7 +29,7 @@ export default async function TopRatedMovies(props: TopTenProps) {
       <div className="gap-x-8 space-y-4 px-4 md:columns-2">
         {movies.results
           .sort((a, b) => b.popularity - a.popularity)
-          .slice(10)
+          .slice(0, 10)
           .map((t, i) => (
             <Anchor
               aria-label={`Link to watch ${t.title}`}
