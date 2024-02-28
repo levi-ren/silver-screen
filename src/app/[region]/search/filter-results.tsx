@@ -7,7 +7,6 @@ import { MovieSearch, SimilarResources, TVSearch } from "@/types/shared";
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import { setTimeout } from "timers/promises";
 
 async function searchResources({ query, type, year, page }: SearchPageParams) {
   const fetchMovies = async (): Promise<SimilarResources<MovieSearch>> => {
@@ -20,7 +19,7 @@ async function searchResources({ query, type, year, page }: SearchPageParams) {
       },
       { cache: "force-cache" }
     );
-    console.log(`FETCH MOVIES URL: ${movies.url}`);
+    // console.log(`FETCH MOVIES URL: ${movies.url}`);
     if (!movies.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -38,7 +37,7 @@ async function searchResources({ query, type, year, page }: SearchPageParams) {
       },
       { cache: "force-cache" }
     );
-    console.log(`FETCH TV URL: ${tv.url}`);
+    // console.log(`FETCH TV URL: ${tv.url}`);
 
     if (!tv.ok) {
       throw new Error("Failed to fetch data");
@@ -96,7 +95,6 @@ export default async function FilterResults({
   page = "1",
 }: FilterResultsProps) {
   const resources = await searchResources({ query, type, year, page });
-  await setTimeout(5000);
   const newParams = (i: number) =>
     new URLSearchParams({
       page: (i + 1).toString(),
@@ -159,8 +157,11 @@ export default async function FilterResults({
                   </div>
 
                   <div className="flex flex-1 justify-center">
-                    <span className="ml-auto">
+                    <span className="ml-auto hidden sm:inline">
                       {languages[resource.original_language].english_name}
+                    </span>
+                    <span className="ml-auto sm:hidden uppercase">
+                      {resource.original_language}
                     </span>
                   </div>
                 </div>

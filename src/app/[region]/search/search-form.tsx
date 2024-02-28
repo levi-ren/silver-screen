@@ -1,17 +1,11 @@
-"use client";
-
 import { countries } from "@/constants/countries";
 import { SearchPageParams } from "@/types/page-types";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { PropsWithChildren } from "react";
+import FilterButton from "./filter-button";
 
-function reSearch(
-  oldType: string,
-  page: string,
-  formData: FormData,
-  router: AppRouterInstance
-) {
+async function reSearch(oldType: string, page: string, formData: FormData) {
+  "use server";
   const query = formData.get("query")?.toString().trim();
   const type = formData.get("type")?.toString().trim();
   const year = formData.get("year")?.toString().trim();
@@ -24,7 +18,8 @@ function reSearch(
     ...(year ? { year } : {}),
   });
 
-  router.push(`/search?${params.toString()}`);
+  // router.push(`/search?${params.toString()}`);
+  redirect(`/search?${params.toString()}`);
 }
 
 interface SearchFormProps extends SearchPageParams, PropsWithChildren {
@@ -40,18 +35,11 @@ export default function SearchForm({
   page,
   children,
 }: SearchFormProps) {
-  const router = useRouter();
   return (
     <>
       <form
         className="py-4 border-b border-white/20 my-4 flex gap-4 flex-wrap"
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          const formData = new FormData(e.currentTarget);
-
-          reSearch(type, page, formData, router);
-        }}
+        action={reSearch.bind(null, type, page)}
       >
         <div className="relative">
           <label htmlFor="query" className="text-sm block">
@@ -106,9 +94,7 @@ export default function SearchForm({
           </select>
         </div>
 
-        <button className="rounded-xl bg-gradient-to-r from-blue-400 to-blue-600 self-center py-3 px-6">
-          Filter
-        </button>
+        <FilterButton />
       </form>
 
       {children}
