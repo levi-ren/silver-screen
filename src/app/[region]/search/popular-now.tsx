@@ -18,7 +18,7 @@ async function getPopularMovie(): Promise<PopularMovies> {
 export default async function PopularNow() {
   const resource = await getPopularMovie();
   return (
-    <aside id="now-airing" className="lg:p-2 basis-1/3">
+    <aside id="now-airing" className="basis-1/3">
       <div className="border rounded-xl border-white/20 p-4">
         <p className="text-4xl font-semibold small-caps font-bebas xl:pb-4">
           Popular Right now

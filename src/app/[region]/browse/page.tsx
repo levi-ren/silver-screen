@@ -2,8 +2,8 @@ import Footer from "@/components/footer";
 import Logo from "@/components/logo";
 import SearchIcon from "@/icons/search-icon";
 import { PageProps } from "@/types/page-types";
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { search } from "../search";
 import Featured from "./featured";
 import FeaturedLoading from "./featured-loading";
 import ListLoader from "./list-loader";
@@ -15,13 +15,6 @@ import TopRatedMoviesLoader from "./top-rated-movies-loader";
 import TopTen from "./top-ten";
 import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
-
-async function search(formData: FormData) {
-  "use server";
-  const query = formData.get("query");
-  if (!query) return;
-  redirect(`/search?query=${query}`);
-}
 
 export default async function BrowsePage({ params: { region } }: PageProps) {
   return (

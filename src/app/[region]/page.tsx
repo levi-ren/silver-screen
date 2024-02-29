@@ -2,6 +2,7 @@ import Anchor from "@/components/anchor";
 import Logo from "@/components/logo";
 import SearchIcon from "@/icons/search-icon";
 import Image from "next/image";
+import { search } from "./search";
 
 export default async function Home() {
   return (
@@ -17,11 +18,13 @@ export default async function Home() {
         <div className=" p-6 border border-white/50 rounded-xl text-center backdrop-blur shadow-md from-black to-black/5 bg-gradient-to-b m-4 max-w-4xl">
           <Logo className="mt-4 mb-6" />
           <p>Watch movies at your finger tips</p>
-          <form className="mt-6">
+          <form className="mt-6" action={search}>
             <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/70">
               <input
                 className="w-full placeholder:text-sm bg-transparent outline-none"
                 placeholder="Search movies"
+                name="query"
+                id="query"
               />
               <SearchIcon className="text-white/50 " />
             </div>

@@ -104,93 +104,104 @@ export default async function FilterResults({
 
   return (
     <>
-      <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 gap-4 place-items-center">
-        {resources.results.map((resource) => {
-          const isMovie = "title" in resource;
-          return (
-            <Anchor
-              aria-label={`Link to watch ${
-                isMovie ? resource.title : resource.name
-              }`}
-              href={`/browse/${resource.id}?watch=${isMovie ? "Movie" : "TV"}`}
-              className="relative max-w-[200px] w-full aspect-[2/3]"
-              key={resource.id}
-            >
-              <MovieRating
-                rating={resource.vote_average * 10}
-                className="top-1 left-1"
-              />
-              {resource.poster_path ? (
-                <Image
-                  draggable={false}
-                  src={`https://image.tmdb.org/t/p/w200${resource.poster_path}`}
-                  alt={isMovie ? resource.title : resource.name}
-                  className="select-none rounded-md w-full aspect-[2/3]"
-                  sizes="100vw"
-                  width={200}
-                  height={300}
-                  loading="lazy"
+      {resources.total_results > 1 ? (
+        <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 gap-4 place-items-start">
+          {resources.results.map((resource) => {
+            const isMovie = "title" in resource;
+            return (
+              <Anchor
+                aria-label={`Link to watch ${
+                  isMovie ? resource.title : resource.name
+                }`}
+                href={`/browse/${resource.id}?watch=${
+                  isMovie ? "Movie" : "TV"
+                }`}
+                className="relative max-w-[200px] w-full aspect-[2/3] bg-zinc-950 rounded-md h-full"
+                key={resource.id}
+              >
+                <MovieRating
+                  rating={resource.vote_average * 10}
+                  className="top-1 left-1"
                 />
-              ) : (
-                <div className="w-full aspect-[2/3] rounded-md border border-white/20 p-2 ">
-                  <div className="h-full bg-white/70 rounded italic text-sm flex items-center justify-center text-gray-700">
-                    No poster available
+                {resource.poster_path ? (
+                  <Image
+                    draggable={false}
+                    src={`https://image.tmdb.org/t/p/w200${resource.poster_path}`}
+                    alt={isMovie ? resource.title : resource.name}
+                    className="select-none rounded-t-md aspect-[2/3] "
+                    sizes="100vw"
+                    width={200}
+                    height={300}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full aspect-[2/3] rounded-md border border-white/20 p-2 ">
+                    <div className="h-full bg-white/70 rounded italic text-sm flex items-center justify-center text-gray-700">
+                      No poster available
+                    </div>
                   </div>
+                )}
+                <div className="my-2 space-y-2 px-1 ">
+                  <div className="text-xs flex justify-between items-center">
+                    <div className="flex flex-1 justify-center">
+                      <span className="mr-auto">
+                        {new Date(
+                          isMovie
+                            ? resource.release_date
+                            : resource.first_air_date
+                        ).getFullYear() || "XXXX"}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-1 justify-center">
+                      <span className="px-2 border border-white/20 rounded-full bg-blue-400/90">
+                        {isMovie ? "Movie" : "TV"}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-1 justify-center">
+                      <span className="ml-auto hidden sm:inline">
+                        {languages[resource.original_language].english_name}
+                      </span>
+                      <span className="ml-auto sm:hidden uppercase">
+                        {resource.original_language}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm  text-center">
+                    {isMovie ? resource.title : resource.name}
+                  </p>
                 </div>
+              </Anchor>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="text-center py-20 rounded-md border-dashed border border-white/20 italic text-gray-400 bg-zinc-900">
+          No results found for:{" "}
+          <em className="font-bold">&ldquo; {query} &rdquo;</em>
+        </div>
+      )}
+
+      {resources.total_results > 1 && (
+        <div className="gap-2 my-2 m-auto flex justify-center flex-wrap">
+          {Array.from({
+            length: resources.total_pages > 18 ? 18 : resources.total_pages,
+          }).map((_, i) => (
+            <Link
+              className={twMerge(
+                "w-12 h-12  items-center justify-center text-center rounded border border-white/20 hover:bg-zinc-900 transition-colors cursor-pointer inline-flex",
+                ((i + 1).toString() === page || (!page && i === 0)) &&
+                  "bg-zinc-700"
               )}
-              <div className="my-2 space-y-2">
-                <div className="text-xs flex justify-between items-center">
-                  <div className="flex flex-1 justify-center">
-                    <span className="mr-auto">
-                      {new Date(
-                        isMovie
-                          ? resource.release_date
-                          : resource.first_air_date
-                      ).getFullYear() || "XXXX"}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-1 justify-center">
-                    <span className="px-2 border border-white/20 rounded-full bg-blue-400/90">
-                      {isMovie ? "Movie" : "TV"}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-1 justify-center">
-                    <span className="ml-auto hidden sm:inline">
-                      {languages[resource.original_language].english_name}
-                    </span>
-                    <span className="ml-auto sm:hidden uppercase">
-                      {resource.original_language}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-sm  text-center">
-                  {isMovie ? resource.title : resource.name}
-                </p>
-              </div>
-            </Anchor>
-          );
-        })}
-      </div>
-
-      <div className="gap-2 my-2 m-auto flex justify-center flex-wrap">
-        {Array.from({
-          length: resources.total_pages > 18 ? 18 : resources.total_pages,
-        }).map((_, i) => (
-          <Link
-            className={twMerge(
-              "w-12 h-12  items-center justify-center text-center rounded border border-white/20 hover:bg-zinc-900 transition-colors cursor-pointer inline-flex",
-              ((i + 1).toString() === page || (!page && i === 0)) &&
-                "bg-zinc-700"
-            )}
-            key={i}
-            href={`/search?${newParams(i)}`}
-          >
-            {i + 1}
-          </Link>
-        ))}
-      </div>
+              key={i}
+              href={`/search?${newParams(i)}`}
+            >
+              {i + 1}
+            </Link>
+          ))}
+        </div>
+      )}
     </>
   );
 }
