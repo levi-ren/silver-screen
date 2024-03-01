@@ -97,8 +97,8 @@ export default async function FilterResults({
   const resources = await searchResources({ query, type, year, page });
   const newParams = (i: number) =>
     new URLSearchParams({
-      page: (i + 1).toString(),
       query,
+      page: (i + 1).toString(),
       ...(type ? { type } : {}),
     });
 

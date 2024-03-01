@@ -1,9 +1,9 @@
 import Footer from "@/components/footer";
 import Logo from "@/components/logo";
+import QuerySearchForm from "@/components/query-search-form";
 import SearchIcon from "@/icons/search-icon";
 import { PageProps } from "@/types/page-types";
 import { Suspense } from "react";
-import { search } from "../search";
 import Featured from "./featured";
 import FeaturedLoading from "./featured-loading";
 import ListLoader from "./list-loader";
@@ -22,7 +22,7 @@ export default async function BrowsePage({ params: { region } }: PageProps) {
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">
         <Logo />
 
-        <form className="inline-flex-1 group" action={search}>
+        <QuerySearchForm className="inline-flex-1 group">
           <div className="flex  items-center rounded-full px-3 py-2 bg-black/90">
             <label htmlFor="query">
               <SearchIcon className="text-white w-4 h-4 m-auto focus:ml-auto relative right-0 shrink-0" />
@@ -34,7 +34,7 @@ export default async function BrowsePage({ params: { region } }: PageProps) {
               id="query"
             />
           </div>
-        </form>
+        </QuerySearchForm>
       </header>
       <main className="grid grid-cols-12">
         <Suspense fallback={<FeaturedLoading />}>
