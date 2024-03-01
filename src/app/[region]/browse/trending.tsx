@@ -1,6 +1,6 @@
 import Anchor from "@/components/anchor";
 import MovieRating from "@/components/movie-rating";
-import { tmdbFetch } from "@/helpers/fetcher";
+import { tmdbFetch } from "@/lib/fetcher";
 
 import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";

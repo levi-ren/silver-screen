@@ -1,6 +1,6 @@
 import Anchor from "@/components/anchor";
 import { movieGenres } from "@/constants/genres";
-import { tmdbFetch } from "@/helpers/fetcher";
+import { tmdbFetch } from "@/lib/fetcher";
 import { RatedMovies } from "@/types/discover-movie";
 import Image from "next/image";
 

@@ -1,7 +1,7 @@
 import Anchor from "@/components/anchor";
 import MovieRating from "@/components/movie-rating";
 import { languages } from "@/constants/languages";
-import { tmdbFetch } from "@/helpers/fetcher";
+import { tmdbFetch } from "@/lib/fetcher";
 import { SearchPageParams } from "@/types/page-types";
 import { MovieSearch, SimilarResources, TVSearch } from "@/types/shared";
 import Image from "next/image";

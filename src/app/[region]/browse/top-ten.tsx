@@ -1,5 +1,5 @@
 import Anchor from "@/components/anchor";
-import { tmdbFetch } from "@/helpers/fetcher";
+import { tmdbFetch } from "@/lib/fetcher";
 import { PopularMovies } from "@/types/discover-movie";
 import { PopularTV } from "@/types/popular-tv";
 import { Resource } from "@/types/shared";

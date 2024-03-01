@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import { tmdbFetch } from "@/helpers/fetcher";
+import { tmdbFetch } from "@/lib/fetcher";
 import { MovieDetails } from "@/types/movie-details";
 import { PageProps } from "@/types/page-types";
 import { TVDetails } from "@/types/tv-details";

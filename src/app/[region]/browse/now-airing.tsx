@@ -1,8 +1,8 @@
 import Anchor from "@/components/anchor";
 import { tvGenres } from "@/constants/genres";
 import { languages } from "@/constants/languages";
-import { tmdbFetch } from "@/helpers/fetcher";
 import RateIcon from "@/icons/rate-icon";
+import { tmdbFetch } from "@/lib/fetcher";
 import { DiscoverTV } from "@/types/discover-tv";
 
 import Image from "next/image";

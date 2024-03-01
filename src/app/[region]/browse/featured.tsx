@@ -1,4 +1,4 @@
-import { tmdbFetch } from "@/helpers/fetcher";
+import { tmdbFetch } from "@/lib/fetcher";
 import { TrendingAll } from "@/types/trending-all";
 import Carousel from "./carousel";
 
