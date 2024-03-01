@@ -54,7 +54,9 @@ export default async function TopTen({ region }: TopTenProps) {
 
             <Anchor
               aria-label={`Link to watch ${"title" in t ? t.title : t.name}`}
-              href={`/browse/${t.id}?watch=${"title" in t ? "Movie" : "TV"}`}
+              href={`/${region}/browse/${t.id}?watch=${
+                "title" in t ? "Movie" : "TV"
+              }`}
               className="inline-block"
             >
               {t.poster_path ? (

@@ -1,10 +1,11 @@
 import Anchor from "@/components/anchor";
 import Logo from "@/components/logo";
 import SearchIcon from "@/icons/search-icon";
+import { PageProps } from "@/types/page-types";
 import Image from "next/image";
 import QuerySearchForm from "../../components/query-search-form";
 
-export default async function Home() {
+export default async function Home({ params: { region } }: PageProps) {
   return (
     <main className="relative">
       <Image
@@ -16,9 +17,9 @@ export default async function Home() {
       />
       <section className="min-h-screen flex justify-center items-center">
         <div className=" p-6 border border-white/50 rounded-xl text-center backdrop-blur shadow-md from-black to-black/5 bg-gradient-to-b m-4 max-w-4xl">
-          <Logo className="mt-4 mb-6" />
+          <Logo region={region} className="mt-4 mb-6" />
           <p>Watch movies at your finger tips</p>
-          <QuerySearchForm className="mt-6">
+          <QuerySearchForm className="mt-6" region={region}>
             <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/70">
               <input
                 className="w-full placeholder:text-sm bg-transparent outline-none"
@@ -31,7 +32,7 @@ export default async function Home() {
           </QuerySearchForm>
           <Anchor
             aria-label="Link to browse"
-            href="/browse"
+            href={`${region}/browse`}
             className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 mt-6"
           >
             Browse Cataloge

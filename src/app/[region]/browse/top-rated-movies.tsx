@@ -4,7 +4,9 @@ import { tmdbFetch } from "@/lib/fetcher";
 import { RatedMovies } from "@/types/discover-movie";
 import Image from "next/image";
 
-interface TopTenProps {}
+interface TopTenProps {
+  region: string;
+}
 
 async function getTopRatedMovies(): Promise<RatedMovies> {
   const res = await tmdbFetch(`movie/top_rated`);
@@ -16,7 +18,7 @@ async function getTopRatedMovies(): Promise<RatedMovies> {
   return res.json();
 }
 
-export default async function TopRatedMovies(props: TopTenProps) {
+export default async function TopRatedMovies({ region }: TopTenProps) {
   const movies = await getTopRatedMovies();
   return (
     <section
@@ -33,7 +35,7 @@ export default async function TopRatedMovies(props: TopTenProps) {
           .map((t, i) => (
             <Anchor
               aria-label={`Link to watch ${t.title}`}
-              href={`/browse/${t.id}?watch=Movie`}
+              href={`/${region}/browse/${t.id}?watch=Movie`}
               className="flex items-center relative rounded-xl bg-zinc-900 hover:bg-zinc-900/70 transition-colors p-2"
               key={t.id}
             >

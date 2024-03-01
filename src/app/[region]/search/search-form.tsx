@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import { FormEventHandler, PropsWithChildren } from "react";
 import FilterButton from "./filter-button";
-interface SearchFormProps extends PropsWithChildren {}
+interface SearchFormProps extends PropsWithChildren {
+  region: string;
+}
 
-export default function SearchForm({ children }: SearchFormProps) {
+export default function SearchForm({ children, region }: SearchFormProps) {
   const router = useRouter();
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ export default function SearchForm({ children }: SearchFormProps) {
       ...(type ? { type } : {}),
       ...(year ? { year } : {}),
     });
-    router.push(`/search?${params.toString()}`);
+    router.push(`/${region}/search?${params.toString()}`);
   };
   return (
     <>

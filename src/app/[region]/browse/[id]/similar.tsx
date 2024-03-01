@@ -7,9 +7,10 @@ import Image from "next/image";
 
 interface SimilarProps {
   similar: SimilarMovie[] | SimilarShow[];
+  region: string;
 }
 
-export default function Similar({ similar }: SimilarProps) {
+export default function Similar({ similar, region }: SimilarProps) {
   const resources = similar.slice(0, 10);
   const isMovie = resources.find((r) => "title" in r);
   return (
@@ -35,7 +36,9 @@ export default function Similar({ similar }: SimilarProps) {
               return (
                 <Anchor
                   aria-label={`Link to watch ${isMovie ? t.title : t.name}`}
-                  href={`/browse/${t.id}?watch=${isMovie ? "Movie" : "TV"}`}
+                  href={`/${region}/browse/${t.id}?watch=${
+                    isMovie ? "Movie" : "TV"
+                  }`}
                   className="flex items-center relative rounded-xl bg-black/70 hover:bg-black/90 transition-colors p-2"
                   key={t.id}
                 >

@@ -23,7 +23,7 @@ export default async function Featured({ region }: FeaturedProps) {
       id="featured"
       className="relative aspect-[4/2.7] md:aspect-[16/7.4] lg:aspect-[16/8] max-h-[722px] w-full col-span-12 order-1"
     >
-      <Carousel featured={featured.results.slice(0, 3)} />
+      <Carousel featured={featured.results.slice(0, 3)} region={region} />
     </section>
   );
 }

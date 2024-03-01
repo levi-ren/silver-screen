@@ -10,12 +10,13 @@ import SearchForm from "./search-form";
 const thisYear = new Date().getFullYear();
 
 export default async function SearchPage({
+  params: { region },
   searchParams: { query, type, year, page },
 }: PageProps) {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b flex items-center justify-between gap-x-2">
-        <Logo />
+        <Logo region={region} />
       </header>
       <main className="">
         <section id="filters" className="p-2 sm:p-4">
@@ -23,7 +24,7 @@ export default async function SearchPage({
             <p className="text-4xl font-bebas">Filters</p>
             <div className="flex gap-4 flex-col lg:flex-row">
               <div className="flex-1 basis-2/3">
-                <SearchForm>
+                <SearchForm region={region}>
                   <div className="relative col-span-2">
                     <label htmlFor="query" className="text-sm block">
                       Search
@@ -83,15 +84,16 @@ export default async function SearchPage({
                     type={type}
                     year={year}
                     page={page}
+                    region={region}
                   />
                 </Suspense>
               </div>
-              <PopularNow />
+              <PopularNow region={region} />
             </div>
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer region={region} />
     </>
   );
 }

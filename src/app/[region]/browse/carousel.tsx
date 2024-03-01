@@ -13,9 +13,10 @@ import { FeaturedMovie } from "./featured-movie";
 
 interface CarouselProps {
   featured: Resource[];
+  region: string;
 }
 const minSwipeDistance = 50;
-const Carousel = ({ featured }: CarouselProps) => {
+const Carousel = ({ featured, region }: CarouselProps) => {
   const [index, setIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -112,7 +113,7 @@ const Carousel = ({ featured }: CarouselProps) => {
           as={Fragment}
         >
           <div className="absolute w-full">
-            <FeaturedMovie resource={resource} />
+            <FeaturedMovie resource={resource} region={region} />
           </div>
         </Transition>
       ))}

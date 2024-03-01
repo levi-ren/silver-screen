@@ -99,16 +99,19 @@ export default async function MoviePage({
         <section id="reviews-and-similars" className="px-2 sm:px-4">
           <div className="max-w-screen-xl m-auto flex gap-x-8 gap-y-4 flex-col-reverse md:px-4 md:flex-row">
             <Reviews reviews={resource.reviews} />
-            <Similar similar={resource.similar.results} />
+            <Similar similar={resource.similar.results} region={region} />
           </div>
         </section>
 
         {resource.recommendations.results.length > 0 && (
-          <Recommendations recommendations={resource.recommendations.results} />
+          <Recommendations
+            recommendations={resource.recommendations.results}
+            region={region}
+          />
         )}
       </main>
 
-      <Footer />
+      <Footer region={region} />
     </>
   );
 }

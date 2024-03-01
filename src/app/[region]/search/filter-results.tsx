@@ -86,13 +86,16 @@ async function searchResources({ query, type, year, page }: SearchPageParams) {
   return await getResource();
 }
 
-interface FilterResultsProps extends SearchPageParams {}
+interface FilterResultsProps extends SearchPageParams {
+  region: string;
+}
 
 export default async function FilterResults({
   query,
   type,
   year,
   page = "1",
+  region,
 }: FilterResultsProps) {
   const resources = await searchResources({ query, type, year, page });
   const newParams = (i: number) =>
@@ -113,7 +116,7 @@ export default async function FilterResults({
                 aria-label={`Link to watch ${
                   isMovie ? resource.title : resource.name
                 }`}
-                href={`/browse/${resource.id}?watch=${
+                href={`/${region}/browse/${resource.id}?watch=${
                   isMovie ? "Movie" : "TV"
                 }`}
                 className="relative max-w-[200px] w-full aspect-[2/3] bg-zinc-950 rounded-md h-full"
@@ -195,7 +198,7 @@ export default async function FilterResults({
                   "bg-zinc-700"
               )}
               key={i}
-              href={`/search?${newParams(i)}`}
+              href={`/${region}/search?${newParams(i)}`}
             >
               {i + 1}
             </Link>

@@ -24,7 +24,7 @@ export default function BrowseHeader({ resource, country }: BrowseHeaderProps) {
     >
       <div className="max-w-screen-xl m-auto px-2 xs:px-2 ">
         <div className="flex items-center gap-2 ">
-          <Anchor href="/browse" aria-label="Back button">
+          <Anchor href={`/${country}/browse`} aria-label="Back button">
             <ChevronIcon className="rotate-90" />
           </Anchor>
           <div className="min-w-0">

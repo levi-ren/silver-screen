@@ -26,9 +26,11 @@ const socials = [
   },
 ];
 
-interface FooterProps {}
+interface FooterProps {
+  region: string;
+}
 
-export default function Footer(props: FooterProps) {
+export default function Footer({ region }: FooterProps) {
   return (
     <footer className="relative py-4 mt-10 pt-4">
       <Image
@@ -40,7 +42,7 @@ export default function Footer(props: FooterProps) {
       />
       <div className="p-2">
         <div className="pb-8 border-b border-white/20 flex">
-          <Logo className="text-center mx-auto" size="large" />
+          <Logo className="text-center mx-auto" size="large" region={region} />
         </div>
         <div className="px-2 my-4 flex gap-2 text-sm max-w-2xl m-auto justify-between">
           <div className=" space-y-2">

@@ -18,7 +18,7 @@ async function getNowAiring(): Promise<DiscoverTV> {
   return res.json();
 }
 
-export default async function NowAiring() {
+export default async function NowAiring({ region }: { region: string }) {
   const resource = await getNowAiring();
   return (
     <aside
@@ -33,7 +33,7 @@ export default async function NowAiring() {
           {resource.results.slice(3).map((t) => (
             <Anchor
               aria-label={`Link to watch ${t.name}`}
-              href={`/browse/${t.id}?watch=TV`}
+              href={`/${region}/browse/${t.id}?watch=TV`}
               className="inline-block xl:block hover:bg-zinc-900 transition-colors rounded-md p-2 "
               key={t.id}
             >

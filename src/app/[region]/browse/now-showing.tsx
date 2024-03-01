@@ -45,7 +45,7 @@ export default async function NowShowing({ region }: NowShowingProps) {
         {resource.results.slice(3).map((t) => (
           <Anchor
             aria-label={`Link to watch ${t.title}`}
-            href={`/browse/${t.id}?watch=Movie`}
+            href={`/${region}/browse/${t.id}?watch=Movie`}
             className="relative inline-block"
             key={t.id}
           >
