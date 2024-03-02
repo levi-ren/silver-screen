@@ -1,5 +1,6 @@
 import Anchor from "@/components/anchor";
 import MovieRating from "@/components/movie-rating";
+import Summary from "@/components/summary";
 import { tmdbFetch } from "@/lib/fetcher";
 
 import { TrendingAll } from "@/types/trending-all";
@@ -30,20 +31,23 @@ export default async function Trending({ region }: TrendingProps) {
         Trending Today
       </p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
-        {trending.results.slice(3).map((t) => (
+        {trending.results.slice(3).map((resource) => (
           <Anchor
-            aria-label={`Link to watch ${"title" in t ? t.title : t.name}`}
-            href={`/${region}/browse/${t.id}?watch=${
-              "title" in t ? "Movie" : "TV"
+            aria-label={`Link to watch ${
+              "title" in resource ? resource.title : resource.name
             }`}
-            className="relative inline-block"
-            key={t.id}
+            href={`/${region}/browse/${resource.id}?watch=${
+              "title" in resource ? "Movie" : "TV"
+            }`}
+            className="relative inline-block group"
+            key={resource.id}
+            title={"title" in resource ? resource.title : resource.name}
           >
-            {t.poster_path ? (
+            {resource.poster_path ? (
               <Image
                 draggable={false}
-                src={`https://image.tmdb.org/t/p/w200${t.poster_path}`}
-                alt={"title" in t ? t.title : t.name}
+                src={`https://image.tmdb.org/t/p/w200${resource.poster_path}`}
+                alt={"title" in resource ? resource.title : resource.name}
                 className="h-full select-none rounded-md "
                 width={175}
                 height={262.5}
@@ -52,7 +56,13 @@ export default async function Trending({ region }: TrendingProps) {
             ) : (
               <div className="w-[175px] h-[262.5px] rounded-md border border-white/20 " />
             )}
-            <MovieRating rating={t.vote_average * 10} />
+            <MovieRating rating={resource.vote_average * 10} />
+
+            <Summary
+              isMovie={"title" in resource}
+              genres={resource.genre_ids}
+              title={"title" in resource ? resource.title : resource.name}
+            />
           </Anchor>
         ))}
       </div>

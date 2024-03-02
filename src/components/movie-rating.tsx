@@ -30,7 +30,7 @@ export default function MovieRating({
     <div
       className={twMerge(
         " bg-black/90 rounded-full w-11 h-11 p-[2px]",
-        absolute && "absolute -bottom-4 left-2 z-10",
+        absolute && "absolute -bottom-4 left-2 z-20",
         className
       )}
       title={votes ? `Rated by ${votes} reviewers` : undefined}

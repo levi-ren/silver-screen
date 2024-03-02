@@ -1,5 +1,6 @@
 import Anchor from "@/components/anchor";
 import MovieRating from "@/components/movie-rating";
+import Summary from "@/components/summary";
 import { tmdbFetch } from "@/lib/fetcher";
 import { DiscoverMovies } from "@/types/discover-movie";
 
@@ -42,19 +43,20 @@ export default async function NowShowing({ region }: NowShowingProps) {
         </div>
       </div>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
-        {resource.results.slice(3).map((t) => (
+        {resource.results.slice(3).map((resource) => (
           <Anchor
-            aria-label={`Link to watch ${t.title}`}
-            href={`/${region}/browse/${t.id}?watch=Movie`}
-            className="relative inline-block"
-            key={t.id}
+            aria-label={`Link to watch ${resource.title}`}
+            href={`/${region}/browse/${resource.id}?watch=Movie`}
+            className="relative inline-block group h-[262.5px]"
+            key={resource.id}
+            title={resource.title}
           >
-            {t.poster_path ? (
+            {resource.poster_path ? (
               <Image
                 draggable={false}
-                src={`https://image.tmdb.org/t/p/w200${t.poster_path}`}
-                alt={t.title}
-                className="h-full select-none rounded-md"
+                src={`https://image.tmdb.org/t/p/w200${resource.poster_path}`}
+                alt={resource.title}
+                className="h-full select-none rounded-md object-cover"
                 width={175}
                 height={262.5}
                 loading="lazy"
@@ -63,7 +65,12 @@ export default async function NowShowing({ region }: NowShowingProps) {
               <div className="w-[175px] h-[262.5px] rounded-md border border-white/20 " />
             )}
 
-            <MovieRating rating={t.vote_average * 10} />
+            <MovieRating rating={resource.vote_average * 10} />
+            <Summary
+              isMovie={true}
+              genres={resource.genre_ids}
+              title={resource.title}
+            />
           </Anchor>
         ))}
       </div>
