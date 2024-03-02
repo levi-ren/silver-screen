@@ -26,7 +26,7 @@ export default function TVContentRating({
 
   return rating ? (
     <div
-      className={twMerge("text-gray-400 space-y-1 hidden sm:block", className)}
+      className={twMerge("text-gray-400 space-y-1 hidden md:block", className)}
     >
       <div className=" text-xl tracking-tighter font-bebas  divide-x divide-white/40">
         <div className="inline">

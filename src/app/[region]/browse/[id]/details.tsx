@@ -63,7 +63,7 @@ export default function Details({ resource, country }: DetailsProps) {
                 release_date={resource.release_date}
                 country={country}
                 runtime={resource.runtime}
-                className="sm:hidden block text-center !text-white"
+                className="md:hidden block text-center sm:text-left !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md"
               />
             ) : (
               <TVContentRating
@@ -73,7 +73,7 @@ export default function Details({ resource, country }: DetailsProps) {
                 }`}
                 episodes={`${resource.number_of_episodes} episodes`}
                 ratings={resource.content_ratings.results}
-                className="sm:hidden block text-center !text-white"
+                className="md:hidden block text-center sm:text-left !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md"
               />
             )}
 

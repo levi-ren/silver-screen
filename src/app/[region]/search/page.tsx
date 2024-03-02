@@ -36,7 +36,9 @@ export default async function SearchPage({
                       required
                       pattern=".*\S+.*"
                       defaultValue={query}
-                      placeholder="What's your favorite movie?"
+                      placeholder={`What's your favorite ${
+                        type === "movie" ? "movie" : "show"
+                      }?`}
                     />
                   </div>
 

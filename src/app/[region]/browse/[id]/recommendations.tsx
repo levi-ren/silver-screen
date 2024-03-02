@@ -20,7 +20,7 @@ export default function Recommendations({
         <p className="text-4xl font-bebas font-semibold small-caps">
           You Might Like
         </p>
-        <ul className="space-x-4 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar text-sm">
+        <div className="space-x-4 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar text-sm">
           {resources.map((resource) => {
             const isMovie = "title" in resource;
             return (
@@ -56,7 +56,7 @@ export default function Recommendations({
               </Anchor>
             );
           })}
-        </ul>
+        </div>
       </div>
     </section>
   );

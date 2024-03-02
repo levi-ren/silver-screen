@@ -7,10 +7,8 @@ import Anchor from "./anchor";
 
 const quicklinks = [
   { label: "About", href: "/about" },
-  { label: "Movies", href: "/search?type=movies" },
+  { label: "Movies", href: "/search?type=movie" },
   { label: "TV-Shows", href: "/search?type=tv" },
-  { label: "Trending", href: "/search?trending=all" },
-  { label: "Upcoming", href: "/search?type=movies&upcoming=true" },
 ];
 const socials = [
   { label: "Levi Deang", href: "https://www.levideang.dev", logo: LDLogo },
@@ -52,7 +50,10 @@ export default function Footer({ region }: FooterProps) {
             <ul className="space-y-2">
               {quicklinks.map((q) => (
                 <li key={q.label}>
-                  <Anchor aria-label={`Link to ${q.label}`} href={q.href}>
+                  <Anchor
+                    aria-label={`Link to ${q.label}`}
+                    href={`/${region}/${q.href}`}
+                  >
                     {q.label}
                   </Anchor>
                 </li>
@@ -103,6 +104,10 @@ export default function Footer({ region }: FooterProps) {
               loading="lazy"
             />
           </Anchor>
+          <em className="italic block">
+            This product uses the TMDB API but is not endorsed or certified by
+            TMDB.
+          </em>
         </div>
       </div>
     </footer>

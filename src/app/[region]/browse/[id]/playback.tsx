@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/button";
 import PlayIcon from "@/icons/play-icon";
 import { YouTubeEmbed } from "@next/third-parties/google";
 import { useState } from "react";
@@ -36,12 +37,13 @@ export default function Playback({
     <>
       {existing ? (
         <div className="w-full h-full flex  flex-col gap-y-2 items-center justify-center">
-          <button
+          <Button
+            aria-label="Play movie/tv"
             onClick={() => setPlayVid(true)}
             className="border border-white/20 rounded-full p-6 grid"
           >
             <PlayIcon />
-          </button>
+          </Button>
 
           <p className="text-center">Watch {title}</p>
         </div>

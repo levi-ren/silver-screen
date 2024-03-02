@@ -13,7 +13,7 @@ async function searchResources({ query, type, year, page }: SearchPageParams) {
     const movies = await tmdbFetch(
       query ? `search/movie` : "discover/movie",
       {
-        query,
+        ...(query ? { query } : {}),
         ...(page ? { page } : {}),
         ...(year ? { year } : {}),
       },
@@ -31,7 +31,7 @@ async function searchResources({ query, type, year, page }: SearchPageParams) {
     const tv = await tmdbFetch(
       query ? `search/tv` : "discover/tv",
       {
-        query,
+        ...(query ? { query } : {}),
         ...(page ? { page } : {}),
         ...(year ? { year } : {}),
       },
