@@ -3,12 +3,12 @@ import { tmdbFetch } from "@/lib/fetcher";
 import { MovieDetails } from "@/types/movie-details";
 import { PageProps } from "@/types/page-types";
 import { TVDetails } from "@/types/tv-details";
-import { YouTubeEmbed } from "@next/third-parties/google";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Casts from "./casts";
 import Details from "./details";
 import BrowseHeader from "./header";
+import Playback from "./playback";
 import { PreloadResources } from "./preload-resources";
 import Recommendations from "./recommendations";
 import Reviews from "./reviews";
@@ -19,14 +19,12 @@ export async function generateMetadata({
   params: { id },
   searchParams: { watch },
 }: PageProps<WatchType>): Promise<Metadata> {
-  // fetch data
   const res = await tmdbFetch(`${watch.toLowerCase()}/${id}`, {
     append_to_response:
       "videos,release_dates,credits,keywords,reviews,similar,recommendations,content_ratings,aggregate_credits",
   });
 
   if (!res.ok) {
-    console.log(await res.json());
     new Error("Generate Metadata - Failed to fetch data");
   }
 
@@ -71,6 +69,12 @@ export default async function MoviePage({
 
   const isMovie = "title" in resource;
 
+  const vidSrc = `https://vidsrc.xyz/embed/${isMovie ? "movie" : "tv"}?tmdb=${
+    resource.id
+  }${!isMovie ? `&season=${1}&episode=1` : ""}`;
+
+  const e = await fetch(vidSrc);
+
   return (
     <>
       <PreloadResources />
@@ -79,10 +83,12 @@ export default async function MoviePage({
           id="trailer"
           className="w-full h-screen max-w-[100vw] relative z-30"
         >
-          <YouTubeEmbed
-            videoid={trailerKey || ""}
-            style="width:100%; max-width:100vw; height:100vh"
-            params="autoplay=1&controls=1"
+          <Playback
+            isMovie={isMovie}
+            existing={e.ok}
+            id={resource.id}
+            trailerKey={trailerKey || ""}
+            title={isMovie ? resource.title : resource.name}
           />
         </section>
 

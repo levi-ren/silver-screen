@@ -5,17 +5,16 @@ const PlayIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ ...props }, ref) => (
     <svg
       ref={ref}
-      width="22"
-      height="27"
-      viewBox="0 0 22 27"
-      fill="none"
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth="0"
+      height={24}
+      width={24}
+      viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path
-        d="M0 2.1716V24.6378C0 26.351 1.88664 27.3919 3.33958 26.4594L20.9916 15.2263C22.3361 14.3806 22.3361 12.4289 20.9916 11.5614L3.33958 0.350015C1.88664 -0.582464 0 0.458443 0 2.1716Z"
-        fill="currentColor"
-      />
+      <path d="M133 440a35.37 35.37 0 0 1-17.5-4.67c-12-6.8-19.46-20-19.46-34.33V111c0-14.37 7.46-27.53 19.46-34.33a35.13 35.13 0 0 1 35.77.45l247.85 148.36a36 36 0 0 1 0 61l-247.89 148.4A35.5 35.5 0 0 1 133 440z"></path>
     </svg>
   )
 );

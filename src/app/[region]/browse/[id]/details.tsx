@@ -21,14 +21,16 @@ export default function Details({ resource, country }: DetailsProps) {
   return (
     <section id="details" className="relative p-2 md:p-4">
       <div className="absolute inset-0 -top-[103px] sm:-top-[152px] w-full sm:h-[calc(100%_+_152px)] h-[calc(100%_+_103px)]">
-        <Image
-          draggable={false}
-          src={`https://image.tmdb.org/t/p/w1280${resource.backdrop_path}`}
-          alt={isMovie ? resource.title : resource.name}
-          className="select-none blur-[2px] grayscale brightness-50 object-cover"
-          fill
-          priority
-        />
+        {resource.backdrop_path && (
+          <Image
+            draggable={false}
+            src={`https://image.tmdb.org/t/p/w1280${resource.backdrop_path}`}
+            alt={isMovie ? resource.title : resource.name}
+            className="select-none blur-[2px] grayscale brightness-50 object-cover"
+            fill
+            priority
+          />
+        )}
       </div>
       <div className="max-w-screen-xl m-auto relative z-10">
         <div className="p-2 md:p-4 flex h-full gap-x-4 flex-col sm:flex-row">
