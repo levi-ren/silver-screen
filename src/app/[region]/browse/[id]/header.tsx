@@ -7,8 +7,6 @@ import ChevronIcon from "@/icons/chevron-icon";
 import SaveLaterIcon from "@/icons/save-later-icon";
 import { MovieDetails } from "@/types/movie-details";
 import { TVDetails } from "@/types/tv-details";
-import Certification from "./certification";
-import TVContentRating from "./content-rating";
 
 interface BrowseHeaderProps {
   resource: MovieDetails | TVDetails;
@@ -36,23 +34,6 @@ export default function BrowseHeader({ resource, country }: BrowseHeaderProps) {
                 .map(({ id }) => (isMovie ? movieGenres : tvGenres)[id])
                 .join(" • ")}
             </p>
-            {isMovie ? (
-              <Certification
-                certificates={resource.release_dates}
-                release_date={resource.release_date}
-                country={country}
-                runtime={resource.runtime}
-              />
-            ) : (
-              <TVContentRating
-                country={country}
-                seasons={`${resource.number_of_seasons} season${
-                  resource.number_of_seasons > 1 ? "s" : ""
-                }`}
-                ratings={resource.content_ratings.results}
-                episodes={`${resource.number_of_episodes} episodes`}
-              />
-            )}
           </div>
           <div className="flex items-center gap-2 shrink-0 ml-auto">
             <Anchor

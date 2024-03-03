@@ -36,10 +36,8 @@ export default function Certification({
     : "US";
 
   return certificate ? (
-    <div
-      className={twMerge("text-gray-400 space-y-1 hidden md:block", className)}
-    >
-      <div className=" text-xl tracking-tighter font-bebas  divide-x divide-white/40">
+    <div className={twMerge("text-gray-400 space-y-1", className)}>
+      <div className=" text-xl tracking-tighter font-bebas divide-x divide-white/40">
         <div className="inline">
           <span
             className={twMerge(

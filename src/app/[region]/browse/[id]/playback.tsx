@@ -57,10 +57,12 @@ export default function Playback({
           allowFullScreen
         />
       ) : (
-        <div className="w-full h-full flex relative flex-col gap-y-2 items-center justify-center">
+        <div
+          className="w-full h-full flex relative flex-col gap-y-2 items-center justify-center cursor-pointer"
+          onClickCapture={() => setPlayVid(true)}
+        >
           <Button
             aria-label="Play movie/tv"
-            onClick={() => setPlayVid(true)}
             className="border border-white/20 rounded-full p-6 grid"
           >
             <PlayIcon />

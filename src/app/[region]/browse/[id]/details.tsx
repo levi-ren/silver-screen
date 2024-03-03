@@ -53,9 +53,11 @@ export default function Details({ resource, country }: DetailsProps) {
           )}
 
           <div className="flex-1 py-2">
-            <p className="italic my-4 tracking-tighter text-blue-400 text-center sm:text-left">
-              ~ {resource.tagline} ~
-            </p>
+            {resource.tagline && (
+              <p className="italic my-4 tracking-tighter text-blue-400 text-center text-balance max-w-xl">
+                ~ {resource.tagline} ~
+              </p>
+            )}
 
             {isMovie ? (
               <Certification
@@ -63,7 +65,7 @@ export default function Details({ resource, country }: DetailsProps) {
                 release_date={resource.release_date}
                 country={country}
                 runtime={resource.runtime}
-                className="md:hidden block text-center sm:text-left !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md"
+                className="text-center !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md max-w-xl"
               />
             ) : (
               <TVContentRating
@@ -73,7 +75,7 @@ export default function Details({ resource, country }: DetailsProps) {
                 }`}
                 episodes={`${resource.number_of_episodes} episodes`}
                 ratings={resource.content_ratings.results}
-                className="md:hidden block text-center sm:text-left !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md"
+                className="text-center !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md max-w-xl"
               />
             )}
 

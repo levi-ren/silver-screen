@@ -37,7 +37,7 @@ export default function SeasonPicker({
       <PopoverTrigger
         asChild
         className={twMerge(
-          "cursor-pointer absolute right-4 z-20 top-2 opacity-10 lg:opacity-0 group-hover:opacity-100 peer-hover:opacity-100 transition-opacity",
+          "cursor-pointer absolute right-4 z-20 top-2 opacity-70 lg:opacity-0 group-hover:opacity-100 peer-hover:opacity-100 transition-opacity",
           open && "opacity-100"
         )}
       >
