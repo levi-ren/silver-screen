@@ -56,7 +56,7 @@ async function getResource(
 
 export default async function MoviePage({
   params: { id, region },
-  searchParams: { watch },
+  searchParams: { watch, season, episode },
 }: PageProps<WatchType>) {
   if (!watch || (watch !== "TV" && watch !== "Movie")) {
     notFound();
@@ -74,14 +74,15 @@ export default async function MoviePage({
   }${!isMovie ? `&season=${1}&episode=1` : ""}`;
 
   const e = await fetch(vidSrc);
+  console.log(season);
 
   return (
     <>
       <PreloadResources />
       <main>
         <section
-          id="trailer"
-          className="w-full h-screen max-w-[100vw] relative z-30"
+          id={e.ok ? "stream" : "trailer"}
+          className="w-full h-screen max-w-[100vw] relative z-30 group"
         >
           <Playback
             isMovie={isMovie}
@@ -89,6 +90,15 @@ export default async function MoviePage({
             id={resource.id}
             trailerKey={trailerKey || ""}
             title={isMovie ? resource.title : resource.name}
+            seasons={
+              !isMovie && {
+                season: resource.seasons,
+                lastEpisode: resource.last_episode_to_air.episode_number,
+                lastSeason: resource.last_episode_to_air.season_number,
+                seasonNumber: season || "1",
+                episodeNumber: episode || "1",
+              }
+            }
           />
         </section>
 

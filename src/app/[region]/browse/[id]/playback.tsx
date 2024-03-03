@@ -2,8 +2,10 @@
 
 import Button from "@/components/button";
 import PlayIcon from "@/icons/play-icon";
+import { TVSeasons } from "@/types/tv-details";
 import { YouTubeEmbed } from "@next/third-parties/google";
 import { useState } from "react";
+import SeasonPicker from "./season-picker";
 
 interface PlaybackProps {
   isMovie: boolean;
@@ -11,6 +13,15 @@ interface PlaybackProps {
   id: number;
   trailerKey: string;
   title: string;
+  seasons:
+    | {
+        season: TVSeasons[];
+        lastEpisode: number;
+        lastSeason: number;
+        seasonNumber: string;
+        episodeNumber: string;
+      }
+    | false;
 }
 
 export default function Playback({
@@ -19,24 +30,34 @@ export default function Playback({
   existing,
   trailerKey,
   title,
+  seasons,
 }: PlaybackProps) {
   const [playVid, setPlayVid] = useState(false);
+  const seasonNumber = (seasons && seasons.seasonNumber) || 1;
+  const episodeNumber = (seasons && seasons.episodeNumber) || 1;
 
-  const vidSrc = `https://vidsrc.xyz/embed/${
-    isMovie ? "movie" : "tv"
-  }?tmdb=${id}${!isMovie ? `&season=${1}&episode=1` : ""}`;
+  const vidSrc = `https://vidsrc.to/embed/${isMovie ? "movie" : "tv"}/${id}${
+    !isMovie ? `/${seasonNumber}/${episodeNumber}` : ""
+  }`;
 
-  return playVid ? (
-    <iframe
-      src={vidSrc}
-      className="w-full h-full"
-      referrerPolicy="origin"
-      allowFullScreen
+  return !existing ? (
+    <YouTubeEmbed
+      videoid={trailerKey}
+      style="width:100%; max-width:100vw; height:100vh"
+      params="autoplay=1&controls=1"
+      playlabel={`Watch ${title} Trailer`}
     />
   ) : (
     <>
-      {existing ? (
-        <div className="w-full h-full flex  flex-col gap-y-2 items-center justify-center">
+      {playVid ? (
+        <iframe
+          src={vidSrc}
+          className="w-full h-full peer"
+          referrerPolicy="origin"
+          allowFullScreen
+        />
+      ) : (
+        <div className="w-full h-full flex relative flex-col gap-y-2 items-center justify-center">
           <Button
             aria-label="Play movie/tv"
             onClick={() => setPlayVid(true)}
@@ -47,17 +68,15 @@ export default function Playback({
 
           <p className="text-center">Watch {title}</p>
         </div>
-      ) : (
-        <>
-          <YouTubeEmbed
-            videoid={trailerKey}
-            style="width:100%; max-width:100vw; height:100vh"
-            params="autoplay=1&controls=1"
-          />
-          <p className="absolute top-[52%]  translate-x-1/2 right-1/2">
-            Watch {title} Trailer
-          </p>
-        </>
+      )}
+      {seasons && (
+        <SeasonPicker
+          season={seasons.season}
+          lastEpisode={seasons.lastEpisode}
+          lastSeason={seasons.lastSeason}
+          seasonNumber={seasons.seasonNumber}
+          episodeNumber={seasons.episodeNumber}
+        />
       )}
     </>
   );

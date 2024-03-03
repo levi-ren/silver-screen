@@ -109,6 +109,9 @@ const config = {
           "-ms-overflow-style": "none",
           "scrollbar-width": "",
         },
+        ".no-scrollbar-height::-webkit-scrollbar": {
+          height: "0",
+        },
         ".show-scrollbar::-webkit-scrollbar": {
           display: "block",
         },
