@@ -1,41 +1,56 @@
-import Anchor from "@/components/anchor";
 import BackgroundImage from "@/components/background-image";
+import BrowseLink from "@/components/browse-link";
+import BrowseLinkLoader from "@/components/browse-link-loader";
 import Logo from "@/components/logo";
+import LogoLoader from "@/components/logo-loader";
 import QuerySearchForm from "@/components/query-search-form";
+import QuerySearchFormLoader from "@/components/query-search-form-loader";
 import SearchIcon from "@/icons/search-icon";
-import { PageProps } from "@/types/page-types";
+import { Suspense } from "react";
 
-export default async function Home({ searchParams: { country } }: PageProps) {
+export const dynamic = "error";
+
+const Input = () => (
+  <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/70">
+    <input
+      className="w-full placeholder:text-sm bg-transparent outline-none"
+      placeholder="Search movies"
+      name="query"
+      id="query"
+    />
+    <SearchIcon className="text-white/50 " />
+  </div>
+);
+
+export default async function Home() {
   return (
     <main className="relative">
       <BackgroundImage />
       <section className="min-h-screen flex justify-center items-center">
         <div className=" border border-white/50 rounded-xl text-center backdrop-blur shadow-md from-black to-black/5 bg-gradient-to-b m-4 max-w-4xl pr-1">
-          <Logo country={country} className="mt-4 mb-6" />
+          <Suspense fallback={<LogoLoader className="my-6" />}>
+            <Logo className="my-6" />
+          </Suspense>
           <p className="text-balance px-2 md:px-4 text-blue-400">
             ~ Elevating Entertainment, One Stream at a Time. ~
           </p>
-          <QuerySearchForm className="mt-6 px-2 md:px-6">
-            <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/70">
-              <input
-                className="w-full placeholder:text-sm bg-transparent outline-none"
-                placeholder="Search movies"
-                name="query"
-                id="query"
-              />
-              <SearchIcon className="text-white/50 " />
-            </div>
-          </QuerySearchForm>
+          <Suspense
+            fallback={
+              <QuerySearchFormLoader className="mt-6 px-2 md:px-6">
+                <Input />
+              </QuerySearchFormLoader>
+            }
+          >
+            <QuerySearchForm className="mt-6 px-2 md:px-6">
+              <Input />
+            </QuerySearchForm>
+          </Suspense>
           <span className="block my-2 italic text-sm text-gray-300 font-thin">
             ~ or ~
           </span>
-          <Anchor
-            aria-label="Link to browse"
-            href={`/browse${country ? `?country=${country}` : ""}`}
-            className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 mb-6"
-          >
-            Browse Cataloge
-          </Anchor>
+          <Suspense fallback={<BrowseLinkLoader />}>
+            <BrowseLink />
+          </Suspense>
           <div className="space-y-2 max-h-[50vh] overflow-y-auto pl-4 pr-1 text-justify pb-6 md:px-6 font-thin">
             <div className="first-letter:text-2xl">
               Welcome to <h1 className="inline">Silver Screen</h1>, your

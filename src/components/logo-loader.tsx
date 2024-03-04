@@ -1,21 +1,14 @@
-"use client";
-import { useSearchParams } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import Anchor from "./anchor";
 
 interface LogoProps {
   className?: string;
   size?: "base" | "large";
 }
 
-export default function Logo({ className, size }: LogoProps) {
-  const country = useSearchParams().get("country");
+export default function LogoLoader({ className, size }: LogoProps) {
   return (
     <div className={twMerge(className, "relative ")}>
-      <Anchor
-        aria-label="Link to home page"
-        href={`/browse${country ? `?country=${country}` : ""}`}
-      >
+      <div className="inline">
         <span
           className={twMerge(
             "text-5xl md:text-6xl absolute right-1/2 translate-x-1/2 top-[60%] -translate-y-[60%] text-white/30",
@@ -40,7 +33,7 @@ export default function Logo({ className, size }: LogoProps) {
         >
           Silver Screen
         </p>
-      </Anchor>
+      </div>
     </div>
   );
 }

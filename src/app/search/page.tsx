@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Logo from "@/components/logo";
+import LogoLoader from "@/components/logo-loader";
 import { PageProps, SearchPageParams } from "@/types/page-types";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -21,7 +22,9 @@ export default async function SearchPage({
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b flex items-center justify-between gap-x-2">
-        <Logo country={country} />
+        <Suspense fallback={<LogoLoader />}>
+          <Logo />
+        </Suspense>
       </header>
       <main className="">
         <section id="filters" className="p-2 sm:p-4">

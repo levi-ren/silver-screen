@@ -40,11 +40,7 @@ export default function Footer({ country }: FooterProps) {
       />
       <div className="p-2">
         <div className="pb-8 border-b border-white/20 flex">
-          <Logo
-            className="text-center mx-auto"
-            size="large"
-            country={country}
-          />
+          <Logo className="text-center mx-auto" size="large" />
         </div>
         <div className="px-2 my-4 flex gap-2 text-sm max-w-2xl m-auto justify-between">
           <div className=" space-y-2">

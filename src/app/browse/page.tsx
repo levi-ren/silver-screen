@@ -1,6 +1,8 @@
 import Footer from "@/components/footer";
 import Logo from "@/components/logo";
+import LogoLoader from "@/components/logo-loader";
 import QuerySearchForm from "@/components/query-search-form";
+import QuerySearchFormLoader from "@/components/query-search-form-loader";
 import SearchIcon from "@/icons/search-icon";
 import { PageProps } from "@/types/page-types";
 import { Suspense } from "react";
@@ -17,28 +19,42 @@ import TopTen from "./top-ten";
 import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
 
+const Input = () => (
+  <div className="flex  items-center rounded-full px-3 py-2 bg-black/90">
+    <label htmlFor="query">
+      <SearchIcon className="text-white w-4 h-4 m-auto focus:ml-auto relative right-0 shrink-0" />
+    </label>
+    <input
+      className="transition-all md:group-hover:w-[320px] md:[&:not(:placeholder-shown)]:w-[320px] md:focus:[&:placeholder-shown]:w-[320px] group-hover:w-[150px] placeholder:text-sm bg-transparent outline-none [&:not(:placeholder-shown)]:w-[150px] [&:placeholder-shown]:w-0 focus:[&:placeholder-shown]:w-[150px] focus:ml-2 group-hover:ml-2 [&:not(:placeholder-shown)]:ml-2 "
+      placeholder="Search movies"
+      name="query"
+      id="query"
+    />
+  </div>
+);
+
 export default async function BrowsePage({
   searchParams: { country },
 }: PageProps) {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">
-        <Logo country={country} />
+        <Suspense fallback={<LogoLoader />}>
+          <Logo />
+        </Suspense>
 
         <div className="flex gap-x-2 items-center">
-          <QuerySearchForm className="inline-flex-1 group">
-            <div className="flex  items-center rounded-full px-3 py-2 bg-black/90">
-              <label htmlFor="query">
-                <SearchIcon className="text-white w-4 h-4 m-auto focus:ml-auto relative right-0 shrink-0" />
-              </label>
-              <input
-                className="transition-all md:group-hover:w-[320px] md:[&:not(:placeholder-shown)]:w-[320px] md:focus:[&:placeholder-shown]:w-[320px] group-hover:w-[150px] placeholder:text-sm bg-transparent outline-none [&:not(:placeholder-shown)]:w-[150px] [&:placeholder-shown]:w-0 focus:[&:placeholder-shown]:w-[150px] focus:ml-2 group-hover:ml-2 [&:not(:placeholder-shown)]:ml-2 "
-                placeholder="Search movies"
-                name="query"
-                id="query"
-              />
-            </div>
-          </QuerySearchForm>
+          <Suspense
+            fallback={
+              <QuerySearchFormLoader className="inline-flex-1 group">
+                <Input />
+              </QuerySearchFormLoader>
+            }
+          >
+            <QuerySearchForm className="inline-flex-1 group">
+              <Input />
+            </QuerySearchForm>
+          </Suspense>
 
           <div className="group relative">
             <CountryList />

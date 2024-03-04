@@ -1,16 +1,33 @@
 import Anchor from "@/components/anchor";
 import BackgroundImage from "@/components/background-image";
+import BrowseLink from "@/components/browse-link";
+import BrowseLinkLoader from "@/components/browse-link-loader";
 import QuerySearchForm from "@/components/query-search-form";
+import QuerySearchFormLoader from "@/components/query-search-form-loader";
 import SearchIcon from "@/icons/search-icon";
-import { PageProps } from "@/types/page-types";
 import { Metadata } from "next";
+import { Suspense } from "react";
+
+export const dynamic = "error";
 
 export const metadata: Metadata = {
   title: "Silver Screen | About",
   description: "Silver Screen about page",
 };
 
-export default function About({ searchParams: { country } }: PageProps) {
+const Input = () => (
+  <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/90 border border-white/20">
+    <input
+      className="w-full placeholder:text-sm bg-transparent outline-none"
+      placeholder="Search movies"
+      name="query"
+      id="query"
+    />
+    <SearchIcon className="text-white/50 " />
+  </div>
+);
+
+export default function About() {
   return (
     <main className="relative">
       <BackgroundImage />
@@ -71,27 +88,22 @@ export default function About({ searchParams: { country } }: PageProps) {
             of the cinema.
           </div>
         </div>
-
-        <QuerySearchForm className="w-full mt-6">
-          <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/90 border border-white/20">
-            <input
-              className="w-full placeholder:text-sm bg-transparent outline-none"
-              placeholder="Search movies"
-              name="query"
-              id="query"
-            />
-            <SearchIcon className="text-white/50 " />
-          </div>
-        </QuerySearchForm>
+        <Suspense
+          fallback={
+            <QuerySearchFormLoader className="w-full mt-6">
+              <Input />
+            </QuerySearchFormLoader>
+          }
+        >
+          <QuerySearchForm className="w-full mt-6">
+            <Input />
+          </QuerySearchForm>
+        </Suspense>
 
         <span className="block my-2 italic text-sm text-gray-300">~ or ~</span>
-        <Anchor
-          aria-label="Link to browse"
-          href={`/browse${country ? `?country=${country}` : ""}`}
-          className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 mb-6"
-        >
-          Start your journey here
-        </Anchor>
+        <Suspense fallback={<BrowseLinkLoader />}>
+          <BrowseLink />
+        </Suspense>
       </section>
     </main>
   );
