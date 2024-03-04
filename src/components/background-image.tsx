@@ -4,7 +4,7 @@ export default function BackgroundImage() {
   return (
     <Image
       className="brightness-[.2] object-cover -z-10 blur-[2px]"
-      src="/banner-posters.jpg"
+      src="/banner-posters.webp"
       alt="Banner posters"
       fill
       priority

@@ -33,7 +33,7 @@ export default function Footer({ country }: FooterProps) {
     <footer className="relative py-4 mt-10 pt-4">
       <Image
         className="grayscale object-cover -z-10 blur brightness-50"
-        src="/banner-footer.jpg"
+        src="/banner-footer.webp"
         alt="Banner posters"
         fill
         loading="lazy"
