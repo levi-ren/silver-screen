@@ -6,8 +6,8 @@ import { tmdbFetch } from "@/lib/fetcher";
 import { TrendingAll } from "@/types/trending-all";
 import Image from "next/image";
 
-async function getTrending(region: string): Promise<TrendingAll> {
-  const res = await tmdbFetch(`trending/all/day`, { region });
+async function getTrending(country?: string): Promise<TrendingAll> {
+  const res = await tmdbFetch(`trending/all/day`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -17,11 +17,11 @@ async function getTrending(region: string): Promise<TrendingAll> {
 }
 
 interface TrendingProps {
-  region: string;
+  country?: string;
 }
 
-export default async function Trending({ region }: TrendingProps) {
-  const trending = await getTrending(region);
+export default async function Trending({ country }: TrendingProps) {
+  const trending = await getTrending(country);
   return (
     <section
       id="trending"
@@ -36,7 +36,7 @@ export default async function Trending({ region }: TrendingProps) {
             aria-label={`Link to watch ${
               "title" in resource ? resource.title : resource.name
             }`}
-            href={`/${region}/browse/${resource.id}?watch=${
+            href={`/browse/${resource.id}?watch=${
               "title" in resource ? "Movie" : "TV"
             }`}
             className="relative inline-block group"

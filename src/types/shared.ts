@@ -139,5 +139,5 @@ export interface TVSearch {
   first_air_date: string;
   vote_average: number;
   vote_count: number;
-  origin_country: string[] | null;
+  origin_country?: string[] | null;
 }

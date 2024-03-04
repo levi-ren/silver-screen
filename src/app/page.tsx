@@ -1,26 +1,21 @@
 import Anchor from "@/components/anchor";
 import BackgroundImage from "@/components/background-image";
 import Logo from "@/components/logo";
-import { allowedLocales } from "@/constants/countries";
+import QuerySearchForm from "@/components/query-search-form";
 import SearchIcon from "@/icons/search-icon";
 import { PageProps } from "@/types/page-types";
-import QuerySearchForm from "../../components/query-search-form";
 
-export async function generateStaticParams() {
-  return allowedLocales.map((locale) => ({ region: locale }));
-}
-
-export default async function Home({ params: { region } }: PageProps) {
+export default async function Home({ searchParams: { country } }: PageProps) {
   return (
     <main className="relative">
       <BackgroundImage />
       <section className="min-h-screen flex justify-center items-center">
         <div className=" border border-white/50 rounded-xl text-center backdrop-blur shadow-md from-black to-black/5 bg-gradient-to-b m-4 max-w-4xl pr-1">
-          <Logo region={region} className="mt-4 mb-6" />
+          <Logo country={country} className="mt-4 mb-6" />
           <p className="text-balance px-2 md:px-4 text-blue-400">
             ~ Elevating Entertainment, One Stream at a Time. ~
           </p>
-          <QuerySearchForm className="mt-6 px-2 md:px-6" region={region}>
+          <QuerySearchForm className="mt-6 px-2 md:px-6">
             <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/70">
               <input
                 className="w-full placeholder:text-sm bg-transparent outline-none"
@@ -36,7 +31,7 @@ export default async function Home({ params: { region } }: PageProps) {
           </span>
           <Anchor
             aria-label="Link to browse"
-            href={`/${region}/browse`}
+            href={`/browse${country ? `?country=${country}` : ""}`}
             className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 mb-6"
           >
             Browse Cataloge

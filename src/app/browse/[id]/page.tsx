@@ -18,7 +18,7 @@ import Similar from "./similar";
 export async function generateMetadata({
   params: { id },
   searchParams: { watch },
-}: PageProps<WatchType>): Promise<Metadata> {
+}: PageProps<{ watch: WatchType }>): Promise<Metadata> {
   const res = await tmdbFetch(
     `${watch.toLowerCase()}/${id}`,
     {
@@ -62,10 +62,11 @@ async function getResource(
   return res.json();
 }
 
+type ResourcePageParams = { watch: WatchType; season: string; episode: string };
 export default async function MoviePage({
-  params: { id, region },
+  params: { id, country },
   searchParams: { watch, season, episode },
-}: PageProps<WatchType>) {
+}: PageProps<ResourcePageParams>) {
   if (!watch || (watch !== "TV" && watch !== "Movie")) {
     notFound();
   }
@@ -110,9 +111,9 @@ export default async function MoviePage({
           />
         </section>
 
-        <BrowseHeader resource={resource} country={region} />
+        <BrowseHeader resource={resource} country={country} />
 
-        <Details resource={resource} country={region} />
+        <Details resource={resource} country={country} />
 
         {!isMovie && <Seasons seasons={resource.seasons} />}
 
@@ -123,19 +124,19 @@ export default async function MoviePage({
         <section id="reviews-and-similars" className="px-2 sm:px-4">
           <div className="max-w-screen-xl m-auto flex gap-x-8 gap-y-4 flex-col-reverse md:px-4 md:flex-row">
             <Reviews reviews={resource.reviews} />
-            <Similar similar={resource.similar.results} region={region} />
+            <Similar similar={resource.similar.results} country={country} />
           </div>
         </section>
 
         {resource.recommendations.results.length > 0 && (
           <Recommendations
             recommendations={resource.recommendations.results}
-            region={region}
+            country={country}
           />
         )}
       </main>
 
-      <Footer region={region} />
+      <Footer country={country} />
     </>
   );
 }

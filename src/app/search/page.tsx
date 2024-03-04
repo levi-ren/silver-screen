@@ -1,6 +1,7 @@
 import Footer from "@/components/footer";
 import Logo from "@/components/logo";
-import { PageProps } from "@/types/page-types";
+import { PageProps, SearchPageParams } from "@/types/page-types";
+import { Metadata } from "next";
 import { Suspense } from "react";
 import FilterResults from "./filter-results";
 import FilterResultsLoader from "./filter-results-loader";
@@ -9,14 +10,18 @@ import SearchForm from "./search-form";
 
 const thisYear = new Date().getFullYear();
 
+export const metadata: Metadata = {
+  title: "Silver Screen | Search",
+  description: "Silver Screen search page",
+};
+
 export default async function SearchPage({
-  params: { region },
-  searchParams: { query, type, year, page },
-}: PageProps) {
+  searchParams: { query, type, year, page, country },
+}: PageProps<SearchPageParams & { country?: string }>) {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b flex items-center justify-between gap-x-2">
-        <Logo region={region} />
+        <Logo country={country} />
       </header>
       <main className="">
         <section id="filters" className="p-2 sm:p-4">
@@ -24,7 +29,7 @@ export default async function SearchPage({
             <p className="text-4xl font-bebas">Filters</p>
             <div className="flex gap-4 flex-col lg:flex-row">
               <div className="flex-1 basis-2/3">
-                <SearchForm region={region}>
+                <SearchForm>
                   <div className="relative col-span-2">
                     <label htmlFor="query" className="text-sm block">
                       Search
@@ -80,22 +85,25 @@ export default async function SearchPage({
                     </select>
                   </div>
                 </SearchForm>
-                <Suspense key={query + page} fallback={<FilterResultsLoader />}>
+                <Suspense
+                  key={`${query}${page}`}
+                  fallback={<FilterResultsLoader />}
+                >
                   <FilterResults
                     query={query}
                     type={type}
                     year={year}
                     page={page}
-                    region={region}
+                    country={country}
                   />
                 </Suspense>
               </div>
-              <PopularNow region={region} />
+              <PopularNow country={country} />
             </div>
           </div>
         </section>
       </main>
-      <Footer region={region} />
+      <Footer country={country} />
     </>
   );
 }

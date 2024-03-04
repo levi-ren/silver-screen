@@ -6,8 +6,8 @@ import { PopularTV } from "@/types/popular-tv";
 import { Resource } from "@/types/shared";
 import Image from "next/image";
 
-async function getPopularMovie(region: string): Promise<PopularMovies> {
-  const res = await tmdbFetch(`movie/popular`, { region });
+async function getPopularMovie(country?: string): Promise<PopularMovies> {
+  const res = await tmdbFetch(`movie/popular`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -16,8 +16,8 @@ async function getPopularMovie(region: string): Promise<PopularMovies> {
   return res.json();
 }
 
-async function getPopularTV(region: string): Promise<PopularTV> {
-  const res = await tmdbFetch(`tv/popular`, { region });
+async function getPopularTV(country?: string): Promise<PopularTV> {
+  const res = await tmdbFetch(`tv/popular`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -26,13 +26,13 @@ async function getPopularTV(region: string): Promise<PopularTV> {
   return res.json();
 }
 interface TopTenProps {
-  region: string;
+  country?: string;
 }
 
-export default async function TopTen({ region }: TopTenProps) {
+export default async function TopTen({ country }: TopTenProps) {
   const topten: Resource[] = await Promise.allSettled([
-    getPopularMovie(region),
-    getPopularTV(region),
+    getPopularMovie(country),
+    getPopularTV(country),
   ]).then(([m, t]) => {
     const movie = m.status === "fulfilled" ? m.value.results : [];
     const tv = t.status === "fulfilled" ? t.value.results : [];
@@ -60,7 +60,7 @@ export default async function TopTen({ region }: TopTenProps) {
               aria-label={`Link to watch ${
                 "title" in resource ? resource.title : resource.name
               }`}
-              href={`/${region}/browse/${resource.id}?watch=${
+              href={`/browse/${resource.id}?watch=${
                 "title" in resource ? "Movie" : "TV"
               }`}
               className="inline-block md:w-[250px] w-[175px] h-[262px] md:h-[375px] relative"

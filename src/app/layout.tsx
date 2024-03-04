@@ -16,8 +16,8 @@ const bebas = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "Silver Screen",
-  description: "Stream movies at your fingertips",
+  title: "Silver Screen | Elevating Entertainment, One Stream at a Time.",
+  description: "Siver Screen index page",
 };
 
 export default function RootLayout({

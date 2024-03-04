@@ -6,8 +6,8 @@ import { DiscoverMovies } from "@/types/discover-movie";
 
 import Image from "next/image";
 
-async function getNowShowing(region: string): Promise<DiscoverMovies> {
-  const res = await tmdbFetch(`movie/now_playing`, { region });
+async function getNowShowing(country?: string): Promise<DiscoverMovies> {
+  const res = await tmdbFetch(`movie/now_playing`, { region: country || "" });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -17,11 +17,11 @@ async function getNowShowing(region: string): Promise<DiscoverMovies> {
 }
 
 interface NowShowingProps {
-  region: string;
+  country?: string;
 }
 
-export default async function NowShowing({ region }: NowShowingProps) {
-  const resource = await getNowShowing(region);
+export default async function NowShowing({ country }: NowShowingProps) {
+  const resource = await getNowShowing(country);
   return (
     <section
       id="now-showing"
@@ -30,23 +30,25 @@ export default async function NowShowing({ region }: NowShowingProps) {
       <div className="flex items-center gap-x-2">
         <div className="flex items-center gap-x-2">
           <p className="text-4xl  font-semibold small-caps font-bebas">
-            Only on Cinemas
+            Showing on Cinemas
           </p>
-          <Image
-            draggable={false}
-            src={`https://flagcdn.com/24x18/${region.toLowerCase()}.webp`}
-            alt={`${region} flag`}
-            width={24}
-            height={18}
-            loading="lazy"
-          />
+          {country && (
+            <Image
+              draggable={false}
+              src={`https://flagcdn.com/24x18/${country?.toLowerCase()}.webp`}
+              alt={`${country} flag`}
+              width={24}
+              height={18}
+              loading="lazy"
+            />
+          )}
         </div>
       </div>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
         {resource.results.slice(3).map((resource) => (
           <Anchor
             aria-label={`Link to watch ${resource.title}`}
-            href={`/${region}/browse/${resource.id}?watch=Movie`}
+            href={`/browse/${resource.id}?watch=Movie`}
             className="relative inline-block group h-[262.5px]"
             key={resource.id}
             title={resource.title}

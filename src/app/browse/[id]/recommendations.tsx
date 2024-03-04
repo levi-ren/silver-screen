@@ -6,12 +6,12 @@ import Image from "next/image";
 
 interface ReccomendationProps {
   recommendations: MovieRecommendation[] | TVRecommendation[];
-  region: string;
+  country?: string;
 }
 
 export default function Recommendations({
   recommendations,
-  region,
+  country,
 }: ReccomendationProps) {
   const resources = recommendations.slice(0, 10);
   return (
@@ -29,7 +29,7 @@ export default function Recommendations({
                   isMovie ? resource.title : resource.name
                 }`}
                 key={resource.id}
-                href={`/${region}/browse/${resource.id}?watch=${
+                href={`/browse/${resource.id}?watch=${
                   isMovie ? "Movie" : "TV"
                 }`}
                 className="relative inline-block w-[300px] h-[168.75px] rounded-md group overflow-hidden"

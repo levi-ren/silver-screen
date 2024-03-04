@@ -55,7 +55,7 @@ export interface ProductionCompaniesEntity {
   id: number;
   logo_path?: string | null;
   name: string;
-  origin_country: string;
+  origin_country?: string;
 }
 export interface ProductionCountriesEntity {
   iso_3166_1: string;

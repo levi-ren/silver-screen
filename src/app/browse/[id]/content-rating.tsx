@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 interface ContentRatingProps {
   ratings: ContentRating[];
   episodes: string;
-  country: string;
+  country?: string;
   seasons: string;
   className?: string;
 }

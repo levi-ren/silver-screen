@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 interface CertificationProps {
   certificates: MovieReleaseDates;
   release_date: string;
-  country: string;
+  country?: string;
   runtime: number;
   className?: string;
 }

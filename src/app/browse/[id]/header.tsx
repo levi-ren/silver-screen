@@ -10,7 +10,7 @@ import { TVDetails } from "@/types/tv-details";
 
 interface BrowseHeaderProps {
   resource: MovieDetails | TVDetails;
-  country: string;
+  country?: string;
 }
 
 export default function BrowseHeader({ resource, country }: BrowseHeaderProps) {

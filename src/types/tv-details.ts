@@ -24,7 +24,7 @@ export interface TVDetails {
   networks: NetworksEntityOrProductionCompaniesEntity[];
   number_of_episodes: number;
   number_of_seasons: number;
-  origin_country: string[];
+  origin_country?: string[];
   original_language: string;
   original_name: string;
   overview: string;
@@ -53,7 +53,7 @@ export interface SimilarShow {
   backdrop_path: string;
   genre_ids: number[];
   id: number;
-  origin_country: string[];
+  origin_country?: string[];
   original_language: string;
   original_name: string;
   overview: string;
@@ -110,7 +110,7 @@ export interface NetworksEntityOrProductionCompaniesEntity {
   id: number;
   logo_path: string;
   name: string;
-  origin_country: string;
+  origin_country?: string;
 }
 export interface ProductionCountriesEntity {
   iso_3166_1: string;
@@ -171,5 +171,5 @@ export interface TVRecommendation {
   first_air_date: string;
   vote_average: number;
   vote_count: number;
-  origin_country: string[];
+  origin_country?: string[];
 }

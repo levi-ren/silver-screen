@@ -13,7 +13,7 @@ const moneyFormat = (n: number) =>
 
 interface DetailsProps {
   resource: MovieDetails | TVDetails;
-  country: string;
+  country?: string;
 }
 
 export default function Details({ resource, country }: DetailsProps) {

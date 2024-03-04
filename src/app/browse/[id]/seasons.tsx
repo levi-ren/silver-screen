@@ -16,6 +16,7 @@ export default function Seasons({ seasons }: SeasonsProps) {
             <div
               className="relative inline-flex flex-col align-top border border-white/20 rounded-xl overflow-hidden max-w-[185px] shadow-md shadow-white/20 h-[277.5px]"
               key={season.id}
+              title={season.name}
             >
               {season.poster_path ? (
                 <Image
@@ -31,8 +32,8 @@ export default function Seasons({ seasons }: SeasonsProps) {
                 <div className="w-[185px] h-[277.5px] bg-white/20" />
               )}
               <div className="absolute bottom-0 p-1 w-full ">
-                <div className="bg-black/80 rounded-md px-2 py-1">
-                  <p className="font-bebas text-xl ">{season.name}</p>
+                <div className="bg-black/80 rounded-md px-2 py-1 truncate">
+                  <p className="font-bebas text-xl truncate">{season.name}</p>
                   <p className="text-xs">{season.episode_count} Episodes</p>
                 </div>
               </div>

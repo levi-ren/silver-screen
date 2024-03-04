@@ -4,13 +4,16 @@ import Anchor from "./anchor";
 interface LogoProps {
   className?: string;
   size?: "base" | "large";
-  region: string;
+  country?: string;
 }
 
-export default function Logo({ className, size, region }: LogoProps) {
+export default function Logo({ className, size, country }: LogoProps) {
   return (
     <div className={twMerge(className, "relative ")}>
-      <Anchor aria-label="Link to home page" href={`/${region}/browse`}>
+      <Anchor
+        aria-label="Link to home page"
+        href={`/browse${country ? `?country=${country}` : ""}`}
+      >
         <span
           className={twMerge(
             "text-5xl md:text-6xl absolute right-1/2 translate-x-1/2 top-[60%] -translate-y-[60%] text-white/30",

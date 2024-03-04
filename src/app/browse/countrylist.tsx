@@ -19,7 +19,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
-export const Content = () => {
+const Content = ({ onSelect }: { onSelect: (e: boolean) => void }) => {
   const router = useRouter();
   const groupRef = useRef<HTMLDivElement>(null);
   const [filteredCountries, setFilteredCountries] = useState(countries);
@@ -71,10 +71,11 @@ export const Content = () => {
                 value={filteredCountries[virtualOption.index].english_name}
                 onSelect={() => {
                   router.push(
-                    `/${
+                    `/browse?country=${
                       filteredCountries[virtualOption.index].iso_3166_1
-                    }/browse`
+                    }`
                   );
+                  onSelect(false);
                 }}
                 className="flex gap-x-4 items-center"
               >
@@ -107,24 +108,23 @@ export function CountryList() {
   const [open, setOpen] = useState(false);
   const [load, setLoad] = useState(false);
 
+  const close = (e: boolean) => {
+    setOpen(e);
+    if (e) {
+      setLoad(e);
+    } else {
+      setTimeout(() => {
+        setLoad(e);
+      }, 150);
+    }
+  };
+
   return (
-    <Popover
-      open={open}
-      onOpenChange={(e) => {
-        setOpen(e);
-        if (e) {
-          setLoad(e);
-        } else {
-          setTimeout(() => {
-            setLoad(e);
-          }, 150);
-        }
-      }}
-    >
+    <Popover open={open} onOpenChange={close}>
       <PopoverTrigger asChild className="cursor-pointer">
         <EarthIcon className="text-white/80 transition-colors hover:text-white" />
       </PopoverTrigger>
-      {load && <Content />}
+      {load && <Content onSelect={close} />}
     </Popover>
   );
 }

@@ -1,15 +1,16 @@
 import Anchor from "@/components/anchor";
 import BackgroundImage from "@/components/background-image";
 import QuerySearchForm from "@/components/query-search-form";
-import { allowedLocales } from "@/constants/countries";
 import SearchIcon from "@/icons/search-icon";
 import { PageProps } from "@/types/page-types";
+import { Metadata } from "next";
 
-export async function generateStaticParams() {
-  return allowedLocales.map((locale) => ({ region: locale }));
-}
+export const metadata: Metadata = {
+  title: "Silver Screen | About",
+  description: "Silver Screen about page",
+};
 
-export default function About({ params: { region } }: PageProps) {
+export default function About({ searchParams: { country } }: PageProps) {
   return (
     <main className="relative">
       <BackgroundImage />
@@ -71,7 +72,7 @@ export default function About({ params: { region } }: PageProps) {
           </div>
         </div>
 
-        <QuerySearchForm className="w-full mt-6" region={region}>
+        <QuerySearchForm className="w-full mt-6">
           <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/90 border border-white/20">
             <input
               className="w-full placeholder:text-sm bg-transparent outline-none"
@@ -86,7 +87,7 @@ export default function About({ params: { region } }: PageProps) {
         <span className="block my-2 italic text-sm text-gray-300">~ or ~</span>
         <Anchor
           aria-label="Link to browse"
-          href={`/${region}/browse`}
+          href={`/browse${country ? `?country=${country}` : ""}`}
           className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 mb-6"
         >
           Start your journey here

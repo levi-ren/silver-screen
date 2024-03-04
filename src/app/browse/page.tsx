@@ -17,14 +17,16 @@ import TopTen from "./top-ten";
 import TopTenLoader from "./top-ten-loader";
 import Trending from "./trending";
 
-export default async function BrowsePage({ params: { region } }: PageProps) {
+export default async function BrowsePage({
+  searchParams: { country },
+}: PageProps) {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">
-        <Logo region={region} />
+        <Logo country={country} />
 
         <div className="flex gap-x-2 items-center">
-          <QuerySearchForm className="inline-flex-1 group" region={region}>
+          <QuerySearchForm className="inline-flex-1 group">
             <div className="flex  items-center rounded-full px-3 py-2 bg-black/90">
               <label htmlFor="query">
                 <SearchIcon className="text-white w-4 h-4 m-auto focus:ml-auto relative right-0 shrink-0" />
@@ -45,31 +47,31 @@ export default async function BrowsePage({ params: { region } }: PageProps) {
       </header>
       <main className="grid grid-cols-12">
         <Suspense fallback={<FeaturedLoading />}>
-          <Featured region={region} />
+          <Featured country={country} />
         </Suspense>
         <Suspense
           fallback={<ListLoader header="Trending Today" className="order-2" />}
         >
-          <Trending region={region} />
+          <Trending country={country} />
         </Suspense>
         <Suspense fallback={<NowAiringLoader />}>
-          <NowAiring region={region} />
+          <NowAiring country={country} />
         </Suspense>
         <Suspense
           fallback={<ListLoader header="Only on Cinemas" className="order-3" />}
         >
-          <NowShowing region={region} />
+          <NowShowing country={country} />
         </Suspense>
         <Suspense fallback={<TopTenLoader />}>
-          <TopTen region={region} />
+          <TopTen country={country} />
         </Suspense>
 
         <Suspense fallback={<TopRatedMoviesLoader />}>
-          <TopRatedMovies region={region} />
+          <TopRatedMovies country={country} />
         </Suspense>
       </main>
 
-      <Footer region={region} />
+      <Footer country={country} />
     </>
   );
 }

@@ -15,7 +15,7 @@ async function getPopularMovie(): Promise<PopularMovies> {
   return res.json();
 }
 
-export default async function PopularNow({ region }: { region: string }) {
+export default async function PopularNow({ country }: { country?: string }) {
   const resource = await getPopularMovie();
   return (
     <aside id="now-airing" className="basis-1/3">
@@ -27,7 +27,7 @@ export default async function PopularNow({ region }: { region: string }) {
           {resource.results.slice(0, 10).map((t, i) => (
             <Anchor
               aria-label={`Link to watch ${t.title}`}
-              href={`/${region}/browse/${t.id}?watch=Movie`}
+              href={`/${country}/browse/${t.id}?watch=Movie`}
               className="flex items-center rounded-xl bg-zinc-900 hover:bg-zinc-900/70 transition-colors p-2"
               key={t.id}
             >

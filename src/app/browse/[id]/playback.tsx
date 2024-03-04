@@ -73,7 +73,9 @@ export default function Playback({
             <span className="block">
               {title}
               {`${
-                !isMovie && ` Season ${seasonNumber} Episode ${episodeNumber}`
+                !isMovie
+                  ? ` Season ${seasonNumber} Episode ${episodeNumber}`
+                  : ""
               }`}
             </span>{" "}
           </p>

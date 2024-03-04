@@ -11,11 +11,11 @@ import { forwardRef } from "react";
 
 interface FeaturedMovieProps {
   resource: Resource;
-  region: string;
+  country?: string;
 }
 
 export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
-  ({ resource, region }, ref) => {
+  ({ resource, country }, ref) => {
     const isMovie = "title" in resource;
     const year = new Date(
       isMovie ? resource.release_date : resource.first_air_date
@@ -67,7 +67,7 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
               aria-label={`Link to watch ${
                 "title" in resource ? resource.title : resource.name
               }`}
-              href={`/${region}/browse/${resource.id}?watch=${
+              href={`/${country}/browse/${resource.id}?watch=${
                 "title" in resource ? "Movie" : "TV"
               }`}
               className="rounded-full bg-gradient-to-r from-blue-400 to-blue-600 py-2 px-8 sm:py-3 flex gap-x-1 items-center"

@@ -25,10 +25,10 @@ const socials = [
 ];
 
 interface FooterProps {
-  region: string;
+  country?: string;
 }
 
-export default function Footer({ region }: FooterProps) {
+export default function Footer({ country }: FooterProps) {
   return (
     <footer className="relative py-4 mt-10 pt-4">
       <Image
@@ -40,7 +40,11 @@ export default function Footer({ region }: FooterProps) {
       />
       <div className="p-2">
         <div className="pb-8 border-b border-white/20 flex">
-          <Logo className="text-center mx-auto" size="large" region={region} />
+          <Logo
+            className="text-center mx-auto"
+            size="large"
+            country={country}
+          />
         </div>
         <div className="px-2 my-4 flex gap-2 text-sm max-w-2xl m-auto justify-between">
           <div className=" space-y-2">
@@ -52,7 +56,7 @@ export default function Footer({ region }: FooterProps) {
                 <li key={q.label}>
                   <Anchor
                     aria-label={`Link to ${q.label}`}
-                    href={`/${region}/${q.href}`}
+                    href={`${q.href}${country ? `?country=${country}` : ""}`}
                   >
                     {q.label}
                   </Anchor>
