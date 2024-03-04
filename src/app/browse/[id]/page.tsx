@@ -29,7 +29,10 @@ export async function generateMetadata({
   );
 
   if (!res.ok) {
-    new Error("Generate Metadata - Failed to fetch data");
+    return {
+      title: "Silver Screen | 404",
+      description: "Silver Screen 404 page - resource missing",
+    };
   }
 
   const resource: MovieDetails | TVDetails = await res.json();
@@ -56,6 +59,10 @@ async function getResource(
   );
 
   if (!res.ok) {
+    const error = await res.json();
+    if (error.status_code === 34 && !error.success) {
+      notFound();
+    }
     throw new Error("Failed to fetch data");
   }
 

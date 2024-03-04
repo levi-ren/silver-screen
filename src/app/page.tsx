@@ -52,7 +52,7 @@ export default async function Home() {
             <BrowseLink />
           </Suspense>
           <div className="space-y-2 max-h-[50vh] overflow-y-auto pl-4 pr-1 text-justify pb-6 md:px-6 font-thin">
-            <div className="first-letter:text-2xl">
+            <div className="first-letter:text-2xl font-thin">
               Welcome to <h1 className="inline">Silver Screen</h1>, your
               ultimate destination for streaming movies and TV shows! Dive into
               a world of endless entertainment where every click opens up a
