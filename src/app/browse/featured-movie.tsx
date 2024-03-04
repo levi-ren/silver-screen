@@ -67,9 +67,9 @@ export const FeaturedMovie = forwardRef<HTMLDivElement, FeaturedMovieProps>(
               aria-label={`Link to watch ${
                 "title" in resource ? resource.title : resource.name
               }`}
-              href={`/${country}/browse/${resource.id}?watch=${
+              href={`/browse/${resource.id}?watch=${
                 "title" in resource ? "Movie" : "TV"
-              }`}
+              }${country ? `&country=${country}` : ""}`}
               className="rounded-full bg-gradient-to-r from-blue-400 to-blue-600 py-2 px-8 sm:py-3 flex gap-x-1 items-center"
             >
               <PlayIcon className="shrink-0 h-5" />

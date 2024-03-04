@@ -7,7 +7,7 @@ import { Resource } from "@/types/shared";
 import Image from "next/image";
 
 async function getPopularMovie(country?: string): Promise<PopularMovies> {
-  const res = await tmdbFetch(`movie/popular`);
+  const res = await tmdbFetch(`movie/popular`, { region: country || "" });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -17,7 +17,7 @@ async function getPopularMovie(country?: string): Promise<PopularMovies> {
 }
 
 async function getPopularTV(country?: string): Promise<PopularTV> {
-  const res = await tmdbFetch(`tv/popular`);
+  const res = await tmdbFetch(`tv/popular`, { region: country || "" });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -38,14 +38,18 @@ export default async function TopTen({ country }: TopTenProps) {
     const tv = t.status === "fulfilled" ? t.value.results : [];
 
     return [...movie, ...tv]
-      .sort((a, b) => b.popularity - a.popularity)
+      .sort((a, b) => b.vote_average - a.vote_average)
       .slice(0, 10);
   });
+
   return (
     <section
       id="top-10"
       className="px-2 py-4 bg-zinc-950 mt-4 col-span-12 order-4"
     >
+      <p className="text-4xl font-bebas font-semibold small-caps">
+        Top Ten Shows
+      </p>
       <div className="overflow-x-auto overflow-y-hidden h-full hidden-scrollbar hover:display-scrollbar pb-4 space-x-2 whitespace-nowrap">
         {topten.map((resource, i) => (
           <div
@@ -62,7 +66,7 @@ export default async function TopTen({ country }: TopTenProps) {
               }`}
               href={`/browse/${resource.id}?watch=${
                 "title" in resource ? "Movie" : "TV"
-              }`}
+              }${country ? `&country=${country}` : ""}`}
               className="inline-block md:w-[250px] w-[175px] h-[262px] md:h-[375px] relative"
               title={"title" in resource ? resource.title : resource.name}
             >

@@ -36,7 +36,9 @@ export default function Similar({ similar, country }: SimilarProps) {
               return (
                 <Anchor
                   aria-label={`Link to watch ${isMovie ? t.title : t.name}`}
-                  href={`/browse/${t.id}?watch=${isMovie ? "Movie" : "TV"}`}
+                  href={`/browse/${t.id}?watch=${isMovie ? "Movie" : "TV"}${
+                    country ? `&country=${country}` : ""
+                  }`}
                   className="flex items-center relative rounded-xl bg-black/70 hover:bg-black/90 transition-colors p-2"
                   key={t.id}
                 >

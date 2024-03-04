@@ -74,7 +74,9 @@ export default async function BrowsePage({
           <NowAiring country={country} />
         </Suspense>
         <Suspense
-          fallback={<ListLoader header="Only on Cinemas" className="order-3" />}
+          fallback={
+            <ListLoader header="Showing on Cinemas" className="order-3" />
+          }
         >
           <NowShowing country={country} />
         </Suspense>

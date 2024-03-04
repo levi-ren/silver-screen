@@ -30,10 +30,12 @@ export default async function NowAiring({ country }: { country?: string }) {
           Airing Today
         </p>
         <div className="space-y-4 xl:overflow-y-auto xl:overflow-x-hidden overflow-x-auto overflow-y-hidden xl:py-4 hidden-scrollbar hover:display-scrollbar xl:pr-4 max-h-[655px] whitespace-nowrap xl:whitespace-normal space-x-4 xl:space-x-0">
-          {resources.results.slice(3).map((resource) => (
+          {resources.results.map((resource) => (
             <Anchor
               aria-label={`Link to watch ${resource.name}`}
-              href={`/browse/${resource.id}?watch=TV`}
+              href={`/browse/${resource.id}?watch=TV${
+                country ? `&country=${country}` : ""
+              }`}
               className="inline-block xl:block hover:bg-zinc-900 transition-colors rounded-md p-2 "
               key={resource.id}
               title={resource.name}
@@ -44,7 +46,7 @@ export default async function NowAiring({ country }: { country?: string }) {
                     draggable={false}
                     src={`https://image.tmdb.org/t/p/w92${resource.poster_path}`}
                     alt={resource.name}
-                    className="h-full select-none rounded-md shrink-0"
+                    className=" select-none rounded-md shrink-0 h-[138px] object-cover"
                     width={92}
                     height={138}
                     loading="lazy"

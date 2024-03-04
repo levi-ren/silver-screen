@@ -27,7 +27,9 @@ export default async function PopularNow({ country }: { country?: string }) {
           {resource.results.slice(0, 10).map((t, i) => (
             <Anchor
               aria-label={`Link to watch ${t.title}`}
-              href={`/${country}/browse/${t.id}?watch=Movie`}
+              href={`/browse/${t.id}?watch=Movie${
+                country ? `&country=${country}` : ""
+              }`}
               className="flex items-center rounded-xl bg-zinc-900 hover:bg-zinc-900/70 transition-colors p-2"
               key={t.id}
             >

@@ -45,10 +45,12 @@ export default async function NowShowing({ country }: NowShowingProps) {
         </div>
       </div>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
-        {resource.results.slice(3).map((resource) => (
+        {resource.results.map((resource) => (
           <Anchor
             aria-label={`Link to watch ${resource.title}`}
-            href={`/browse/${resource.id}?watch=Movie`}
+            href={`/browse/${resource.id}?watch=Movie${
+              country ? `&country=${country}` : ""
+            }`}
             className="relative inline-block group h-[262.5px]"
             key={resource.id}
             title={resource.title}

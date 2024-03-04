@@ -1,4 +1,4 @@
-import Back from "../../../components/back";
+import { Back } from "@/components/back";
 
 export default function NotFound() {
   return (

@@ -31,7 +31,7 @@ export default function Recommendations({
                 key={resource.id}
                 href={`/browse/${resource.id}?watch=${
                   isMovie ? "Movie" : "TV"
-                }`}
+                }${country ? `&country=${country}` : ""}`}
                 className="relative inline-block w-[300px] h-[168.75px] rounded-md group overflow-hidden"
                 title={isMovie ? resource.title : resource.name}
               >

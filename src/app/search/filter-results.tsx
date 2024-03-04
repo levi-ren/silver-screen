@@ -117,9 +117,9 @@ export default async function FilterResults({
                 aria-label={`Link to watch ${
                   isMovie ? resource.title : resource.name
                 }`}
-                href={`/${country}/browse/${resource.id}?watch=${
+                href={`/browse/${resource.id}?watch=${
                   isMovie ? "Movie" : "TV"
-                }`}
+                }${country ? `&country=${country}` : ""}`}
                 className="relative max-w-[200px] w-full aspect-[2/3] bg-zinc-950 rounded-md h-full"
                 key={resource.id}
               >

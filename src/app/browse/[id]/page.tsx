@@ -69,11 +69,15 @@ async function getResource(
   return res.json();
 }
 
-type ResourcePageParams = { watch: WatchType; season: string; episode: string };
+type ResourcePageParams = {
+  watch: WatchType;
+  season?: string;
+  episode?: string;
+};
 export default async function MoviePage({
-  params: { id, country },
-  searchParams: { watch, season, episode },
-}: PageProps<ResourcePageParams>) {
+  params: { id },
+  searchParams: { watch, season, episode, country },
+}: PageProps<ResourcePageParams & { country?: string }>) {
   if (!watch || (watch !== "TV" && watch !== "Movie")) {
     notFound();
   }
@@ -90,7 +94,6 @@ export default async function MoviePage({
   }${!isMovie ? `&season=${1}&episode=1` : ""}`;
 
   const e = await fetch(vidSrc);
-  console.log(season);
 
   return (
     <>

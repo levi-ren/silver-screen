@@ -3,10 +3,10 @@ import MovieRating from "@/components/movie-rating";
 import Summary from "@/components/summary";
 import { tmdbFetch } from "@/lib/fetcher";
 
-import { TrendingAll } from "@/types/trending-all";
+import { TrendingAll, TrendingMovie, TrendingTV } from "@/types/trending-all";
 import Image from "next/image";
 
-async function getTrending(country?: string): Promise<TrendingAll> {
+async function getTrending(): Promise<TrendingAll> {
   const res = await tmdbFetch(`trending/all/day`);
 
   if (!res.ok) {
@@ -21,7 +21,10 @@ interface TrendingProps {
 }
 
 export default async function Trending({ country }: TrendingProps) {
-  const trending = await getTrending(country);
+  const trending = await getTrending();
+  const filtered = trending.results.filter(
+    (e): e is TrendingMovie | TrendingTV => e.media_type !== "person"
+  );
   return (
     <section
       id="trending"
@@ -31,14 +34,14 @@ export default async function Trending({ country }: TrendingProps) {
         Trending Today
       </p>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
-        {trending.results.slice(3).map((resource) => (
+        {filtered.slice(3).map((resource) => (
           <Anchor
             aria-label={`Link to watch ${
               "title" in resource ? resource.title : resource.name
             }`}
             href={`/browse/${resource.id}?watch=${
               "title" in resource ? "Movie" : "TV"
-            }`}
+            }${country ? `&country=${country}` : ""}`}
             className="relative inline-block group"
             key={resource.id}
             title={"title" in resource ? resource.title : resource.name}

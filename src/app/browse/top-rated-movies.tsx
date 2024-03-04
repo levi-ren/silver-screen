@@ -35,7 +35,9 @@ export default async function TopRatedMovies({ country }: TopTenProps) {
           .map((t, i) => (
             <Anchor
               aria-label={`Link to watch ${t.title}`}
-              href={`/browse/${t.id}?watch=Movie`}
+              href={`/browse/${t.id}?watch=Movie${
+                country ? `&country=${country}` : ""
+              }`}
               className="flex items-center relative rounded-xl bg-zinc-900 hover:bg-zinc-900/70 transition-colors p-2"
               key={t.id}
             >

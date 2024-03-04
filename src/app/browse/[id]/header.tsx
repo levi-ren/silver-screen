@@ -1,9 +1,9 @@
 import Anchor from "@/components/anchor";
+import { BackIcon } from "@/components/back";
 import Button from "@/components/button";
 import MovieRating from "@/components/movie-rating";
 import { movieGenres, tvGenres } from "@/constants/genres";
 import BookMarkIcon from "@/icons/bookmark-icon";
-import ChevronIcon from "@/icons/chevron-icon";
 import SaveLaterIcon from "@/icons/save-later-icon";
 import { MovieDetails } from "@/types/movie-details";
 import { TVDetails } from "@/types/tv-details";
@@ -18,13 +18,11 @@ export default function BrowseHeader({ resource, country }: BrowseHeaderProps) {
   return (
     <section
       id="header"
-      className="py-4 xs:p-4 sticky top-0 z-50 bg-gradient-to-b from-black/90 to-black/50 backdrop-blur-xl backdrop-opacity-90 border-b border-white/20"
+      className="py-4 xs:p-4 sticky top-0 z-50 bg-gradient-to-b from-black/90 to-black/50 backdrop-blur-xl backdrop-opacity-[.97] border-b border-white/20"
     >
       <div className="max-w-screen-xl m-auto px-2 xs:px-2 ">
         <div className="flex items-center gap-2 ">
-          <Anchor href={`/${country}/browse`} aria-label="Back button">
-            <ChevronIcon className="rotate-90" />
-          </Anchor>
+          <BackIcon />
           <div className="min-w-0">
             <p className="small-caps font-bebas text-5xl truncate  ">
               {isMovie ? resource.title : resource.name}

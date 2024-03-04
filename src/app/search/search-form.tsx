@@ -1,12 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormEventHandler, PropsWithChildren } from "react";
 import FilterButton from "./filter-button";
 interface SearchFormProps extends PropsWithChildren {}
 
 export default function SearchForm({ children }: SearchFormProps) {
   const router = useRouter();
+  const country = useSearchParams().get("country");
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -17,6 +19,7 @@ export default function SearchForm({ children }: SearchFormProps) {
 
     const params = new URLSearchParams({
       query,
+      ...(country ? { country } : {}),
       page: "1",
       ...(type ? { type } : {}),
       ...(year ? { year } : {}),
