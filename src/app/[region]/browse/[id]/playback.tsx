@@ -68,7 +68,15 @@ export default function Playback({
             <PlayIcon />
           </Button>
 
-          <p className="text-center">Watch {title}</p>
+          <p className="text-center">
+            Watch:{" "}
+            <span className="block">
+              {title}
+              {`${
+                !isMovie && ` Season ${seasonNumber} Episode ${episodeNumber}`
+              }`}
+            </span>{" "}
+          </p>
         </div>
       )}
       {seasons && (

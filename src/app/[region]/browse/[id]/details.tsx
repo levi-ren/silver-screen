@@ -20,7 +20,7 @@ export default function Details({ resource, country }: DetailsProps) {
   const isMovie = "title" in resource;
   return (
     <section id="details" className="relative p-2 md:p-4">
-      <div className="absolute inset-0 -top-[103px] sm:-top-[152px] w-full sm:h-[calc(100%_+_152px)] h-[calc(100%_+_103px)]">
+      <div className="absolute inset-0 -top-[103px] w-fullh-[calc(100%_+_103px)]">
         {resource.backdrop_path && (
           <Image
             draggable={false}
@@ -33,17 +33,38 @@ export default function Details({ resource, country }: DetailsProps) {
         )}
       </div>
       <div className="max-w-screen-xl m-auto relative z-10">
-        <div className="p-2 md:p-4 flex h-full gap-x-4 flex-col sm:flex-row">
+        <div className="p-2 md:p-4 flex h-full gap-x-4 flex-col sm:flex-row justify-center">
           {resource.poster_path ? (
-            <Image
-              draggable={false}
-              src={`https://image.tmdb.org/t/p/w342${resource.poster_path}`}
-              alt={isMovie ? resource.title : resource.name}
-              className="select-none rounded-md self-center min-w-0 sm:w-[230px] sm:h-[345px] md:w-[342px] md:h-[513px] sm:self-start"
-              width={342}
-              height={513}
-              priority
-            />
+            <div className="self-center sm:self-start space-y-2  shrink-0 w-full sm:w-fit">
+              <Image
+                draggable={false}
+                src={`https://image.tmdb.org/t/p/w342${resource.poster_path}`}
+                alt={isMovie ? resource.title : resource.name}
+                className="select-none rounded-md  min-w-0 sm:w-[230px] sm:h-[345px] md:w-[342px] md:h-[513px] m-auto"
+                width={342}
+                height={513}
+                priority
+              />
+              {isMovie ? (
+                <Certification
+                  certificates={resource.release_dates}
+                  release_date={resource.release_date}
+                  country={country}
+                  runtime={resource.runtime}
+                  className="text-center !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md "
+                />
+              ) : (
+                <TVContentRating
+                  country={country}
+                  seasons={`${resource.number_of_seasons} season${
+                    resource.number_of_seasons > 1 ? "s" : ""
+                  }`}
+                  episodes={`${resource.number_of_episodes} episodes`}
+                  ratings={resource.content_ratings.results}
+                  className="text-center !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md max-w-xl"
+                />
+              )}
+            </div>
           ) : (
             <div className="self-center w-[342px] h-[513px] min-w-0 sm:w-[230px] sm:h-[345px] md:w-[342px] md:h-[513px] rounded-md border border-white/20 p-2 sm:self-start">
               <div className="bg-black/80 h-full rounded grid place-items-center text-sm italic font-extralight">
@@ -52,31 +73,11 @@ export default function Details({ resource, country }: DetailsProps) {
             </div>
           )}
 
-          <div className="flex-1 py-2">
+          <div className="max-w-xl py-2">
             {resource.tagline && (
               <p className="italic my-4 tracking-tighter text-blue-400 text-center text-balance max-w-xl">
                 ~ {resource.tagline} ~
               </p>
-            )}
-
-            {isMovie ? (
-              <Certification
-                certificates={resource.release_dates}
-                release_date={resource.release_date}
-                country={country}
-                runtime={resource.runtime}
-                className="text-center !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md max-w-xl"
-              />
-            ) : (
-              <TVContentRating
-                country={country}
-                seasons={`${resource.number_of_seasons} season${
-                  resource.number_of_seasons > 1 ? "s" : ""
-                }`}
-                episodes={`${resource.number_of_episodes} episodes`}
-                ratings={resource.content_ratings.results}
-                className="text-center !text-white  border border-dashed border-white/20 p-2 bg-black/50 rounded-md max-w-xl"
-              />
             )}
 
             <div className="tracking-tighter leading-tight max-w-xl mt-4">

@@ -19,10 +19,14 @@ export async function generateMetadata({
   params: { id },
   searchParams: { watch },
 }: PageProps<WatchType>): Promise<Metadata> {
-  const res = await tmdbFetch(`${watch.toLowerCase()}/${id}`, {
-    append_to_response:
-      "videos,release_dates,credits,keywords,reviews,similar,recommendations,content_ratings,aggregate_credits",
-  });
+  const res = await tmdbFetch(
+    `${watch.toLowerCase()}/${id}`,
+    {
+      append_to_response:
+        "videos,release_dates,credits,keywords,reviews,similar,recommendations,content_ratings,aggregate_credits",
+    },
+    { cache: "force-cache" }
+  );
 
   if (!res.ok) {
     new Error("Generate Metadata - Failed to fetch data");
@@ -42,10 +46,14 @@ async function getResource(
   id: string,
   type: WatchType
 ): Promise<MovieDetails | TVDetails> {
-  const res = await tmdbFetch(`${type.toLowerCase()}/${id}`, {
-    append_to_response:
-      "videos,release_dates,credits,keywords,reviews,similar,recommendations,content_ratings,aggregate_credits",
-  });
+  const res = await tmdbFetch(
+    `${type.toLowerCase()}/${id}`,
+    {
+      append_to_response:
+        "videos,release_dates,credits,keywords,reviews,similar,recommendations,content_ratings,aggregate_credits",
+    },
+    { cache: "force-cache" }
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

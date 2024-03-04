@@ -17,8 +17,8 @@ export default async function Home({ params: { region } }: PageProps) {
       <section className="min-h-screen flex justify-center items-center">
         <div className=" border border-white/50 rounded-xl text-center backdrop-blur shadow-md from-black to-black/5 bg-gradient-to-b m-4 max-w-4xl pr-1">
           <Logo region={region} className="mt-4 mb-6" />
-          <p className="text-balance px-2 md:px-4">
-            Elevating Entertainment, One Stream at a Time.
+          <p className="text-balance px-2 md:px-4 text-blue-400">
+            ~ Elevating Entertainment, One Stream at a Time. ~
           </p>
           <QuerySearchForm className="mt-6 px-2 md:px-6" region={region}>
             <div className="flex gap-x-2 items-center rounded-full px-4 py-2 bg-black/70">
@@ -31,15 +31,18 @@ export default async function Home({ params: { region } }: PageProps) {
               <SearchIcon className="text-white/50 " />
             </div>
           </QuerySearchForm>
+          <span className="block my-2 italic text-sm text-gray-300 font-thin">
+            ~ or ~
+          </span>
           <Anchor
             aria-label="Link to browse"
             href={`/${region}/browse`}
-            className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 my-6"
+            className="inline-block rounded-full bg-gradient-to-r from-blue-400 to-blue-600 px-5 py-2 mb-6"
           >
             Browse Cataloge
           </Anchor>
-          <div className="space-y-2 max-h-[50vh] overflow-y-auto pl-4 pr-1 text-justify pb-6 md:px-6 ">
-            <div className="">
+          <div className="space-y-2 max-h-[50vh] overflow-y-auto pl-4 pr-1 text-justify pb-6 md:px-6 font-thin">
+            <div className="first-letter:text-2xl">
               Welcome to <h1 className="inline">Silver Screen</h1>, your
               ultimate destination for streaming movies and TV shows! Dive into
               a world of endless entertainment where every click opens up a

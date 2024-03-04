@@ -86,7 +86,7 @@ export default function Footer({ region }: FooterProps) {
           This site does not collect, store and distribute data, this site only
           provides visual displays of media hosted on 3rd party services.
         </p>
-        <div className="text-sm text-center pt-4 border-t border-blue-400/50">
+        <div className="text-sm text-center pt-4 border-t border-blue-400/50 font-thin">
           <p>Powered by:</p>
           <Anchor
             aria-label="Link to TMDB"
