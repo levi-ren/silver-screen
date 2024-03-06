@@ -1,6 +1,7 @@
 import Anchor from "@/components/anchor";
 import MovieRating from "@/components/movie-rating";
 import Summary from "@/components/summary";
+import { countries } from "@/constants/countries";
 import { tmdbFetch } from "@/lib/fetcher";
 import { DiscoverMovies } from "@/types/discover-movie";
 
@@ -45,38 +46,50 @@ export default async function NowShowing({ country }: NowShowingProps) {
         </div>
       </div>
       <div className="space-x-2 whitespace-nowrap overflow-auto py-4 hidden-scrollbar hover:display-scrollbar">
-        {resource.results.map((resource) => (
-          <Anchor
-            aria-label={`Link to watch ${resource.title}`}
-            href={`/browse/${resource.id}?watch=Movie${
-              country ? `&country=${country}` : ""
-            }`}
-            className="relative inline-block group h-[262.5px]"
-            key={resource.id}
-            title={resource.title}
-          >
-            {resource.poster_path ? (
-              <Image
-                draggable={false}
-                src={`https://image.tmdb.org/t/p/w200${resource.poster_path}`}
-                alt={resource.title}
-                className="h-full select-none rounded-md object-cover"
-                width={175}
-                height={262.5}
-                loading="lazy"
-              />
-            ) : (
-              <div className="w-[175px] h-[262.5px] rounded-md border border-white/20 " />
-            )}
-
-            <MovieRating rating={resource.vote_average * 10} />
-            <Summary
-              isMovie={true}
-              genres={resource.genre_ids}
+        {resource.total_results > 0 ? (
+          resource.results.map((resource) => (
+            <Anchor
+              aria-label={`Link to watch ${resource.title}`}
+              href={`/browse/${resource.id}?watch=Movie${
+                country ? `&country=${country}` : ""
+              }`}
+              className="relative inline-block group h-[262.5px]"
+              key={resource.id}
               title={resource.title}
-            />
-          </Anchor>
-        ))}
+            >
+              {resource.poster_path ? (
+                <Image
+                  draggable={false}
+                  src={`https://image.tmdb.org/t/p/w200${resource.poster_path}`}
+                  alt={resource.title}
+                  className="h-full select-none rounded-md object-cover"
+                  width={175}
+                  height={262.5}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="w-[175px] h-[262.5px] rounded-md border border-white/20 " />
+              )}
+
+              <MovieRating rating={resource.vote_average * 10} />
+              <Summary
+                isMovie={true}
+                genres={resource.genre_ids}
+                title={resource.title}
+              />
+            </Anchor>
+          ))
+        ) : (
+          <div className="h-[281.5px] rounded-md border border-white/20 grid place-content-center tracking-tighter font-thin italic text-gray-300">
+            No showing currently
+            {country &&
+              ` on ${
+                countries.find(
+                  (c) => c.iso_3166_1.toLowerCase() === country.toLowerCase()
+                )?.english_name
+              }`}
+          </div>
+        )}
       </div>
     </section>
   );
