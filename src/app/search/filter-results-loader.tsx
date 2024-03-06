@@ -1,4 +1,4 @@
-export default async function FilterResultsLoader() {
+export default  function FilterResultsLoader() {
   return (
     <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 gap-4 place-items-center">
       {Array.from({ length: 40 }).map((_, o) => {

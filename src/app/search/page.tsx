@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "Silver Screen search page",
 };
 
-export default async function SearchPage({
+export default  function SearchPage({
   searchParams: { query, type, year, page, country },
 }: PageProps<SearchPageParams & { country?: string }>) {
   return (

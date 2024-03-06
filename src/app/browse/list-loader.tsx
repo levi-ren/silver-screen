@@ -5,10 +5,7 @@ interface ListLoaderProps {
   className?: string;
 }
 
-export default async function ListLoader({
-  header,
-  className,
-}: ListLoaderProps) {
+export default function ListLoader({ header, className }: ListLoaderProps) {
   return (
     <section
       id="trending"

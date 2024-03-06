@@ -22,7 +22,7 @@ const Input = () => (
   </div>
 );
 
-export default async function Home() {
+export default function Home() {
   return (
     <main className="relative">
       <BackgroundImage />

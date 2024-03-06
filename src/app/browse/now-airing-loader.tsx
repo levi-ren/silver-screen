@@ -1,4 +1,4 @@
-export default async function NowAiringLoader() {
+export default function NowAiringLoader() {
   return (
     <section
       id="now-airing"

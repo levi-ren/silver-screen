@@ -33,9 +33,7 @@ const Input = () => (
   </div>
 );
 
-export default async function BrowsePage({
-  searchParams: { country },
-}: PageProps) {
+export default function BrowsePage({ searchParams: { country } }: PageProps) {
   return (
     <>
       <header className="p-2 md:p-6 z-10 from-black to-black/5  bg-gradient-to-b relative flex items-center justify-between gap-x-2">

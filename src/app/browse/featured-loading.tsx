@@ -1,4 +1,4 @@
-export default async function FeaturedLoading() {
+export default function FeaturedLoading() {
   return (
     <section
       id="featured"
