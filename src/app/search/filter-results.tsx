@@ -104,6 +104,7 @@ export default async function FilterResults({
       ...(query ? { query } : {}),
       page: (i + 1).toString(),
       ...(type ? { type } : {}),
+      ...(country ? { country } : {}),
     });
 
   return (
@@ -199,7 +200,7 @@ export default async function FilterResults({
                   "bg-zinc-700"
               )}
               key={i}
-              href={`/${country}/search?${newParams(i)}`}
+              href={`/search?${newParams(i)}`}
             >
               {i + 1}
             </Link>
